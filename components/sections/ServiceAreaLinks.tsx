@@ -20,8 +20,6 @@ const ServiceAreaLinks: React.FC = () => {
                         key={loc.title} 
                         href={loc.url}
                         className="text-sm text-gray-500 hover:text-primary transition-colors"
-                        target="_blank" 
-                        rel="noopener noreferrer"
                     >
                         {loc.title} Water Damage Restoration
                     </a>

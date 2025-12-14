@@ -21,8 +21,6 @@ const LocationsGrid: React.FC<LocationsGridProps> = ({ locations, id }) => {
                 <a 
                   key={loc.title} 
                   href={loc.url} 
-                  target="_blank" 
-                  rel="noopener noreferrer"
                   className="group flex items-center justify-between p-6 bg-white border border-gray-200 rounded-xl shadow-none hover:shadow-md hover:border-gray-300 transition-all duration-200"
                 >
                   <span className="font-medium text-lg text-gray-900 group-hover:text-primary">{loc.title}</span>

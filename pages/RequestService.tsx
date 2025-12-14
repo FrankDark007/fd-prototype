@@ -12,35 +12,35 @@ const RequestService: React.FC = () => {
       />
       
       <div className="max-w-xl mx-auto px-4 py-12 md:py-20">
-        <div className="text-center mb-10">
-           <h1 className="text-3xl md:text-4xl font-semibold text-gray-900 mb-4 tracking-tight">Request Emergency Service</h1>
+        <div className="text-center mb-12">
+           <h1 className="text-4xl md:text-5xl font-semibold text-gray-900 mb-6 tracking-tight leading-[1.1]">Request Emergency Service</h1>
            <p className="text-gray-600 text-lg">Our team is on standby 24/7. We will call you back within 5 minutes.</p>
         </div>
 
-        <div className="bg-white rounded-2xl shadow-card border border-gray-100 p-6 md:p-10">
+        <div className="bg-white rounded-2xl shadow-card border border-gray-200 p-6 md:p-10">
            <form className="space-y-6">
               <div>
-                  <label htmlFor="name" className="block text-sm font-medium text-gray-700 mb-1.5">Full Name</label>
+                  <label htmlFor="name" className="block text-sm font-medium text-gray-700 mb-1.5 ml-1">Full Name</label>
                   <input 
                     type="text" 
                     id="name" 
-                    className="w-full px-4 py-3 rounded-lg bg-gray-50 border border-transparent focus:bg-white focus:ring-2 focus:ring-primary/20 focus:border-primary outline-none transition-all text-gray-900 placeholder-gray-400" 
+                    className="w-full px-4 py-3.5 rounded-lg bg-white border border-gray-300 text-gray-900 placeholder-gray-400 focus:border-primary focus:ring-4 focus:ring-primary/10 outline-none transition-all" 
                     placeholder="John Doe" 
                   />
               </div>
               <div>
-                  <label htmlFor="phone" className="block text-sm font-medium text-gray-700 mb-1.5">Phone Number</label>
+                  <label htmlFor="phone" className="block text-sm font-medium text-gray-700 mb-1.5 ml-1">Phone Number</label>
                   <input 
                     type="tel" 
                     id="phone" 
-                    className="w-full px-4 py-3 rounded-lg bg-gray-50 border border-transparent focus:bg-white focus:ring-2 focus:ring-primary/20 focus:border-primary outline-none transition-all text-gray-900 placeholder-gray-400" 
+                    className="w-full px-4 py-3.5 rounded-lg bg-white border border-gray-300 text-gray-900 placeholder-gray-400 focus:border-primary focus:ring-4 focus:ring-primary/10 outline-none transition-all" 
                     placeholder="(555) 555-5555" 
                   />
               </div>
               <div>
-                  <label htmlFor="issue" className="block text-sm font-medium text-gray-700 mb-1.5">Emergency Type</label>
+                  <label htmlFor="issue" className="block text-sm font-medium text-gray-700 mb-1.5 ml-1">Emergency Type</label>
                   <div className="relative">
-                    <select id="issue" className="w-full px-4 py-3 rounded-lg bg-gray-50 border border-transparent focus:bg-white focus:ring-2 focus:ring-primary/20 focus:border-primary outline-none transition-all text-gray-900 appearance-none">
+                    <select id="issue" className="w-full px-4 py-3.5 rounded-lg bg-white border border-gray-300 text-gray-900 focus:border-primary focus:ring-4 focus:ring-primary/10 outline-none transition-all appearance-none">
                         <option>Water Damage</option>
                         <option>Flooding</option>
                         <option>Sewage Backup</option>
@@ -52,8 +52,8 @@ const RequestService: React.FC = () => {
                     </div>
                   </div>
               </div>
-              <div className="pt-2">
-                  <Button fullWidth variant="primary" type="submit" className="text-base py-3 h-12 shadow-md">
+              <div className="pt-4">
+                  <Button fullWidth variant="primary" type="submit" className="text-base py-3.5 h-14 shadow-button font-semibold">
                       Submit Request
                   </Button>
               </div>
@@ -61,7 +61,7 @@ const RequestService: React.FC = () => {
            
            <div className="mt-8 pt-6 border-t border-gray-100 text-center">
                <span className="text-sm text-gray-500">Need immediate assistance? </span>
-               <a href="tel:8774970007" className="block mt-1 text-lg font-semibold text-primary hover:underline">(877) 497-0007</a>
+               <a href="tel:8774970007" className="block mt-2 text-xl font-bold text-primary hover:underline">(877) 497-0007</a>
            </div>
         </div>
       </div>

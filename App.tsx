@@ -54,7 +54,8 @@ const App: React.FC = () => {
   return (
     <Router>
       <ScrollToTop />
-      <div className="min-h-screen flex flex-col bg-white font-sans">
+      {/* Added pb-24 md:pb-0 to main container to accommodate sticky mobile CTA */}
+      <div className="min-h-screen flex flex-col bg-white font-sans pb-24 md:pb-0">
         <Header />
         <Routes>
           <Route path="/" element={<Home />} />

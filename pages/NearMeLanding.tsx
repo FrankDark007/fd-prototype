@@ -24,7 +24,7 @@ const NearMeLanding: React.FC = () => {
              <p className="text-xl text-gray-600 mb-10 max-w-2xl mx-auto">
                  We are your local emergency response team. Arriving at your doorstep in Northern Virginia within 60 minutes.
              </p>
-             <div className="flex flex-col sm:flex-row justify-center gap-4">
+             <div className="hidden md:flex flex-col sm:flex-row justify-center gap-4">
                  <Button to="/request/" variant="primary" className="h-14 px-8 text-lg">
                     Request Service
                  </Button>

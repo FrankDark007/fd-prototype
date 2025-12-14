@@ -30,7 +30,7 @@ const FeatureSplitSection: React.FC<FeatureSplitSectionProps> = ({
             <h2 className="text-3xl md:text-5xl font-medium text-gray-900 mb-6 leading-[1.2] tracking-tight">
               {heading}
             </h2>
-            <p className="text-xl text-gray-500 leading-relaxed mb-8">
+            <p className="text-xl text-gray-500 leading-relaxed mb-8 max-w-2xl mx-auto lg:mx-0">
               {description}
             </p>
             {ctaLabel && (

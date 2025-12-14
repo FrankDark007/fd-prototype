@@ -22,8 +22,14 @@ export interface ServiceData {
   // Rich Content Fields
   heroHeading?: string; // Custom H1
   heroIntro?: string; // First paragraph content
+  heroVisualKey?: string; // Key to map to SVG component in ServiceDetail
+  thumbVisualKey?: string; // Key to map to SVG component in Service Cards (Archive)
   
+  // Content Sections with Optional Intros
+  intro_whenToCall?: string;
   whenToCall?: string[]; // Bullets
+  
+  intro_whatWeDo?: string;
   whatWeDo?: string[]; // Bullets
   
   whatToExpect?: {
@@ -33,12 +39,14 @@ export interface ServiceData {
     noise?: string;
   };
   
+  intro_safety?: string;
   safety?: {
     head?: string;
     items: string[];
     kidsPets?: string;
   };
   
+  intro_scenarios?: string;
   scenarios?: string[]; // Bullets
   
   saveVsRemove?: {

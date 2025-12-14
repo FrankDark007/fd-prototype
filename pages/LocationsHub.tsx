@@ -3,6 +3,7 @@ import Hero from '../components/sections/Hero';
 import LocationsGrid from '../components/sections/LocationsGrid';
 import PageMeta from '../components/ui/PageMeta';
 import { LOCATIONS } from '../data/locations';
+import { LocationsHeroAnimation } from '../components/graphics';
 
 const LocationsHub: React.FC = () => {
   return (
@@ -14,6 +15,7 @@ const LocationsHub: React.FC = () => {
       <Hero 
         title={<>Serving <span className="text-primary">Northern Virginia</span></>} 
         subtitle="Our rapid response teams are stationed throughout the region to ensure we can reach any emergency within 60 minutes." 
+        visual={<LocationsHeroAnimation />}
       />
       <div className="bg-subtle/30 border-t border-gray-100 min-h-[50vh]">
         <LocationsGrid locations={LOCATIONS} />

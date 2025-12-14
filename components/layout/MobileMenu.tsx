@@ -1,139 +1,134 @@
-import React, { useEffect, useRef, useState } from 'react';
+import React, { useEffect, useRef } from 'react';
 import { Link, useLocation } from 'react-router-dom';
-import { X, ChevronRight, ChevronDown } from 'lucide-react';
-import { RESIDENTIAL_NAV } from '../../data/nav';
-import { LOCATIONS } from '../../data/locations';
-import Button from '../ui/Button';
+import { 
+  X, 
+  ChevronRight, 
+  Home, 
+  Briefcase, 
+  Hammer, 
+  Building2, 
+  MapPin, 
+  BookOpen, 
+  Star, 
+  Info, 
+  Phone 
+} from 'lucide-react';
 
 interface MobileMenuProps {
   isOpen: boolean;
   onClose: () => void;
 }
 
+const MENU_ITEMS = [
+  { label: 'Home', path: '/', icon: Home },
+  { label: 'Services', path: '/services/', icon: Briefcase },
+  { label: 'Residential Services', path: '/services/residential/', icon: Hammer },
+  { label: 'Commercial Services', path: '/services/commercial/', icon: Building2 },
+  { label: 'Locations', path: '/locations/', icon: MapPin },
+  { label: 'Resources', path: '/resources/', icon: BookOpen },
+  { label: 'Reviews', path: '/reviews/', icon: Star },
+  { label: 'About', path: '/about/', icon: Info },
+  { label: 'Contact', path: '/contact/', icon: Phone },
+];
+
 const MobileMenu: React.FC<MobileMenuProps> = ({ isOpen, onClose }) => {
-  const drawerRef = useRef<HTMLDivElement>(null);
   const location = useLocation();
-  const [expandedSection, setExpandedSection] = useState<string | null>(null);
+  const menuRef = useRef<HTMLDivElement>(null);
 
   // Close menu when route changes
   useEffect(() => {
     onClose();
   }, [location, onClose]);
 
-  const toggleSection = (section: string) => {
-    setExpandedSection(expandedSection === section ? null : section);
-  }
+  // Prevent body scroll when menu is open
+  useEffect(() => {
+    if (isOpen) {
+      document.body.style.overflow = 'hidden';
+    } else {
+      document.body.style.overflow = 'unset';
+    }
+    return () => {
+      document.body.style.overflow = 'unset';
+    };
+  }, [isOpen]);
+
+  // Close on Escape key
+  useEffect(() => {
+    const handleKeyDown = (e: KeyboardEvent) => {
+      if (isOpen && e.key === 'Escape') {
+        onClose();
+      }
+    };
+    window.addEventListener('keydown', handleKeyDown);
+    return () => window.removeEventListener('keydown', handleKeyDown);
+  }, [isOpen, onClose]);
+
+  // Close on outside click
+  const handleBackdropClick = (e: React.MouseEvent) => {
+    if (e.target === e.currentTarget) {
+      onClose();
+    }
+  };
 
   return (
     <>
+      {/* Backdrop */}
       <div 
-        className={`fixed inset-0 bg-black/50 z-40 transition-opacity duration-300 ${isOpen ? 'opacity-100' : 'opacity-0 pointer-events-none'}`}
-        onClick={onClose}
+        className={`fixed inset-0 bg-black/50 z-50 transition-opacity duration-300 ${isOpen ? 'opacity-100' : 'opacity-0 pointer-events-none'}`}
+        onClick={handleBackdropClick}
         aria-hidden="true"
       />
 
+      {/* Drawer */}
       <div 
-        ref={drawerRef}
+        ref={menuRef}
         id="mobile-menu"
-        className={`fixed top-0 left-0 w-[85%] max-w-[320px] h-full bg-white z-50 shadow-xl transform transition-transform duration-300 ease-in-out ${isOpen ? 'translate-x-0' : '-translate-x-full'}`}
-        aria-modal="true"
+        className={`fixed top-0 left-0 w-[85%] max-w-[360px] h-full bg-white z-[60] shadow-2xl transform transition-transform duration-300 ease-in-out flex flex-col ${isOpen ? 'translate-x-0' : '-translate-x-full'}`}
         role="dialog"
+        aria-modal="true"
+        aria-label="Mobile Navigation"
       >
-        <div className="flex items-center justify-between p-4 border-b border-gray-100">
-          <span className="font-bold text-lg text-gray-800 tracking-tight">FLOOD DOCTOR</span>
+        {/* Header */}
+        <div className="flex items-center justify-between px-4 py-3 border-b border-gray-100 shrink-0 h-16">
           <button 
             onClick={onClose}
-            className="p-2 text-gray-600 hover:bg-gray-100 rounded-full focus:outline-none focus:ring-2 focus:ring-primary"
+            className="p-2 -ml-2 text-gray-600 hover:bg-gray-100 rounded-md focus:outline-none focus:ring-2 focus:ring-primary transition-colors"
             aria-label="Close menu"
           >
             <X size={24} />
           </button>
+          <span className="font-bold text-lg text-gray-900 tracking-tight">FLOOD DOCTOR</span>
+          <div className="w-10"></div> {/* Spacer for center alignment balance */}
         </div>
 
-        <nav className="flex flex-col p-4 overflow-y-auto h-[calc(100%-80px)]">
-          <Link to="/" className="py-3 px-2 text-lg font-medium text-gray-800 border-b border-gray-100 hover:bg-gray-50">
-            Home
-          </Link>
-          
-          {/* Emergency Services Expandable */}
-          <div className="border-b border-gray-100">
-            <button 
-                onClick={() => toggleSection('emergency')}
-                className="w-full flex items-center justify-between py-3 px-2 text-lg font-medium text-gray-800 hover:bg-gray-50"
-            >
-                <span>Emergency Services</span>
-                {expandedSection === 'emergency' ? <ChevronDown size={20} /> : <ChevronRight size={20} className="text-gray-400" />}
-            </button>
-            {expandedSection === 'emergency' && (
-                <ul className="bg-gray-50 px-4 py-2 space-y-3 mb-2 rounded-lg">
-                    {RESIDENTIAL_NAV.items.slice(0, 5).map((item) => (
-                        <li key={item.path}>
-                            <Link to={item.path} className="block text-sm text-gray-700 hover:text-primary py-1">
-                                {item.label}
-                            </Link>
-                        </li>
-                    ))}
-                    <li>
-                        <Link to="/services/" className="block text-sm font-medium text-primary py-1">View All Services</Link>
-                    </li>
-                </ul>
-            )}
-          </div>
+        {/* Navigation Items */}
+        <nav className="flex-1 overflow-y-auto py-2">
+          <ul className="flex flex-col">
+            {MENU_ITEMS.map((item) => {
+              const isActive = item.path === '/' 
+                ? location.pathname === '/' 
+                : location.pathname.startsWith(item.path);
+              
+              const Icon = item.icon;
 
-          <Link to="/services/" className="py-3 px-2 text-lg font-medium text-gray-800 border-b border-gray-100 hover:bg-gray-50">
-            All Services
-          </Link>
-
-           {/* Locations Expandable */}
-           <div className="border-b border-gray-100">
-            <button 
-                onClick={() => toggleSection('locations')}
-                className="w-full flex items-center justify-between py-3 px-2 text-lg font-medium text-gray-800 hover:bg-gray-50"
-            >
-                <span>Locations</span>
-                {expandedSection === 'locations' ? <ChevronDown size={20} /> : <ChevronRight size={20} className="text-gray-400" />}
-            </button>
-            {expandedSection === 'locations' && (
-                <ul className="bg-gray-50 px-4 py-2 space-y-3 mb-2 rounded-lg">
-                    {LOCATIONS.slice(0, 6).map((item) => (
-                        <li key={item.title}>
-                            <a href={item.url} target="_blank" rel="noopener noreferrer" className="block text-sm text-gray-700 hover:text-primary py-1">
-                                {item.title}
-                            </a>
-                        </li>
-                    ))}
-                    <li>
-                        <Link to="/locations/" className="block text-sm font-medium text-primary py-1">View All 12 Cities</Link>
-                    </li>
-                </ul>
-            )}
-          </div>
-
-          <Link to="/about/" className="py-3 px-2 text-lg font-medium text-gray-800 border-b border-gray-100 hover:bg-gray-50">
-            About
-          </Link>
-          
-          <Link to="/reviews/" className="py-3 px-2 text-lg font-medium text-gray-800 border-b border-gray-100 hover:bg-gray-50">
-            Reviews
-          </Link>
-
-          <Link to="/resources/faq/" className="py-3 px-2 text-lg font-medium text-gray-800 border-b border-gray-100 hover:bg-gray-50">
-            FAQ
-          </Link>
-
-          <Link to="/blog/" className="py-3 px-2 text-lg font-medium text-gray-800 border-b border-gray-100 hover:bg-gray-50">
-            Blog
-          </Link>
-          
-          <Link to="/contact/" className="py-3 px-2 text-lg font-medium text-gray-800 border-b border-gray-100 hover:bg-gray-50">
-            Contact
-          </Link>
-
-          <div className="mt-8">
-             <Button to="/request/" fullWidth variant="primary" className="mb-4 py-3 text-lg">
-                REQUEST EMERGENCY HELP
-             </Button>
-          </div>
+              return (
+                <li key={item.path} className="border-b border-gray-50 last:border-0">
+                  <Link 
+                    to={item.path} 
+                    className={`flex items-center w-full px-6 py-4 text-[17px] font-medium transition-colors ${
+                        isActive 
+                        ? 'text-primary bg-blue-50/50' 
+                        : 'text-gray-900 hover:bg-gray-50'
+                    }`}
+                  >
+                    <Icon size={20} className={`mr-4 ${isActive ? 'text-primary' : 'text-gray-400'}`} />
+                    <span className="flex-1">{item.label}</span>
+                    <ChevronRight size={20} className={isActive ? 'text-primary' : 'text-gray-300'} />
+                  </Link>
+                </li>
+              );
+            })}
+          </ul>
         </nav>
       </div>
     </>

@@ -2,7 +2,6 @@ import React from 'react';
 import PageMeta from '../../components/ui/PageMeta';
 import Breadcrumbs from '../../components/ui/Breadcrumbs';
 import Button from '../../components/ui/Button';
-import OfficeMonitoringDashboard from '../../components/ui/technology/OfficeMonitoringDashboard';
 import ThermalScanIllustration from '../../components/ui/technology/ThermalScanIllustration';
 import SensorNetworkIllustration from '../../components/ui/technology/SensorNetworkIllustration';
 import DocumentationTimelineIllustration from '../../components/ui/technology/DocumentationTimelineIllustration';
@@ -12,6 +11,8 @@ import PortalMoistureMapsIllustration from '../../components/ui/technology/porta
 import PortalDeliverablesInteractive from '../../components/sections/PortalDeliverablesInteractive';
 import { ArrowRight, Thermometer, Radio, FileCheck, Scan, BarChart3, Map } from 'lucide-react';
 import GoogleStyleFAQ from '../../components/sections/GoogleStyleFAQ';
+import Hero from '../../components/sections/Hero';
+import { TechnologyHeroAnimation } from '../../components/graphics';
 
 // --- DATA: FAQ ---
 const TECHNOLOGY_FAQ = [
@@ -158,36 +159,11 @@ const Technology: React.FC = () => {
       />
 
       {/* 1. Hero Section */}
-      <section className="pt-8 pb-16 md:pt-12 md:pb-24 border-b border-gray-100 bg-white overflow-hidden">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-            <Breadcrumbs items={[{ label: 'Resources', path: '/resources/' }, { label: 'Technology', path: '/resources/technology/' }]} />
-            
-            <div className="lg:grid lg:grid-cols-12 lg:gap-16 items-center mt-8">
-                {/* Left Content */}
-                <div className="lg:col-span-5 mb-12 lg:mb-0">
-                    <h1 className="text-4xl md:text-5xl lg:text-[3.5rem] font-semibold text-gray-900 mb-8 tracking-[-0.02em] leading-[1.02] lg:max-w-[15ch]">
-                        Restoration Technology That Dries Your Home Faster
-                    </h1>
-                    <p className="text-xl text-gray-600 mb-8 leading-relaxed">
-                        We use thermal imaging, moisture mapping, and real-time monitoring to find hidden moisture, control drying conditions, and keep you informed from start to finish.
-                    </p>
-                    <div className="flex flex-col sm:flex-row gap-4">
-                        <Button to="/request/" variant="primary" className="h-12 px-8 text-base">
-                            Request Services
-                        </Button>
-                        <Button href="tel:8774970007" variant="secondary" className="h-12 px-8 text-base">
-                            Call (877) 497-0007
-                        </Button>
-                    </div>
-                </div>
-
-                {/* Right Visual */}
-                <div className="lg:col-span-7">
-                    <OfficeMonitoringDashboard />
-                </div>
-            </div>
-        </div>
-      </section>
+      <Hero 
+        title="Restoration Technology That Dries Your Home Faster"
+        subtitle="We use thermal imaging, moisture mapping, and real-time monitoring to find hidden moisture, control drying conditions, and keep you informed from start to finish."
+        visual={<TechnologyHeroAnimation />}
+      />
 
       {/* 2. Find Hidden Moisture (Thermal) */}
       <section className="py-20 md:py-24 bg-white">
@@ -530,8 +506,8 @@ const Technology: React.FC = () => {
       {/* 10. FAQ */}
       <GoogleStyleFAQ data={TECHNOLOGY_FAQ} title="Technology FAQ" />
 
-      {/* 11. Final CTA */}
-      <section className="py-20 bg-white border-t border-gray-100 text-center">
+      {/* 11. Final CTA (Desktop Only) */}
+      <section className="py-20 bg-white border-t border-gray-100 text-center hidden md:block">
          <div className="max-w-2xl mx-auto px-4">
             <h2 className="text-3xl font-semibold text-gray-900 mb-4">Request Service</h2>
             <div className="flex flex-col sm:flex-row justify-center gap-4 mt-8">

@@ -41,13 +41,13 @@ const Communication: React.FC = () => {
             
             <div className="lg:grid lg:grid-cols-12 lg:gap-16 items-center mt-8">
                  <div className="lg:col-span-5 mb-12 lg:mb-0">
-                    <h1 className="text-4xl md:text-5xl lg:text-[3.5rem] font-semibold text-gray-900 mb-6 tracking-[-0.02em] leading-[1.05]">
+                    <h1 className="text-[40px] md:text-5xl lg:text-[3.5rem] font-semibold text-gray-900 mb-6 tracking-[-0.02em] leading-[1.05]">
                         No More Guessing Games
                     </h1>
                     <p className="text-xl text-gray-600 mb-8 leading-relaxed">
                         Water damage is stressful enough without chasing contractors for answers. We prioritize proactive, clear communication from dispatch to final sign-off.
                     </p>
-                    <div className="flex flex-col sm:flex-row gap-4">
+                    <div className="hidden md:flex flex-col sm:flex-row gap-4">
                         <Button to="/request/" variant="primary" className="h-12 px-8 text-base">Request Service</Button>
                     </div>
                  </div>
@@ -125,7 +125,9 @@ const Communication: React.FC = () => {
                       <p className="text-gray-600 mb-6">
                           We send photos, moisture maps, and drying logs directly to your adjuster using Xactimate—the industry standard software they use. This speeds up approval and ensures nothing is missed.
                       </p>
-                      <Button to="/resources/insurance-guide/" variant="secondary">View Insurance Guide</Button>
+                      <div className="hidden md:block">
+                        <Button to="/resources/insurance-guide/" variant="secondary">View Insurance Guide</Button>
+                      </div>
                   </div>
                   <div>
                       <InsuranceCoordinationIllustration />

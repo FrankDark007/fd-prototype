@@ -1,6 +1,7 @@
 import React from 'react';
 import PageMeta from '../components/ui/PageMeta';
 import Hero from '../components/sections/Hero';
+import Section from '../components/ui/Section';
 import { Star } from 'lucide-react';
 
 const Reviews: React.FC = () => {
@@ -44,11 +45,10 @@ const Reviews: React.FC = () => {
         subtitle="We take pride in our 5-star reputation across Northern Virginia, DC, and Maryland."
       />
 
-      <div className="py-20 bg-gray-50 border-t border-gray-100">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+      <Section bg="gray" borderTop>
             <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
                 {reviews.map((review, index) => (
-                    <div key={index} className="bg-white p-8 rounded-2xl border border-gray-200 shadow-sm">
+                    <div key={index} className="bg-white p-8 rounded-2xl border border-gray-200 shadow-sm hover:shadow-md transition-all">
                         <div className="flex items-center gap-1 text-orange-400 mb-4">
                             {[...Array(review.rating)].map((_, i) => (
                                 <Star key={i} size={20} fill="currentColor" />
@@ -76,8 +76,7 @@ const Reviews: React.FC = () => {
                      <span className="text-gray-500 font-medium">Yelp (4.9/5.0)</span>
                  </div>
             </div>
-        </div>
-      </div>
+      </Section>
     </main>
   );
 };

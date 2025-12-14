@@ -1,9 +1,9 @@
 import React from 'react';
-import Hero from '../components/sections/Hero';
-import ServicesGrid from '../components/sections/ServicesGrid';
 import PageMeta from '../components/ui/PageMeta';
-import { SERVICES, getServicesByAudience } from '../data/services';
-import ServicesFilterHintCard from '../components/ui/illustrations/ServicesFilterHintCard';
+import ServiceArchiveGrid from '../components/services/ServiceArchiveGrid';
+import { SERVICES } from '../data/services';
+import Hero from '../components/sections/Hero';
+import { ResidentialHeroAnimation, CommercialHeroAnimation } from '../components/graphics';
 
 interface ServicesHubProps {
   title: string;
@@ -12,33 +12,44 @@ interface ServicesHubProps {
 }
 
 const ServicesHub: React.FC<ServicesHubProps> = ({ title, subtitle, filterAudience }) => {
-  const filteredServices = filterAudience ? getServicesByAudience(filterAudience) : SERVICES;
+  const filteredServices = filterAudience ? SERVICES.filter(service => service.audience === filterAudience) : SERVICES;
   const metaTitle = filterAudience ? `${title} | Northern Virginia` : 'All Restoration Services';
 
+  // Determine Visual based on audience
+  let HeroVisual = null;
+  if (filterAudience === 'RESIDENTIAL') {
+    HeroVisual = <ResidentialHeroAnimation />;
+  } else if (filterAudience === 'COMMERCIAL') {
+    HeroVisual = <CommercialHeroAnimation />;
+  }
+
   return (
-    <main className="flex-grow pb-20 md:pb-0">
+    <main className="flex-grow pb-24 md:pb-0 bg-white min-h-screen">
       <PageMeta title={metaTitle} description={subtitle} />
       
-      <Hero title={<>{title}</>} subtitle={subtitle} />
-      
-      {/* Category Grouping Logic or Simple Grid */}
-      <div className="bg-subtle/30 border-t border-gray-100 relative">
-         
-         {/* Visual Hint for Filtering (Purely illustrative as per design system requirements) */}
-         <div className="absolute top-0 left-0 right-0 -mt-5 flex justify-center pointer-events-none">
-             <ServicesFilterHintCard />
-         </div>
+      {/* If specific audience page, show Hero with graphic */}
+      {filterAudience && (
+        <Hero 
+          title={title} 
+          subtitle={subtitle}
+          visual={HeroVisual}
+        />
+      )}
 
-         {filterAudience ? (
-             <ServicesGrid services={filteredServices} />
-         ) : (
-             <>
-                <ServicesGrid services={getServicesByAudience('RESIDENTIAL')} title="Residential Services" />
-                <div className="border-t border-gray-200 mx-4 lg:mx-8"></div>
-                <ServicesGrid services={getServicesByAudience('COMMERCIAL')} title="Commercial Services" />
-             </>
-         )}
-      </div>
+      {/* 
+          Using ServiceArchiveGrid which handles:
+          - Hero-style text header (We might want to suppress title if we used Hero above, 
+            but ServiceArchiveGrid logic combines title into filter area. 
+            If we used Hero above, we might pass null/empty to Grid title to avoid duplication,
+            OR just let Grid handle title if no Hero used (like "All Services").
+      */}
+      <ServiceArchiveGrid 
+         services={filteredServices}
+         title={!filterAudience ? title : undefined} // Only show title in Grid if not shown in Hero
+         subtitle={!filterAudience ? subtitle : undefined}
+         initialAudience={filterAudience}
+      />
+      
     </main>
   );
 };

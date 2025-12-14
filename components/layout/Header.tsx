@@ -68,26 +68,25 @@ const Header: React.FC = () => {
         Skip to content
       </a>
 
-      {/* Header: 56px on mobile (h-14), 80px on desktop (h-20) */}
-      <header className="sticky top-0 z-40 bg-white/95 backdrop-blur-sm border-b border-border transition-all duration-300">
-        <div className="max-w-7xl mx-auto px-2 sm:px-6 lg:px-8">
-          <div className="flex justify-between items-center h-14 md:h-20">
+      {/* Header: 64px on mobile (h-16), 80px on desktop (h-20) */}
+      <header className="sticky top-0 z-40 bg-white/95 backdrop-blur-md border-b border-gray-100 transition-all duration-300">
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+          <div className="flex justify-between items-center h-16 md:h-20">
             
-            {/* Mobile: Left Menu Button (Ghost Icon) */}
+            {/* Mobile: Left Menu Button */}
             <div className="flex items-center md:hidden">
-              <Button 
-                variant="ghost" 
-                icon={true}
+              <button 
                 onClick={() => setMobileMenuOpen(true)}
-                ariaLabel="Open menu"
+                className="p-2 -ml-2 text-gray-700 hover:bg-gray-100 rounded-md focus:outline-none focus:ring-2 focus:ring-primary transition-colors"
+                aria-label="Open menu"
                 aria-expanded={mobileMenuOpen}
               >
                 <Menu size={24} />
-              </Button>
+              </button>
             </div>
 
-            {/* Logo - Centered on Mobile */}
-            <div className="flex-shrink-0 flex items-center justify-center flex-1 md:justify-start md:flex-none transform -translate-x-0 md:translate-x-0">
+            {/* Logo */}
+            <div className="flex-shrink-0 flex items-center justify-start flex-1 md:flex-none ml-2 md:ml-0">
               <Link to="/" className="flex items-center gap-1.5 text-xl md:text-2xl tracking-tight text-gray-900 group" aria-label="Flood Doctor Home">
                  <span className="text-primary font-bold group-hover:text-primaryHover">FLOOD</span>
                  <span className="font-semibold text-secondary">DOCTOR</span>
@@ -114,11 +113,11 @@ const Header: React.FC = () => {
 
                       {/* Mega Menu Logic: Services */}
                       {isOpen && item.dropdownId === 'services' && (
-                        <div className="absolute left-0 mt-2 w-[900px] max-w-[90vw] bg-white rounded-xl shadow-soft ring-1 ring-black ring-opacity-5 p-6 z-50 animate-in fade-in slide-in-from-top-2 duration-200 overflow-hidden">
+                        <div className="absolute left-0 mt-2 w-[900px] max-w-[90vw] bg-white rounded-2xl shadow-xl ring-1 ring-black/5 p-8 z-50 animate-in fade-in slide-in-from-top-2 duration-200 overflow-hidden border border-gray-100">
                           
                           {/* Scrollable Content Area */}
-                          <div className="max-h-[70vh] overflow-y-auto pr-2 custom-scrollbar">
-                            <div className="grid grid-cols-2 gap-12">
+                          <div className="max-h-[70vh] overflow-y-auto pr-2 custom-scrollbar overscroll-contain">
+                            <div className="grid grid-cols-2 gap-16">
                                 
                                 {/* Residential Column */}
                                 <div>
@@ -128,11 +127,11 @@ const Header: React.FC = () => {
                                     <div className="space-y-8">
                                         {residentialGroups.map((group) => (
                                             <div key={group.label}>
-                                                <h4 className="text-xs font-bold text-gray-900 uppercase tracking-wider mb-3">{group.label}</h4>
+                                                <h4 className="text-xs font-bold text-gray-900 uppercase tracking-wider mb-3 opacity-60">{group.label}</h4>
                                                 <ul className="space-y-1">
                                                     {group.items.map(service => (
                                                         <li key={service.id}>
-                                                            <Link to={service.slug} className="block text-sm text-gray-600 hover:text-primary py-1.5 px-2 -mx-2 rounded-lg hover:bg-gray-50 transition-colors">
+                                                            <Link to={service.slug} className="block text-sm text-gray-600 hover:text-primary py-1.5 px-3 -mx-3 rounded-lg hover:bg-gray-50 transition-colors">
                                                                 {service.title}
                                                             </Link>
                                                         </li>
@@ -151,11 +150,11 @@ const Header: React.FC = () => {
                                     <div className="space-y-8">
                                         {commercialGroups.map((group) => (
                                             <div key={group.label}>
-                                                <h4 className="text-xs font-bold text-gray-900 uppercase tracking-wider mb-3">{group.label}</h4>
+                                                <h4 className="text-xs font-bold text-gray-900 uppercase tracking-wider mb-3 opacity-60">{group.label}</h4>
                                                 <ul className="space-y-1">
                                                     {group.items.map(service => (
                                                         <li key={service.id}>
-                                                            <Link to={service.slug} className="block text-sm text-gray-600 hover:text-primary py-1.5 px-2 -mx-2 rounded-lg hover:bg-gray-50 transition-colors">
+                                                            <Link to={service.slug} className="block text-sm text-gray-600 hover:text-primary py-1.5 px-3 -mx-3 rounded-lg hover:bg-gray-50 transition-colors">
                                                                 {service.title}
                                                             </Link>
                                                         </li>
@@ -170,11 +169,11 @@ const Header: React.FC = () => {
                           </div>
 
                           {/* Mega Menu Footer */}
-                          <div className="mt-6 pt-4 border-t border-gray-100 flex items-center justify-between bg-white z-10 relative">
+                          <div className="mt-8 pt-6 border-t border-gray-100 flex items-center justify-between bg-white z-10 relative">
                              <Link to="/services/" className="text-sm font-medium text-primary hover:text-primaryHover hover:underline flex items-center">
                                 View Full Service Directory &rarr;
                              </Link>
-                             <Button to="/request/" variant="primary" className="h-9 px-6 text-xs font-semibold">
+                             <Button to="/request/" variant="primary" className="h-10 px-6 text-sm font-semibold">
                                 Request Service
                              </Button>
                           </div>
@@ -183,13 +182,13 @@ const Header: React.FC = () => {
 
                       {/* Mega Menu Logic: Locations */}
                       {isOpen && item.dropdownId === 'locations' && (
-                        <div className="absolute left-0 mt-2 w-[500px] bg-white rounded-xl shadow-soft ring-1 ring-black ring-opacity-5 p-6 grid grid-cols-2 gap-8 z-50 animate-in fade-in slide-in-from-top-2 duration-200">
+                        <div className="absolute left-0 mt-2 w-[500px] bg-white rounded-2xl shadow-xl ring-1 ring-black/5 p-8 grid grid-cols-2 gap-8 z-50 animate-in fade-in slide-in-from-top-2 duration-200 border border-gray-100">
                           <div>
                             <h3 className="text-xs font-bold text-gray-500 uppercase tracking-wide mb-4">Northern Virginia</h3>
                             <ul className="space-y-2">
                               {LOCATIONS.slice(0, 8).map(loc => (
                                 <li key={loc.title}>
-                                  <a href={loc.url} target="_blank" rel="noopener noreferrer" className="text-sm text-gray-600 hover:text-primary block py-1 px-2 -mx-2 rounded hover:bg-gray-50">
+                                  <a href={loc.url} className="text-sm text-gray-600 hover:text-primary block py-1.5 px-2 -mx-2 rounded hover:bg-gray-50 transition-colors">
                                     {loc.title}
                                   </a>
                                 </li>
@@ -201,11 +200,11 @@ const Header: React.FC = () => {
                             <ul className="space-y-2">
                                 {NEARBY_AREAS.map(loc => (
                                     <li key={loc.title}>
-                                        <span className="text-sm text-gray-400 block py-1 px-2 -mx-2 cursor-default">{loc.title}</span>
+                                        <span className="text-sm text-gray-400 block py-1.5 px-2 -mx-2 cursor-default">{loc.title}</span>
                                     </li>
                                 ))}
                             </ul>
-                            <div className="mt-4 pt-4 border-t border-gray-100">
+                            <div className="mt-6 pt-4 border-t border-gray-100">
                                 <Link to="/locations/" className="text-sm font-medium text-primary hover:underline block mb-2">View All 12 Cities &rarr;</Link>
                                 <Link to="/locations/" className="text-sm font-medium text-primary hover:underline block">View Service Area Map &rarr;</Link>
                             </div>
@@ -227,7 +226,7 @@ const Header: React.FC = () => {
               })}
             </nav>
 
-            {/* Desktop Actions - Hidden on Mobile */}
+            {/* Desktop Actions */}
             <div className="hidden md:flex items-center space-x-3">
               <a href="tel:8774970007" className="flex items-center text-gray-700 font-semibold hover:text-primary transition-colors px-3 py-2 rounded-full hover:bg-gray-50">
                 <span className="text-[17px] font-semibold tracking-tight">(877) 497-0007</span>
@@ -237,7 +236,7 @@ const Header: React.FC = () => {
               </Button>
             </div>
 
-            {/* Mobile: Phone Button (Ghost Icon) */}
+            {/* Mobile: Phone Button */}
             <div className="flex items-center md:hidden">
               <a 
                  href="tel:8774970007" 

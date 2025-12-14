@@ -27,7 +27,8 @@ const Button: React.FC<ButtonProps> = ({
   icon = false,
 }) => {
   // Base: Pill shape (rounded-full), font-weight 500, font-size 14px
-  const baseStyles = "inline-flex items-center justify-center font-medium text-sm transition-colors duration-200 focus:outline-none focus-visible:ring-2 focus-visible:ring-primary/25";
+  // Added: whitespace-nowrap to ensure button labels don't wrap awkwardly
+  const baseStyles = "inline-flex items-center justify-center font-medium text-sm transition-colors duration-200 focus:outline-none focus-visible:ring-2 focus-visible:ring-primary/25 whitespace-nowrap";
   
   // Dimensions
   // Normal: Height 40-44px (using h-11 = 44px).
@@ -43,8 +44,7 @@ const Button: React.FC<ButtonProps> = ({
     // Secondary: White bg, border #e5e7eb, text #1a73e8, hover #f8fafc
     secondary: "bg-white text-primary border border-border hover:bg-subtle active:bg-gray-100",
     
-    // Outline: (Mapping to secondary for this design system request, or keeping distinct if needed. 
-    // The prompt asks for secondary to be white bg + border. I will map outline to secondary or create a similar one)
+    // Outline: (Mapping to secondary for this design system request)
     outline: "bg-white text-primary border border-gray-300 hover:bg-gray-50",
     
     // Ghost: No border, for icons in header
