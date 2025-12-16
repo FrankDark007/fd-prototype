@@ -14,6 +14,7 @@ import HeroHardwoodDrying from './HeroHardwoodDrying';
 import HeroRoofLeak from './HeroRoofLeak';
 import HeroStormDamage from './HeroStormDamage';
 import HeroBurstPipe from './HeroBurstPipe';
+import HeroOrbitPhone from './HeroOrbitPhone';
 
 // Commercial Imports
 import HeroCommercialWaterDamage from './HeroCommercialWaterDamage';
@@ -47,6 +48,7 @@ const HERO_VISUALS: Record<string, React.ComponentType> = {
   'roof-leak': HeroRoofLeak,
   'storm-damage': HeroStormDamage,
   'burst-pipe': HeroBurstPipe,
+  'orbit-phone': HeroOrbitPhone, // Added from Variant A
 
   // Commercial
   'com-water': HeroCommercialWaterDamage,

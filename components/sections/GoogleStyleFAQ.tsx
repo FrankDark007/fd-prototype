@@ -71,7 +71,7 @@ interface GoogleStyleFAQProps {
 const GoogleStyleFAQ: React.FC<GoogleStyleFAQProps> = ({ 
   data = DEFAULT_FAQ_DATA, 
   title = "Your questions, answered",
-  className = "py-16 md:py-24 bg-white border-t border-gray-100"
+  className = "py-12 md:py-16 bg-white border-t border-gray-100"
 }) => {
   const [openIndices, setOpenIndices] = useState<number[]>([]);
 

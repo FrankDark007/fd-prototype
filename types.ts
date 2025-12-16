@@ -7,6 +7,18 @@ export interface FAQItem {
   answer: string;
 }
 
+export interface ContentSectionCard {
+  title: string;
+  content: string;
+  icon?: string;
+}
+
+export interface ServiceContentSections {
+  heading: string;
+  intro: string;
+  cards: ContentSectionCard[];
+}
+
 export interface ServiceData {
   id: string;
   title: string;
@@ -28,6 +40,9 @@ export interface ServiceData {
   // Content Sections with Optional Intros
   intro_whenToCall?: string;
   whenToCall?: string[]; // Bullets
+  
+  // New SEO Content Section (Sticky Scroll)
+  contentSections?: ServiceContentSections;
   
   intro_whatWeDo?: string;
   whatWeDo?: string[]; // Bullets

@@ -12,6 +12,7 @@ import LocationsHub from './pages/LocationsHub';
 import RequestService from './pages/RequestService';
 import ServiceDetail from './pages/templates/ServiceDetail';
 import CategoryLanding from './pages/templates/CategoryLanding';
+import ResidentialVariantA from './pages/templates/ResidentialVariantA';
 
 // New Pages
 import About from './pages/About';
@@ -78,6 +79,9 @@ const App: React.FC = () => {
             path="/services/residential/specialty-services/" 
             element={<CategoryLanding audience="RESIDENTIAL" category="SPECIALTY" title="Residential Specialty Services" description="Specialized solutions for basements, crawl spaces, and roofs." />} 
           />
+
+          {/* New Variant Template */}
+          <Route path="/services/residential/variant-a/" element={<ResidentialVariantA />} />
 
           {/* Commercial Category Pages */}
           <Route 

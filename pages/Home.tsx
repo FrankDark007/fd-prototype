@@ -12,7 +12,6 @@ import PageMeta from '../components/ui/PageMeta';
 import DryingProgressCard from '../components/ui/DryingProgressCard';
 import DispatchEtaCard from '../components/ui/illustrations/DispatchEtaCard';
 import SupportChatCard from '../components/ui/illustrations/SupportChatCard';
-import { HomeHeroAnimation, ProcessStepsAnimation } from '../components/graphics';
 
 const Home: React.FC = () => {
   const featuredServices = SERVICES.slice(0, 6);
@@ -25,37 +24,17 @@ const Home: React.FC = () => {
         schema={FAQ_SCHEMA}
       />
 
-      {/* 1. New Split Hero with Custom Animation */}
+      {/* 1. New Split Hero with Default Animation (Reverted) */}
       <Hero 
         title={<>24/7 <span className="text-primary">Water Damage Restoration</span></>}
         subtitle="Serving Northern Virginia, Maryland, and DC, with rapid water removal, flood cleanup, and structural drying, with clear documentation from start to finish." 
-        visual={<HomeHeroAnimation />}
       />
       
       {/* 2. Sticky Section Tabs */}
       <SectionTabs />
 
-      {/* 3. Steps Section (Custom Graphic) */}
-      <div className="py-12 md:py-20 lg:py-24 bg-white text-center">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <h2 className="text-[28px] md:text-5xl font-medium text-gray-900 mb-6 tracking-tight">
-              Restore your peace of mind
-          </h2>
-          <p className="text-lg md:text-xl text-gray-500 max-w-2xl mx-auto mb-12">
-              Recovering from water damage in a few simple steps.
-          </p>
-          
-          <div className="hidden md:flex justify-center mb-16">
-               <Button to="/request/" variant="primary" className="px-8 h-12 text-[15px]">
-                  Start restoration
-               </Button>
-          </div>
-
-          <div className="w-full max-w-4xl mx-auto">
-             <ProcessStepsAnimation />
-          </div>
-        </div>
-      </div>
+      {/* 3. Steps Section (Reverted to Component) */}
+      <StepsSection />
 
       {/* 4. Feature Split 1: Performance/Data (Chart) - Image Right */}
       <FeatureSplitSection 
