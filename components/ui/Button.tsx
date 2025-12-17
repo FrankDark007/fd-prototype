@@ -10,8 +10,7 @@ interface ButtonProps {
   className?: string;
   fullWidth?: boolean;
   type?: 'button' | 'submit' | 'reset';
-  ariaLabel?: string;
-  icon?: boolean; // For icon-only circular buttons
+  icon?: boolean;
 }
 
 const Button: React.FC<ButtonProps> = ({
@@ -23,61 +22,40 @@ const Button: React.FC<ButtonProps> = ({
   className = '',
   fullWidth = false,
   type = 'button',
-  ariaLabel,
   icon = false,
 }) => {
-  // Base: Pill shape (rounded-full), font-weight 500, font-size 14px
-  // Added: whitespace-nowrap to ensure button labels don't wrap awkwardly
-  const baseStyles = "inline-flex items-center justify-center font-medium text-sm transition-colors duration-200 focus:outline-none focus-visible:ring-2 focus-visible:ring-primary/25 whitespace-nowrap";
+  // Google Style: "Outfit" font for buttons, tracking-wide, pill shape
+  const baseStyles = "inline-flex items-center justify-center font-display font-medium text-[15px] transition-all duration-200 focus:outline-none focus:ring-2 focus:ring-primary/50 disabled:opacity-50 disabled:cursor-not-allowed";
   
-  // Dimensions
-  // Normal: Height 40-44px (using h-11 = 44px).
-  // Icon: 44x44px square-ish but rounded full.
-  const dimensionStyles = icon 
-    ? "h-11 w-11 p-0 rounded-full" 
-    : "h-11 px-6 rounded-full";
+  // Google buttons are often 48px (h-12) or 36px (h-9)
+  const dimensionStyles = icon
+     ? "h-12 w-12 p-0 rounded-full"
+     : "h-12 px-8 rounded-full"; // Pill shape is key
 
   const variants = {
-    // Primary: Google Blue #1a73e8, white text, subtle shadow
-    primary: "bg-primary text-white hover:bg-primaryHover shadow-sm hover:shadow-md active:shadow-sm border border-transparent",
+    // Primary: Google Blue, subtle shadow that grows on hover
+    primary: "bg-primary text-white hover:bg-primaryHover shadow-none hover:shadow-google-hover border border-transparent",
     
-    // Secondary: White bg, border #e5e7eb, text #1a73e8, hover #f8fafc
-    secondary: "bg-white text-primary border border-border hover:bg-subtle active:bg-gray-100",
+    // Secondary: White with thin gray border, blue text
+    secondary: "bg-white text-primary border border-border hover:bg-blue-50 hover:border-primary/30",
     
-    // Outline: (Mapping to secondary for this design system request)
-    outline: "bg-white text-primary border border-gray-300 hover:bg-gray-50",
+    // Outline: Just border
+    outline: "bg-transparent text-text border border-gray-400 hover:border-gray-900",
     
-    // Ghost: No border, for icons in header
-    ghost: "bg-transparent text-gray-600 hover:bg-gray-50 active:bg-gray-100",
+    // Ghost: For nav icons
+    ghost: "bg-transparent text-muted hover:text-primary hover:bg-gray-100",
     
-    // Text: minimal padding
-    text: "bg-transparent text-primary hover:text-primaryHover hover:bg-blue-50/50 px-4",
+    // Text: Blue text link style
+    text: "bg-transparent text-primary hover:text-primaryHover p-0 h-auto hover:underline",
   };
 
   const widthStyles = fullWidth ? "w-full" : "";
   const combinedClasses = `${baseStyles} ${dimensionStyles} ${variants[variant]} ${widthStyles} ${className}`;
 
-  if (to) {
-    return (
-      <Link to={to} className={combinedClasses} aria-label={ariaLabel}>
-        {children}
-      </Link>
-    );
-  }
-
-  if (href) {
-    return (
-      <a href={href} className={combinedClasses} aria-label={ariaLabel}>
-        {children}
-      </a>
-    );
-  }
-
-  return (
-    <button type={type} onClick={onClick} className={combinedClasses} aria-label={ariaLabel}>
-      {children}
-    </button>
-  );
+  if (to) return <Link to={to} className={combinedClasses}>{children}</Link>;
+  if (href) return <a href={href} className={combinedClasses}>{children}</a>;
+  
+  return <button type={type} onClick={onClick} className={combinedClasses}>{children}</button>;
 };
 
 export default Button;

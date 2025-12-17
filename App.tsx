@@ -47,15 +47,11 @@ const useBrowserRouter =
 
 const Router = useBrowserRouter ? BrowserRouter : HashRouter;
 
-if (typeof window !== "undefined") {
-  console.log(`[Router Config] Host: ${host}, Mode: ${useBrowserRouter ? 'Browser' : 'Hash'}`);
-}
-
 const App: React.FC = () => {
   return (
     <Router>
       <ScrollToTop />
-      {/* Added pb-24 md:pb-0 to main container to accommodate sticky mobile CTA */}
+      {/* Main Container with padding for mobile CTA */}
       <div className="min-h-screen flex flex-col bg-white font-sans pb-24 md:pb-0">
         <Header />
         <Routes>

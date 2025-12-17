@@ -1,6 +1,6 @@
 import React from 'react';
 import { 
-  Plus, 
+  ArrowRight, 
   Droplets, 
   Flame, 
   Leaf, 
@@ -23,8 +23,6 @@ interface ServiceCardProps {
 
 const getServiceIcon = (service: ServiceData) => {
   const t = service.title.toLowerCase();
-  
-  // Specific mappings based on title keywords
   if (t.includes('fire') || t.includes('smoke')) return Flame;
   if (t.includes('mold')) return Leaf;
   if (t.includes('storm')) return CloudLightning;
@@ -33,8 +31,7 @@ const getServiceIcon = (service: ServiceData) => {
   if (t.includes('odor') || t.includes('air')) return Wind;
   if (t.includes('content') || t.includes('pack')) return Box;
   if (t.includes('clean')) return Sparkles;
-
-  // Category fallbacks
+  
   switch (service.category) {
     case 'TECHNICAL': return Activity;
     case 'RESTORATION': return Hammer;
@@ -50,7 +47,7 @@ const ServiceCard: React.FC<ServiceCardProps> = ({ service, onClick }) => {
   return (
     <div 
       onClick={() => onClick(service)}
-      className="group relative flex flex-col bg-[#f8fafc] rounded-[28px] overflow-hidden cursor-pointer transition-all duration-300 hover:shadow-lg hover:bg-white border border-transparent hover:border-gray-100"
+      className="group relative flex flex-col bg-subtle rounded-4xl overflow-hidden cursor-pointer transition-all duration-300 hover:shadow-google-hover border border-transparent hover:border-border h-full"
       role="button"
       tabIndex={0}
       onKeyDown={(e) => {
@@ -61,33 +58,40 @@ const ServiceCard: React.FC<ServiceCardProps> = ({ service, onClick }) => {
       }}
       aria-label={`View details for ${service.title}`}
     >
-      {/* Top Thumbnail Area */}
-      <div className="p-2 pb-0">
-        <div className="relative w-full aspect-[16/9] rounded-[20px] overflow-hidden bg-white border border-gray-100/50 shadow-sm group-hover:shadow-md transition-shadow">
-           <ServiceCardThumb visualKey={service.thumbVisualKey} className="w-full h-full transform transition-transform duration-500 group-hover:scale-[1.02]" />
+      {/* Top Thumbnail Area - Google Store style (large image area) */}
+      <div className="relative w-full aspect-[4/3] bg-white overflow-hidden">
+        <ServiceCardThumb 
+          visualKey={service.thumbVisualKey} 
+          className="w-full h-full transform transition-transform duration-700 group-hover:scale-105" 
+        />
+        
+        {/* Category Chip (Floating) */}
+        <div className="absolute top-4 left-4">
+          <span className="inline-flex items-center px-3 py-1 rounded-full text-[11px] font-bold tracking-wider uppercase bg-white/90 backdrop-blur-sm text-text border border-gray-100 shadow-sm">
+            {service.audience === 'RESIDENTIAL' ? 'Home' : 'Business'}
+          </span>
         </div>
       </div>
 
       {/* Content Area */}
-      <div className="p-6 flex flex-col flex-grow relative">
-        <div className="flex items-start gap-3 mb-3">
-           <div className="p-2 rounded-xl bg-white border border-gray-200 text-gray-400 shrink-0 group-hover:bg-primary group-hover:border-primary group-hover:text-white transition-all duration-300 shadow-sm">
-              <Icon size={20} strokeWidth={2} />
-           </div>
-           <h3 className="text-[20px] font-semibold text-gray-900 leading-tight group-hover:text-primary transition-colors pt-1">
+      <div className="p-8 flex flex-col flex-grow">
+        <div className="flex items-center gap-3 mb-4">
+          <div className="p-2 rounded-full bg-white border border-gray-200 text-primary shrink-0">
+             <Icon size={20} strokeWidth={2} />
+          </div>
+          <h3 className="font-display text-xl font-medium text-text leading-tight group-hover:text-primary transition-colors">
              {service.title}
-           </h3>
+          </h3>
         </div>
         
-        <p className="text-sm text-gray-500 leading-relaxed line-clamp-3 mb-8 pl-[3.25rem]">
+        <p className="font-sans text-[15px] text-muted leading-relaxed line-clamp-3 mb-8 flex-grow">
           {service.shortDescription}
         </p>
 
-        {/* Floating Action Button (Google Style) */}
-        <div className="absolute bottom-5 right-5">
-           <div className="w-10 h-10 rounded-full bg-white text-primary border border-gray-100 flex items-center justify-center shadow-sm transition-all duration-300 group-hover:bg-primary group-hover:text-white group-hover:shadow-md group-hover:scale-110 group-hover:border-transparent">
-              <Plus size={24} strokeWidth={2.5} />
-           </div>
+        {/* Action Area */}
+        <div className="flex items-center text-primary font-medium text-[15px] group/btn">
+          <span>Learn more</span>
+          <ArrowRight size={18} className="ml-2 transition-transform group-hover/btn:translate-x-1" />
         </div>
       </div>
     </div>

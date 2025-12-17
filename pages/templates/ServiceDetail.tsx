@@ -1,15 +1,14 @@
-import React from 'react';
+import React, { useState, useEffect } from 'react';
 import { ServiceData } from '../../types';
 import PageMeta from '../../components/ui/PageMeta';
 import Hero from '../../components/sections/Hero';
-import Section from '../../components/ui/Section';
 import Breadcrumbs from '../../components/ui/Breadcrumbs';
 import ServiceDetailHeroAnimation from '../../components/graphics/ServiceDetailHeroAnimation';
-import GoogleStyleFAQ, { FAQ_SCHEMA } from '../../components/sections/GoogleStyleFAQ';
+import GoogleStyleFAQ from '../../components/sections/GoogleStyleFAQ';
 import ServiceAreaLinks from '../../components/sections/ServiceAreaLinks';
 import RelatedServices from '../../components/sections/RelatedServices';
 import Button from '../../components/ui/Button';
-import { CheckCircle2, AlertTriangle, ShieldCheck, Clock } from 'lucide-react';
+import { CheckCircle2, AlertTriangle, Activity, Shield } from 'lucide-react';
 
 interface ServiceDetailProps {
   service: ServiceData;
@@ -25,6 +24,55 @@ const ServiceDetail: React.FC<ServiceDetailProps> = ({ service }) => {
     },
     { label: service.title, path: '#' }
   ];
+
+  // Sticky Nav Logic
+  const [activeSection, setActiveSection] = useState('overview');
+  const sections = [
+    { id: 'overview', label: 'Overview' },
+    { id: 'process', label: 'Process' },
+    { id: 'specs', label: 'Tech Specs' },
+    { id: 'safety', label: 'Safety' },
+    { id: 'faq', label: 'FAQ' },
+  ];
+
+  // FIX 1: Handle scroll manually to prevent "Refused to connect" errors
+  const scrollToSection = (e: React.MouseEvent<HTMLAnchorElement>, id: string) => {
+    e.preventDefault();
+    const element = document.getElementById(id);
+    if (element) {
+      // Offset: Header (80px) + Sticky Nav (56px) + Buffer (24px)
+      const headerOffset = 160; 
+      const elementPosition = element.getBoundingClientRect().top;
+      const offsetPosition = elementPosition + window.pageYOffset - headerOffset;
+
+      window.scrollTo({
+        top: offsetPosition,
+        behavior: "smooth"
+      });
+      setActiveSection(id);
+    }
+  };
+
+  // Scroll Spy: Update active section tab as user scrolls
+  useEffect(() => {
+    const observer = new IntersectionObserver(
+      (entries) => {
+        entries.forEach((entry) => {
+          if (entry.isIntersecting) {
+            setActiveSection(entry.target.id);
+          }
+        });
+      },
+      { rootMargin: '-20% 0px -60% 0px' }
+    );
+
+    sections.forEach(({ id }) => {
+      const el = document.getElementById(id);
+      if (el) observer.observe(el);
+    });
+
+    return () => observer.disconnect();
+  }, []);
 
   // FAQ Schema
   const faqSchema = service.faqs ? {
@@ -48,331 +96,242 @@ const ServiceDetail: React.FC<ServiceDetailProps> = ({ service }) => {
         schema={faqSchema}
       />
 
-      {/* Hero */}
+      {/* Hero: Split layout with Visual */}
       <Hero 
         title={service.heroHeading || service.title}
         subtitle={service.heroIntro || service.shortDescription}
         visual={<ServiceDetailHeroAnimation visualKey={service.heroVisualKey} />}
       />
 
+      {/* Sticky Product Navigation Bar (Desktop Only) */}
+      <div className="sticky top-20 z-30 bg-white/95 backdrop-blur border-b border-border hidden lg:block transition-all duration-200">
+        <div className="max-w-[1440px] mx-auto px-6">
+          <div className="flex items-center gap-8 h-14">
+            <span className="font-display font-medium text-sm text-text">{service.title}</span>
+            <div className="h-4 w-px bg-gray-200"></div>
+            <nav className="flex gap-6 h-full">
+              {sections.map(section => (
+                <a 
+                  key={section.id}
+                  href={`#${section.id}`}
+                  onClick={(e) => scrollToSection(e, section.id)}
+                  className={`text-sm font-medium transition-colors h-full flex items-center border-b-2 ${
+                    activeSection === section.id 
+                      ? 'text-primary border-primary' 
+                      : 'text-muted border-transparent hover:text-primary'
+                  }`}
+                >
+                  {section.label}
+                </a>
+              ))}
+            </nav>
+            <div className="ml-auto">
+              <Button href="tel:8774970007" variant="primary" className="h-8 px-4 text-xs">
+                Request Service
+              </Button>
+            </div>
+          </div>
+        </div>
+      </div>
+
       {/* Breadcrumbs */}
-      <div className="border-b border-gray-100 bg-white">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-4">
+      <div className="border-b border-subtle bg-white">
+        <div className="max-w-[1440px] mx-auto px-6 py-4">
            <Breadcrumbs items={breadcrumbs} />
         </div>
       </div>
 
-      {/* When to Call Section */}
-      {(service.intro_whenToCall || (service.whenToCall && service.whenToCall.length > 0)) && (
-        <Section id="symptoms">
-          <div className="lg:flex lg:gap-20">
-            {/* Left - Sticky */}
-            <div className="lg:w-5/12 mb-10 lg:mb-0">
-              <div className="lg:sticky lg:top-[30vh] lg:h-fit">
-                <h2 className="text-3xl font-semibold text-gray-900 mb-6">When to Call Us</h2>
-                {service.intro_whenToCall && (
-                  <p className="text-lg text-gray-600 mb-8 leading-relaxed">
-                    {service.intro_whenToCall}
-                  </p>
-                )}
-                <div className="bg-red-50 border border-red-100 rounded-xl p-6">
-                  <div className="flex gap-4">
-                    <div className="p-2 bg-white rounded-full text-red-600 shadow-sm shrink-0 h-10 w-10 flex items-center justify-center">
-                      <AlertTriangle size={20} />
-                    </div>
-                    <div>
-                      <h3 className="font-semibold text-gray-900 mb-1">Emergency Response</h3>
-                      <p className="text-sm text-gray-600 mb-4">We answer 24/7 and arrive within 60 minutes.</p>
-                      <Button href="tel:8774970007" variant="primary" className="h-10 text-sm">
-                        Call (877) 497-0007
-                      </Button>
-                    </div>
+      <div className="max-w-[1440px] mx-auto px-6 py-16 lg:py-24">
+        <div className="grid grid-cols-1 lg:grid-cols-12 gap-16">
+          
+          {/* Main Content Area */}
+          <div className="lg:col-span-8">
+            
+            {/* 1. Overview / When to Call */}
+            <div id="overview" className="scroll-mt-40 mb-20">
+              <div className="bg-subtle rounded-4xl p-8 lg:p-12">
+                <div className="flex items-start gap-6 mb-8">
+                  <div className="p-3 bg-white rounded-full text-primary shadow-sm hidden sm:block">
+                    <Activity size={24} />
+                  </div>
+                  <div>
+                    <h2 className="font-display text-2xl md:text-3xl font-medium text-text mb-4">
+                      When to initiate service
+                    </h2>
+                    {service.intro_whenToCall && (
+                      <p className="font-sans text-muted text-lg leading-relaxed mb-6">
+                        {service.intro_whenToCall}
+                      </p>
+                    )}
                   </div>
                 </div>
+
+                {/* Scenarios Grid */}
+                {service.whenToCall && (
+                  <div className="grid md:grid-cols-2 gap-4">
+                    {service.whenToCall.map((item, i) => (
+                      <div key={i} className="flex items-start gap-3 bg-white p-4 rounded-xl border border-border">
+                        <CheckCircle2 size={18} className="text-primary mt-0.5 shrink-0" />
+                        <span className="text-sm text-text font-medium">{item}</span>
+                      </div>
+                    ))}
+                  </div>
+                )}
               </div>
             </div>
-            
-            {/* Right - Scrolling List */}
-            {service.whenToCall && (
-              <div className="lg:w-7/12">
-                <div className="bg-gray-50 rounded-2xl p-8 border border-gray-100">
-                  <h3 className="font-semibold text-gray-900 mb-6">Common Signs & Scenarios</h3>
-                  <ul className="space-y-4">
-                    {service.whenToCall.map((item, i) => (
-                      <li key={i} className="flex items-start gap-3">
-                        <CheckCircle2 size={18} className="text-primary mt-1 shrink-0" />
-                        <span className="text-gray-700 leading-relaxed">{item}</span>
-                      </li>
-                    ))}
-                  </ul>
-                </div>
-              </div>
-            )}
-          </div>
-        </Section>
-      )}
 
-      {/* Content Sections (Sticky Scroll) - Only for Residential Specialty Services */}
-      {service.contentSections && service.audience === 'RESIDENTIAL' && service.category === 'SPECIALTY' && (
-        <section className="bg-gray-50 border-t border-gray-100">
-          <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 py-16 md:py-24">
-            
-            {/* Two Column Sticky Scroll */}
-            <div className="lg:flex lg:gap-20">
-              {/* Left - Sticky */}
-              <div className="lg:w-5/12 mb-10 lg:mb-0">
-                <div className="lg:sticky lg:top-[30vh] lg:h-fit">
-                  <h2 className="text-3xl md:text-[40px] font-normal text-gray-900 mb-6 leading-tight">
-                    {service.contentSections.heading}
-                  </h2>
-                  <p className="text-lg text-gray-500 leading-relaxed">
-                    {service.contentSections.intro}
-                  </p>
-                </div>
-              </div>
+            {/* 2. Process / How it Works */}
+            <div id="process" className="scroll-mt-40 mb-20">
+              <h2 className="font-display text-3xl font-medium text-text mb-8">Restoration Process</h2>
+              <div className="space-y-12 relative">
+                {/* Connector Line */}
+                <div className="absolute left-6 top-6 bottom-6 w-0.5 bg-gray-100 hidden md:block"></div>
 
-              {/* Right - Scrolling Cards */}
-              <div className="lg:w-7/12 space-y-12">
-                {service.contentSections.cards.map((card, index) => {
-                  const colorSchemes = [
-                    { bg: 'bg-amber-50', icon: 'text-amber-600', accent: 'bg-amber-100' },
-                    { bg: 'bg-blue-50', icon: 'text-blue-600', accent: 'bg-blue-100' },
-                    { bg: 'bg-emerald-50', icon: 'text-emerald-600', accent: 'bg-emerald-100' },
-                    { bg: 'bg-rose-50', icon: 'text-rose-600', accent: 'bg-rose-100' },
-                    { bg: 'bg-violet-50', icon: 'text-violet-600', accent: 'bg-violet-100' },
-                  ];
-                  const scheme = colorSchemes[index % colorSchemes.length];
-                  
-                  const icons = [
-                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1.5} d="M9 12l2 2 4-4m5.618-4.016A11.955 11.955 0 0112 2.944a11.955 11.955 0 01-8.618 3.04A12.02 12.02 0 003 9c0 5.591 3.824 10.29 9 11.622 5.176-1.332 9-6.03 9-11.622 0-1.042-.133-2.052-.382-3.016z" />,
-                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1.5} d="M19.428 15.428a2 2 0 00-1.022-.547l-2.387-.477a6 6 0 00-3.86.517l-.318.158a6 6 0 01-3.86.517L6.05 15.21a2 2 0 00-1.806.547M8 4h8l-1 1v5.172a2 2 0 00.586 1.414l5 5c1.26 1.26.367 3.414-1.415 3.414H4.828c-1.782 0-2.674-2.154-1.414-3.414l5-5A2 2 0 009 10.172V5L8 4z" />,
-                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1.5} d="M9 17v-2m3 2v-4m3 4v-6m2 10H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z" />,
-                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1.5} d="M3 12l2-2m0 0l7-7 7 7M5 10v10a1 1 0 001 1h3m10-11l2 2m-2-2v10a1 1 0 01-1 1h-3m-6 0a1 1 0 001-1v-4a1 1 0 011-1h2a1 1 0 011 1v4a1 1 0 001 1m-6 0h6" />,
-                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1.5} d="M12 8c-1.657 0-3 .895-3 2s1.343 2 3 2 3 .895 3 2-1.343 2-3 2m0-8c1.11 0 2.08.402 2.599 1M12 8V7m0 1v8m0 0v1m0-1c-1.11 0-2.08-.402-2.599-1M21 12a9 9 0 11-18 0 9 9 0 0118 0z" />,
-                  ];
-                  
+                {service.whatWeDo?.map((step, i) => {
+                  const [title, desc] = step.split(':');
                   return (
-                    <div key={index} className="bg-white rounded-2xl overflow-hidden shadow-sm">
-                      {/* Visual Area with Illustration */}
-                      <div className={`${scheme.bg} aspect-[16/10] flex items-center justify-center relative overflow-hidden`}>
-                        {/* Decorative circles */}
-                        <div className={`absolute top-4 right-4 w-20 h-20 ${scheme.accent} rounded-full opacity-60`}></div>
-                        <div className={`absolute bottom-6 left-6 w-12 h-12 ${scheme.accent} rounded-full opacity-40`}></div>
-                        
-                        {/* Phone mockup container */}
-                        <div className="bg-white rounded-xl shadow-lg p-4 w-48 relative z-10">
-                          {/* Phone header */}
-                          <div className="flex items-center gap-2 mb-3 pb-2 border-b border-gray-100">
-                            <div className={`w-8 h-8 ${scheme.accent} rounded-lg flex items-center justify-center`}>
-                              <svg className={`w-4 h-4 ${scheme.icon}`} fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                                {icons[index % icons.length]}
-                              </svg>
-                            </div>
-                            <div>
-                              <div className="text-xs font-medium text-gray-900">Flood Doctor</div>
-                              <div className="text-[10px] text-gray-400">Service Details</div>
-                            </div>
-                          </div>
-                          {/* Phone content lines */}
-                          <div className="space-y-2">
-                            <div className="h-2 bg-gray-100 rounded w-full"></div>
-                            <div className="h-2 bg-gray-100 rounded w-4/5"></div>
-                            <div className="h-2 bg-gray-100 rounded w-3/5"></div>
-                          </div>
-                          {/* Phone button */}
-                          <div className={`mt-4 ${scheme.accent} ${scheme.icon} text-[10px] font-medium py-2 rounded-lg text-center`}>
-                            REQUEST QUOTE
-                          </div>
-                        </div>
+                    <div key={i} className="relative flex gap-6 md:gap-10">
+                      {/* Step Number Bubble */}
+                      <div className="hidden md:flex w-12 h-12 rounded-full bg-white border border-gray-200 text-muted font-display font-bold items-center justify-center shrink-0 z-10 shadow-sm">
+                        {i + 1}
                       </div>
                       
-                      {/* Content Area */}
-                      <div className="p-6 md:p-8">
-                        <h3 className="text-xl font-semibold text-gray-900 mb-2">
-                          {card.title}
-                        </h3>
-                        <p className="text-gray-500 leading-relaxed mb-4">
-                          {card.content}
+                      <div className="flex-1 bg-white border border-border rounded-3xl p-6 hover:shadow-google-hover transition-shadow">
+                        <div className="flex items-center gap-4 mb-3">
+                           <div className="w-10 h-10 bg-blue-50 text-primary rounded-full flex items-center justify-center shrink-0 md:hidden font-bold">
+                             {i + 1}
+                           </div>
+                           <h3 className="font-display text-xl font-medium text-text">{title}</h3>
+                        </div>
+                        <p className="font-sans text-muted leading-relaxed">
+                          {desc || step}
                         </p>
-                        <a 
-                          href="#" 
-                          className="inline-flex items-center gap-1 text-primary font-medium text-sm hover:underline"
-                        >
-                          Learn more
-                          <svg className="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                            <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 5l7 7-7 7" />
-                          </svg>
-                        </a>
                       </div>
                     </div>
                   );
                 })}
               </div>
             </div>
-            
-            {/* Bottom Full-Width Card - Two-Up Layout (OUTSIDE the flex container) */}
-            <div className="mt-16 lg:mt-24">
-              <div className="lg:flex lg:gap-20 items-center">
-                {/* Left - Visual (same width as sticky column: 5/12) */}
-                <div className="lg:w-5/12 mb-8 lg:mb-0">
-                  <div className="bg-blue-50 rounded-3xl p-8 md:p-12 flex items-center justify-center min-h-[320px]">
-                    <div className="bg-white rounded-2xl shadow-lg p-5 w-full max-w-[260px]">
-                      {/* Mockup Header */}
-                      <div className="flex items-center gap-2 mb-4 pb-3 border-b border-gray-100">
-                        <svg className="w-4 h-4 text-gray-400" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                          <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M15 19l-7-7 7-7" />
-                        </svg>
-                        <span className="text-sm font-medium text-gray-900">Restoration Progress</span>
-                      </div>
-                      
-                      {/* Stats */}
-                      <div className="text-center py-4">
-                        <div className="text-4xl font-light text-gray-900 mb-1">98%</div>
-                        <div className="text-sm text-gray-500">Customer Satisfaction</div>
-                      </div>
-                      
-                      {/* Chart */}
-                      <div className="flex items-end justify-center gap-2 h-20 mt-4">
-                        <div className="w-6 bg-blue-500 rounded-t opacity-40" style={{height: '35%'}}></div>
-                        <div className="w-6 bg-blue-500 rounded-t opacity-50" style={{height: '50%'}}></div>
-                        <div className="w-6 bg-blue-500 rounded-t opacity-60" style={{height: '45%'}}></div>
-                        <div className="w-6 bg-blue-500 rounded-t opacity-75" style={{height: '70%'}}></div>
-                        <div className="w-6 bg-blue-500 rounded-t opacity-85" style={{height: '60%'}}></div>
-                        <div className="w-6 bg-blue-500 rounded-t" style={{height: '85%'}}></div>
-                      </div>
-                      
-                      {/* Labels */}
-                      <div className="flex justify-between mt-2 text-[10px] text-gray-400">
-                        <span>Mon</span>
-                        <span>Tue</span>
-                        <span>Wed</span>
-                        <span>Thu</span>
-                        <span>Fri</span>
-                        <span>Sat</span>
-                      </div>
+
+            {/* 3. Tech Specs */}
+            <div id="specs" className="scroll-mt-40 mb-20">
+              <h2 className="font-display text-3xl font-medium text-text mb-8">Technical Specifications</h2>
+              <div className="grid md:grid-cols-2 gap-px bg-gray-200 rounded-4xl overflow-hidden border border-gray-200">
+                {service.whatToExpect && Object.entries(service.whatToExpect).map(([key, value]) => (
+                  <div key={key} className="bg-white p-8">
+                    <div className="text-xs font-bold text-muted uppercase tracking-wider mb-2">
+                      {key.replace(/([A-Z])/g, ' $1').trim()}
+                    </div>
+                    <div className="font-sans text-base text-text leading-relaxed">
+                      {value}
                     </div>
                   </div>
+                ))}
+                <div className="bg-white p-8">
+                   <div className="text-xs font-bold text-muted uppercase tracking-wider mb-2">Equipment Grade</div>
+                   <div className="font-sans text-base text-text">Commercial LGR / HEPA Filtration</div>
                 </div>
-                
-                {/* Right - Content (same width as cards column: 7/12) */}
-                <div className="lg:w-7/12">
-                  <h2 className="text-3xl md:text-[40px] font-normal text-gray-900 mb-6 leading-tight">
-                    Track your restoration progress
-                  </h2>
-                  <p className="text-lg text-gray-500 leading-relaxed mb-6">
-                    Stay informed throughout the restoration process with daily updates, moisture readings, and photo documentation. Our client portal gives you 24/7 visibility into your project status.
-                  </p>
-                  <a 
-                    href="/resources/technology/" 
-                    className="inline-flex items-center gap-2 text-primary font-medium hover:underline"
-                  >
-                    See our technology
-                    <svg className="w-5 h-5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                      <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 5l7 7-7 7" />
-                    </svg>
-                  </a>
+                <div className="bg-white p-8">
+                   <div className="text-xs font-bold text-muted uppercase tracking-wider mb-2">Certification</div>
+                   <div className="font-sans text-base text-text">IICRC S500 / S520 Standards</div>
                 </div>
               </div>
             </div>
-            
-          </div>
-        </section>
-      )}
 
-      {/* What We Do / Process */}
-      {(service.intro_whatWeDo || (service.whatWeDo && service.whatWeDo.length > 0)) && (
-        <Section id="process">
-            <div className="max-w-3xl mx-auto text-center mb-16">
-                <h2 className="text-3xl font-semibold text-gray-900 mb-4">Our Restoration Process</h2>
-                <p className="text-lg text-gray-600">{service.intro_whatWeDo}</p>
-            </div>
-            {service.whatWeDo && (
-              <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-6">
-                  {service.whatWeDo.map((step, i) => (
-                      <div key={i} className="bg-white border border-gray-200 rounded-xl p-6 hover:shadow-md transition-shadow">
-                          <div className="w-8 h-8 rounded-full bg-blue-50 text-primary flex items-center justify-center font-bold text-sm mb-4">
-                              {i + 1}
-                          </div>
-                          <h3 className="font-semibold text-gray-900 mb-2">{step.split(':')[0]}</h3>
-                          <p className="text-sm text-gray-600">{step.split(':')[1] || step}</p>
-                      </div>
-                  ))}
-              </div>
-            )}
-        </Section>
-      )}
-
-      {/* Safety & Expectations */}
-      <Section bg="subtle" borderTop>
-        <div className="lg:flex lg:gap-12">
-          {/* Left - Safety (Sticky) */}
-          {service.safety && (
-            <div className="lg:w-5/12 mb-10 lg:mb-0">
-              <div className="lg:sticky lg:top-[30vh] lg:h-fit">
-                <div className="flex items-center gap-3 mb-6">
-                  <ShieldCheck size={28} className="text-primary" />
-                  <h2 className="text-2xl font-semibold text-gray-900">{service.safety.head || 'Safety First'}</h2>
-                </div>
-                <div className="bg-white rounded-2xl p-8 border border-gray-200 shadow-sm">
-                  <p className="text-gray-600 mb-6">{service.intro_safety}</p>
-                  <ul className="space-y-3 mb-6">
-                    {service.safety.items.slice(0, 5).map((item, i) => (
-                      <li key={i} className="flex items-start gap-3 text-sm text-gray-700">
+            {/* 4. Safety Information */}
+            <div id="safety" className="scroll-mt-40 mb-20">
+              {service.safety && (
+                <div className="bg-red-50/50 rounded-4xl p-8 lg:p-12 border border-red-100">
+                  <div className="flex items-center gap-3 mb-6">
+                    <div className="p-2 bg-red-100 text-red-700 rounded-full">
+                      <AlertTriangle size={24} />
+                    </div>
+                    <h2 className="font-display text-2xl font-medium text-text">Safety Protocols</h2>
+                  </div>
+                  
+                  <div className="grid md:grid-cols-2 gap-x-12 gap-y-4 mb-8">
+                    {service.safety.items.slice(0, 6).map((item, i) => (
+                      <li key={i} className="flex items-start gap-3 list-none font-sans text-muted">
                         <span className="w-1.5 h-1.5 rounded-full bg-red-500 mt-2 shrink-0"></span>
                         {item}
                       </li>
                     ))}
-                  </ul>
+                  </div>
+
                   {service.safety.kidsPets && (
-                    <div className="bg-orange-50 text-orange-800 p-4 rounded-lg text-sm border border-orange-100">
-                      <strong>Kids & Pets:</strong> {service.safety.kidsPets}
+                    <div className="bg-white p-6 rounded-2xl border border-red-100 flex items-start gap-4">
+                      <Shield size={24} className="text-red-500 shrink-0" />
+                      <div>
+                        <h4 className="font-bold text-text text-sm mb-1">Family Safety Note</h4>
+                        <p className="text-sm text-muted">{service.safety.kidsPets}</p>
+                      </div>
                     </div>
                   )}
                 </div>
-              </div>
+              )}
             </div>
-          )}
 
-          {/* Right - Expectations (Scrolling) */}
-          {service.whatToExpect && (
-            <div className="lg:w-7/12">
-              <div className="flex items-center gap-3 mb-6">
-                <Clock size={28} className="text-primary" />
-                <h2 className="text-2xl font-semibold text-gray-900">What to Expect</h2>
+            {/* 5. FAQ */}
+            <div id="faq" className="scroll-mt-40">
+               {service.faqs && (
+                  <GoogleStyleFAQ 
+                    data={service.faqs} 
+                    title="Common Questions" 
+                    className="py-0 border-none"
+                  />
+               )}
+            </div>
+
+          </div>
+
+          {/* Right Sidebar - Sticky Call to Action */}
+          <div className="hidden lg:block lg:col-span-4">
+            <div className="sticky top-40">
+              <div className="bg-white border border-border rounded-3xl p-8 shadow-google">
+                <h3 className="font-display text-xl font-medium text-text mb-2">Need {service.title}?</h3>
+                <p className="text-sm text-muted mb-6">
+                  Our certified team is ready to deploy. Response time averages 60 minutes.
+                </p>
+                
+                <div className="space-y-3">
+                  <Button href="tel:8774970007" variant="primary" fullWidth className="h-12 text-base">
+                    (877) 497-0007
+                  </Button>
+                  <Button to="/request/" variant="secondary" fullWidth className="h-12 text-base">
+                    Request Online
+                  </Button>
+                </div>
+
+                <div className="mt-6 pt-6 border-t border-gray-100">
+                  <div className="flex items-center justify-between text-xs text-muted mb-2">
+                    <span>Response Time</span>
+                    <span className="font-bold text-primary">~60 min</span>
+                  </div>
+                  <div className="flex items-center justify-between text-xs text-muted">
+                    <span>Service Area</span>
+                    <span className="font-bold text-text">NoVA, DC, MD</span>
+                  </div>
+                </div>
               </div>
-              <div className="space-y-4">
-                {Object.entries(service.whatToExpect).map(([key, value]) => {
-                  if (!value) return null;
-                  return (
-                    <div key={key} className="bg-white rounded-xl p-6 border border-gray-200 shadow-sm">
-                      <h3 className="text-sm font-bold text-gray-900 uppercase tracking-wide mb-2">
-                        {key.charAt(0).toUpperCase() + key.slice(1)}
-                      </h3>
-                      <p className="text-gray-600 text-sm leading-relaxed">{value}</p>
-                    </div>
-                  );
-                })}
+
+              {/* Related Services */}
+              <div className="mt-8">
+                <h4 className="text-xs font-bold text-muted uppercase tracking-wider mb-4">Related Services</h4>
+                <div className="space-y-3">
+                  <RelatedServices 
+                      currentServiceId={service.id} 
+                      category={service.category} 
+                      audience={service.audience} 
+                  />
+                </div>
               </div>
             </div>
-          )}
+          </div>
+
         </div>
-      </Section>
+      </div>
 
-      {/* FAQ */}
-      {service.faqs && (
-          <GoogleStyleFAQ data={service.faqs} title={`Common Questions about ${service.title}`} />
-      )}
-
-      {/* Related Services */}
-      <RelatedServices 
-          currentServiceId={service.id} 
-          category={service.category} 
-          audience={service.audience} 
-      />
-
-      {/* Service Areas Link Block */}
       <ServiceAreaLinks />
-
     </main>
   );
 };

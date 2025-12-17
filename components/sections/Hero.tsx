@@ -1,7 +1,6 @@
 import React from 'react';
 import Button from '../ui/Button';
-import HeroResponseMock from '../ui/HeroResponseMock';
-import OrbitDots from '../ui/OrbitDots';
+import { ArrowRight, CheckCircle2 } from 'lucide-react';
 
 interface HeroProps {
   title: React.ReactNode;
@@ -11,34 +10,53 @@ interface HeroProps {
 
 const Hero: React.FC<HeroProps> = ({ title, subtitle, visual }) => {
   return (
-    <div id="overview" className="bg-white overflow-hidden relative">
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 pt-12 pb-16 md:pt-24 md:pb-32 lg:pt-32 lg:pb-40">
-        <div className="lg:grid lg:grid-cols-12 lg:gap-16 items-center">
+    <div className="relative bg-white overflow-hidden border-b border-border">
+      <div className="max-w-[1440px] mx-auto">
+        <div className="grid grid-cols-1 lg:grid-cols-2 min-h-[600px]">
           
-          {/* Left Column: Text */}
-          <div className="lg:col-span-6 text-center lg:text-left mb-12 lg:mb-0 relative z-10">
-            <h1 className="text-[40px] md:text-6xl lg:text-7xl tracking-[-0.02em] text-gray-900 mb-6 md:mb-8 leading-[1.05] font-semibold">
-              {title}
-            </h1>
-            <p className="mt-4 md:mt-6 text-lg md:text-xl text-gray-500 max-w-2xl mx-auto lg:mx-0 mb-8 md:mb-10 leading-relaxed font-normal">
-              {subtitle}
-            </p>
-            
-            <div className="hidden md:flex flex-col sm:flex-row gap-4 justify-center lg:justify-start">
-              <Button to="/request/" variant="primary" className="text-[16px] px-8 py-3.5 h-14 rounded-full shadow-none hover:shadow-button">
-                  Request Services
-              </Button>
+          {/* Left: Content - Centered vertically, heavily padded */}
+          <div className="flex flex-col justify-center px-6 py-16 lg:px-20 lg:py-24 z-10 bg-white">
+            <div className="max-w-xl">
+              {/* Google Style "Eyebrow" text */}
+              <div className="flex items-center gap-2 mb-6">
+                <span className="bg-blue-50 text-primary text-xs font-bold px-3 py-1 rounded-full uppercase tracking-wider">
+                  24/7 Emergency Service
+                </span>
+                <span className="text-green-700 text-xs font-bold px-2 flex items-center gap-1">
+                  <CheckCircle2 size={14} /> Google Guaranteed
+                </span>
+              </div>
+
+              {/* Heading: Google Sans (Outfit), Huge, Tight leading */}
+              <h1 className="font-display text-5xl lg:text-[64px] leading-[1.1] font-medium text-text mb-6 tracking-tight">
+                {title}
+              </h1>
+              
+              {/* Subtitle: Inter, Large, Muted */}
+              <p className="font-sans text-xl text-muted mb-10 leading-relaxed max-w-md">
+                {subtitle}
+              </p>
+              
+              {/* Actions - HIDDEN ON MOBILE (md:flex) to prevent clutter. */}
+              <div className="hidden md:flex flex-col sm:flex-row gap-4">
+                <Button to="/request/" variant="primary" className="text-lg">
+                  Request Service
+                </Button>
+                <Button href="tel:8774970007" variant="secondary" className="text-lg group">
+                  (877) 497-0007 <ArrowRight size={18} className="ml-2 transition-transform group-hover:translate-x-1" />
+                </Button>
+              </div>
             </div>
           </div>
 
-          {/* Right Column: Visual */}
-          <div className="lg:col-span-6 relative flex justify-center lg:block">
-             {visual ? visual : (
-               <>
-                 <OrbitDots />
-                 <HeroResponseMock />
-               </>
-             )}
+          {/* Right: Visual - Bleed to edge, soft background */}
+          <div className="relative bg-subtle flex items-center justify-center lg:h-auto min-h-[400px] overflow-hidden">
+            {/* Soft radial gradient often used in Google product shots */}
+            <div className="absolute inset-0 bg-[radial-gradient(circle_at_center,_var(--tw-gradient-stops))] from-white via-subtle to-gray-100 opacity-50"></div>
+            
+            <div className="relative z-10 w-full max-w-lg px-6 lg:px-0 transform lg:scale-110">
+              {visual}
+            </div>
           </div>
 
         </div>
