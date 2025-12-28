@@ -1,3 +1,4 @@
+
 import React, { useState } from 'react';
 import Hero from '../components/sections/Hero';
 import PageMeta from '../components/ui/PageMeta';
@@ -5,6 +6,8 @@ import { LOCATIONS, NEARBY_AREAS } from '../data/locations';
 import { LocationsHeroAnimation } from '../components/graphics';
 import { Search, MapPin, Phone, Globe, ArrowRight, Navigation } from 'lucide-react';
 import Button from '../components/ui/Button';
+import ServiceAreaMap from '../components/ui/ServiceAreaMap';
+import { LocationData } from '../types';
 
 const LocationsHub: React.FC = () => {
   const [searchQuery, setSearchQuery] = useState('');
@@ -13,6 +16,37 @@ const LocationsHub: React.FC = () => {
   const filteredLocations = LOCATIONS.filter(loc => 
     loc.title.toLowerCase().includes(searchQuery.toLowerCase())
   );
+
+  // Combine primary and nearby locations for the map
+  const mapLocations = [...LOCATIONS, ...NEARBY_AREAS];
+
+  const handleMapLocationSelect = (loc: LocationData) => {
+    // 1. Clear search query to ensure the card is visible in the list
+    setSearchQuery('');
+    
+    // 2. Wait a tick for the list to re-render (if it was filtered), then scroll
+    setTimeout(() => {
+      const id = `loc-${loc.title.replace(/\s+/g, '-').toLowerCase()}`;
+      const element = document.getElementById(id);
+      
+      if (element) {
+        const offset = 140; // Account for sticky header
+        const elementPosition = element.getBoundingClientRect().top;
+        const offsetPosition = elementPosition + window.pageYOffset - offset;
+        
+        window.scrollTo({
+          top: offsetPosition,
+          behavior: "smooth"
+        });
+
+        // 3. Highlight animation
+        element.classList.add('ring-2', 'ring-primary', 'ring-offset-4', 'scale-[1.02]', 'shadow-lg');
+        setTimeout(() => {
+          element.classList.remove('ring-2', 'ring-primary', 'ring-offset-4', 'scale-[1.02]', 'shadow-lg');
+        }, 1500);
+      }
+    }, 50);
+  };
 
   return (
     <main className="flex-grow bg-white">
@@ -28,19 +62,31 @@ const LocationsHub: React.FC = () => {
         visual={<LocationsHeroAnimation />}
       />
 
-      {/* 2. Search & Directory Section */}
+      {/* 2. Interactive Map & Directory Section */}
       <div className="bg-subtle border-t border-border min-h-screen py-12 md:py-20">
         <div className="max-w-[1440px] mx-auto px-6">
           
+          {/* Map Section */}
+          <div className="mb-16 md:mb-20">
+             <div className="max-w-2xl mx-auto text-center mb-8">
+                <h2 className="text-2xl font-semibold text-gray-900 mb-2">Interactive Service Map</h2>
+                <p className="text-gray-500">Explore our local hubs across the DMV region.</p>
+             </div>
+             <ServiceAreaMap 
+                locations={mapLocations} 
+                onLocationSelect={handleMapLocationSelect} 
+             />
+          </div>
+
           {/* Search Header (Google Maps Style) */}
-          <div className="max-w-2xl mx-auto mb-16 text-center">
+          <div className="max-w-2xl mx-auto mb-12 text-center">
              <div className="relative group">
                 <div className="absolute inset-y-0 left-0 pl-6 flex items-center pointer-events-none">
                    <Search size={24} className="text-muted group-focus-within:text-primary transition-colors" />
                 </div>
                 <input 
                    type="text"
-                   placeholder="Search your city or zip code..."
+                   placeholder="Filter by city..."
                    className="block w-full pl-16 pr-6 py-5 rounded-full border-2 border-transparent bg-white shadow-google text-lg placeholder-gray-400 focus:outline-none focus:border-primary/30 focus:shadow-lg transition-all"
                    value={searchQuery}
                    onChange={(e) => setSearchQuery(e.target.value)}
@@ -58,7 +104,11 @@ const LocationsHub: React.FC = () => {
           {/* Grid of "Business Profile" Cards */}
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6">
              {filteredLocations.map((loc) => (
-                <div key={loc.title} className="bg-white rounded-3xl overflow-hidden border border-gray-200 hover:shadow-google-hover transition-all duration-300 group flex flex-col">
+                <div 
+                  key={loc.title} 
+                  id={`loc-${loc.title.replace(/\s+/g, '-').toLowerCase()}`}
+                  className="bg-white rounded-3xl overflow-hidden border border-gray-200 hover:shadow-google-hover transition-all duration-300 group flex flex-col scroll-mt-36"
+                >
                    {/* Map Snippet Visual */}
                    <div className="h-32 bg-blue-50 relative overflow-hidden">
                       {/* Abstract Map Lines */}
