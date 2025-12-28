@@ -1,5 +1,5 @@
-/* Import Google Fonts: Inter (Text) and Plus Jakarta Sans (Headings) */
-@import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&family=Plus+Jakarta+Sans:wght@400;500;600;700&display=swap');
+/* Import Google Fonts: Inter (Text) and Outfit (Headings) */
+@import url('https://fonts.googleapis.com/css2?family=Outfit:wght@400;500;600&family=Inter:wght@400;500;600&display=swap');
 
 @tailwind base;
 @tailwind components;
@@ -8,17 +8,49 @@
 @layer base {
   html {
     scroll-behavior: smooth;
+    scroll-padding-top: 150px;
     -webkit-font-smoothing: antialiased;
     -moz-osx-font-smoothing: grayscale;
   }
 
   body {
     @apply font-sans text-text bg-white antialiased;
+    text-rendering: geometricPrecision;
+    font-weight: 400;
+    line-height: 1.6;
   }
 
   /* Typography Defaults */
   h1, h2, h3, h4, h5, h6 {
-    @apply font-display tracking-tight;
+    @apply font-display font-medium text-text;
+  }
+
+  :focus-visible {
+    outline: 2px solid #1a73e8;
+    outline-offset: 2px;
+  }
+
+  ::selection {
+    background: rgba(26, 115, 232, 0.16);
+    color: inherit;
+  }
+
+  ::-moz-selection {
+    background: rgba(26, 115, 232, 0.16);
+    color: inherit;
+  }
+
+  /* Respect reduced motion preferences */
+  @media (prefers-reduced-motion: reduce) {
+    html {
+      scroll-behavior: auto;
+    }
+    *, *::before, *::after {
+      animation-duration: 0.01ms !important;
+      animation-iteration-count: 1 !important;
+      transition-duration: 0.01ms !important;
+      scroll-behavior: auto !important;
+    }
   }
 }
 

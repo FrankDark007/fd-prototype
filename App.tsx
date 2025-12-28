@@ -7,6 +7,7 @@ import MobileStickyCTA from './components/layout/MobileStickyCTA';
 import ScrollToTop from './components/layout/ScrollToTop';
 import { EmergencyProvider } from './contexts/EmergencyContext';
 import CommandPalette from './components/ui/CommandPalette';
+import GlobalSchema from './components/seo/GlobalSchema';
 
 // Pages & Templates
 import Home from './pages/Home';
@@ -14,6 +15,7 @@ import ServicesHub from './pages/ServicesHub';
 import LocationsHub from './pages/LocationsHub';
 import RequestService from './pages/RequestService';
 import ServiceDetail from './pages/templates/ServiceDetail';
+import LocationServiceDetail from './pages/templates/LocationServiceDetail';
 import CategoryLanding from './pages/templates/CategoryLanding';
 import ResidentialVariantA from './pages/templates/ResidentialVariantA';
 
@@ -28,6 +30,7 @@ import HomeownerGuides from './pages/resources/HomeownerGuides';
 import EmergencyChecklists from './pages/resources/EmergencyChecklists';
 import Technology from './pages/resources/Technology';
 import Communication from './pages/resources/Communication';
+import Glossary from './pages/resources/Glossary';
 import BlogIndex from './pages/BlogIndex';
 import NearMeLanding from './pages/NearMeLanding';
 import NotFound from './pages/NotFound';
@@ -55,6 +58,7 @@ const Router = useBrowserRouter ? BrowserRouter : HashRouter;
 const App: React.FC = () => {
   return (
     <EmergencyProvider>
+      <GlobalSchema />
       <Router>
         <ScrollToTop />
         <CommandPalette />
@@ -63,63 +67,71 @@ const App: React.FC = () => {
           <Header />
           <Routes>
             <Route path="/" element={<Home />} />
-            
+
             {/* Service Hubs */}
             <Route path="/services/" element={<ServicesHub title="All Restoration Services" subtitle="Comprehensive water damage, mold, and cleanup solutions." />} />
             <Route path="/services/residential/" element={<ServicesHub title="Residential Services" subtitle="Expert home flood cleanup and water damage restoration." filterAudience="RESIDENTIAL" />} />
             <Route path="/services/commercial/" element={<ServicesHub title="Commercial Services" subtitle="Scalable disaster recovery for businesses and facilities." filterAudience="COMMERCIAL" />} />
-            
+
             {/* Residential Category Pages */}
-            <Route 
-              path="/services/residential/restoration-services/" 
-              element={<CategoryLanding audience="RESIDENTIAL" category="RESTORATION" title="Residential Restoration Services" description="Emergency water damage restoration, structural drying, and storm recovery for homeowners." />} 
+            <Route
+              path="/services/residential/restoration-services/"
+              element={<CategoryLanding audience="RESIDENTIAL" category="RESTORATION" title="Residential Restoration Services" description="Emergency water damage restoration, structural drying, and storm recovery for homeowners." />}
             />
-            <Route 
-              path="/services/residential/cleanup-services/" 
-              element={<CategoryLanding audience="RESIDENTIAL" category="CLEANUP" title="Residential Cleanup Services" description="Professional cleanup for sewage, mold, fire, and biohazards." />} 
+            <Route
+              path="/services/residential/cleanup-services/"
+              element={<CategoryLanding audience="RESIDENTIAL" category="CLEANUP" title="Residential Cleanup Services" description="Professional cleanup for sewage, mold, fire, and biohazards." />}
             />
-            <Route 
-              path="/services/residential/specialty-services/" 
-              element={<CategoryLanding audience="RESIDENTIAL" category="SPECIALTY" title="Residential Specialty Services" description="Specialized solutions for basements, crawl spaces, and roofs." />} 
+            <Route
+              path="/services/residential/specialty-services/"
+              element={<CategoryLanding audience="RESIDENTIAL" category="SPECIALTY" title="Residential Specialty Services" description="Specialized solutions for basements, crawl spaces, and roofs." />}
             />
 
             {/* New Variant Template */}
             <Route path="/services/residential/variant-a/" element={<ResidentialVariantA />} />
 
             {/* Commercial Category Pages */}
-            <Route 
-              path="/services/commercial/restoration-services/" 
-              element={<CategoryLanding audience="COMMERCIAL" category="RESTORATION" title="Commercial Restoration Services" description="Minimize downtime with fast water damage recovery for businesses." />} 
+            <Route
+              path="/services/commercial/restoration-services/"
+              element={<CategoryLanding audience="COMMERCIAL" category="RESTORATION" title="Commercial Restoration Services" description="Minimize downtime with fast water damage recovery for businesses." />}
             />
-            <Route 
-              path="/services/commercial/cleanup-services/" 
-              element={<CategoryLanding audience="COMMERCIAL" category="CLEANUP" title="Commercial Cleanup Services" description="Industrial-grade cleaning for mold, sewage, and fire damage." />} 
+            <Route
+              path="/services/commercial/cleanup-services/"
+              element={<CategoryLanding audience="COMMERCIAL" category="CLEANUP" title="Commercial Cleanup Services" description="Industrial-grade cleaning for mold, sewage, and fire damage." />}
             />
-             <Route 
-              path="/services/commercial/technical-services/" 
-              element={<CategoryLanding audience="COMMERCIAL" category="TECHNICAL" title="Technical Services" description="Advanced moisture mapping, air quality testing, and environmental consulting." />} 
+            <Route
+              path="/services/commercial/technical-services/"
+              element={<CategoryLanding audience="COMMERCIAL" category="TECHNICAL" title="Technical Services" description="Advanced moisture mapping, air quality testing, and environmental consulting." />}
             />
-            <Route 
-              path="/services/commercial/specialty-services/" 
-              element={<CategoryLanding audience="COMMERCIAL" category="SPECIALTY" title="Commercial Specialty Services" description="Tailored restoration for healthcare, education, and industrial facilities." />} 
+            <Route
+              path="/services/commercial/specialty-services/"
+              element={<CategoryLanding audience="COMMERCIAL" category="SPECIALTY" title="Commercial Specialty Services" description="Tailored restoration for healthcare, education, and industrial facilities." />}
             />
 
             {/* Dynamic Leaf Service Pages */}
             {SERVICES.map((service) => (
-               <Route 
-                  key={service.id} 
-                  path={service.slug} 
-                  element={<ServiceDetail service={service} />} 
-               />
+              <Route
+                // @ts-ignore
+                key={service.id}
+                path={service.slug}
+                element={<ServiceDetail service={service} />}
+              />
             ))}
 
             {/* Core Pages */}
             <Route path="/locations/" element={<LocationsHub />} />
+
+            {/* Dynamic Location Routing */}
+            {/* 1. City Hub (e.g. /locations/virginia/fairfax/) */}
+            <Route path="/locations/:state/:city/" element={<LocationsHub />} />
+            {/* 2. Specific Service in City (e.g. /locations/virginia/fairfax/water-damage/) */}
+            <Route path="/locations/:state/:city/:serviceSlug/" element={<LocationServiceDetail />} />
+
             <Route path="/request/" element={<RequestService />} />
             <Route path="/about/" element={<About />} />
             <Route path="/contact/" element={<Contact />} />
             <Route path="/reviews/" element={<Reviews />} />
-            
+
             {/* Near Me Landing */}
             <Route path="/nearme/water-damage-restoration/" element={<NearMeLanding />} />
 
@@ -131,8 +143,9 @@ const App: React.FC = () => {
             <Route path="/resources/emergency-checklists/" element={<EmergencyChecklists />} />
             <Route path="/resources/technology/" element={<Technology />} />
             <Route path="/resources/communication/" element={<Communication />} />
+            <Route path="/resources/glossary/" element={<Glossary />} />
             <Route path="/blog/" element={<BlogIndex />} />
-            
+
             {/* Tools & Demos */}
             <Route path="/tools/video-generator/" element={<VideoGenerator />} />
             <Route path="/portal-demo/" element={<ClientPortalDemo />} />

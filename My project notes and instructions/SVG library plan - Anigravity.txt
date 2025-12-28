@@ -1,0 +1,184 @@
+Flood Doctor SVG Graphics Library Plan
+
+Animation Style Analysis (From Your Videos)
+
+Your existing animations use:
+
+Clean line art / flat design with 2px strokes
+Primary Color: Teal/Cyan (#00a0b0)
+Secondary Colors: Navy blue (#1e3a5f), Cream (#f5e6c8)
+White backgrounds with simple slide-in/fade animations
+Subject matter: Homes, furniture, documents, water effects, insurance policies
+Can I Create Similar Video Animations? I can create animated SVGs that mimic this style with CSS/SMIL animations. For full MP4 video exports, you'd need to render these through After Effects or a similar tool. However, I can provide:
+
+Animated SVGs (loop infinitely, web-ready)
+Lottie JSON files (for high-quality web animations)
+Frame-by-frame SVG sequences
+Complete SVG Graphics Library (Organized by Page)
+
+SECTION 1: Homepage Icons (6 icons)
+
+Icon	Description	Animation	Placement
+60-min-response.svg	Clock with "60" and speedometer needle	Needle ticks from 0 to 60	Hero trust bar
+licensed-contractor.svg	Hard hat with checkmark badge	Checkmark draws in	Hero trust bar
+insurance-billing.svg	Document with dollar sign and arrow to building	Paper slides to building	Hero trust bar
+local-team.svg	Map pin with people silhouettes	Pin drops, people fade in	"Local Team" section
+24-7-emergency.svg	Phone with clock showing all hours	Clock hands rotate continuously	Emergency CTA
+google-guaranteed.svg	Green shield with checkmark	Shield pulse glow	Trust badges
+SECTION 2: Residential Restoration Services (8 icons)
+
+Icon	Description	Animation	Page
+water-damage-restoration.svg	House with water droplet and wrench	Droplet falls, wrench turns	/residential/restoration-services/water-damage-restoration/
+flood-cleanup.svg	Flooded basement with pump extracting	Water level drops	/residential/restoration-services/flood-cleanup/
+storm-damage.svg	House with lightning and wind	Lightning flash, wind lines animate	/residential/restoration-services/storm-damage-restoration/
+burst-pipe.svg	Pipe with crack, water spraying, then sealed	Water stops, pipe seals	/residential/restoration-services/burst-pipe-cleanup/
+structural-drying.svg	Wall cross-section with moisture arrows leaving	Arrows animate outward	/residential/restoration-services/structural-drying/
+dehumidifier.svg	Dehumidifier unit with airflow arrows	Arrows flow continuously	Equipment icons
+air-mover.svg	Industrial fan with air streams	Rotation + airflow	Equipment icons
+moisture-meter.svg	Handheld meter with gauge	Needle moves to green zone	Equipment icons
+SECTION 3: Cleanup Services (6 icons)
+
+Icon	Description	Animation	Page
+sewage-cleanup.svg	Biohazard symbol with cleaning brush	Symbol fades to clean sparkle	/residential/cleanup-services/sewage-cleanup/
+mold-remediation.svg	Mold spores being vacuumed away	Spores disappear into hose	/residential/cleanup-services/mold-remediation/
+fire-smoke.svg	Smoke wisps clearing from house	Smoke dissipates upward	/residential/cleanup-services/fire-smoke-cleanup/
+odor-removal.svg	Nose with wavy lines becoming fresh air	Wavy → straight lines	/residential/cleanup-services/odor-removal/
+contents-packout.svg	Boxes being wrapped and moved	Items pack into boxes	/residential/cleanup-services/contents-cleaning-packout/
+antimicrobial.svg	Spray bottle with shield	Spray mist spreads	Treatment icons
+SECTION 4: Specialty Services (5 icons)
+
+Icon	Description	Animation	Page
+basement-flooding.svg	Basement cross-section with rising water	Water rises then pumps out	/residential/specialty-services/basement-flooding/
+crawl-space.svg	Crawl space with vapor barrier	Barrier unfolds	/residential/specialty-services/crawl-space-drying/
+hardwood-drying.svg	Wood floor planks with mat system	Mat inflates, moisture arrows leave	/residential/specialty-services/hardwood-floor-drying/
+roof-leak.svg	Roof with water trail to interior	Water path traces down	/residential/specialty-services/roof-leak-water-damage/
+injectidry.svg	Wall with injection ports	Ports light up sequentially	Specialty equipment
+SECTION 5: Commercial Services (8 icons)
+
+Icon	Description	Animation	Page
+commercial-building.svg	Office building with water damage	Water clears from floors	/commercial/restoration-services/commercial-water-damage/
+large-loss.svg	Multi-building complex with trucks	Trucks arrive, equipment deploys	/commercial/restoration-services/large-loss-restoration/
+healthcare-facility.svg	Hospital with cross + water shield	Shield activates	/commercial/specialty-services/healthcare-facilities/
+hospitality.svg	Hotel with multiple rooms	Rooms light up green sequentially	/commercial/specialty-services/hospitality-multifamily/
+school-municipal.svg	School building with clock	Fast-forward clock hands	/commercial/specialty-services/municipal-education/
+industrial.svg	Factory/warehouse with equipment	Production line continues	/commercial/specialty-services/industrial-facilities/
+moisture-mapping.svg	Floor plan with thermal gradient	Heat map colors shift	/commercial/technical-services/moisture-mapping-consulting/
+air-quality.svg	Air quality monitor with particles	Particles reduce to zero	/commercial/technical-services/indoor-air-quality/
+SECTION 6: Process & How It Works (5 infographics)
+
+Graphic	Description	Animation	Placement
+3-step-process.svg	Circular diagram: Call → Assess → Restore	Steps light up sequentially	Homepage, About
+restoration-timeline.svg	Horizontal timeline Day 1-5 with milestones	Progress bar fills	Services pages
+drying-diagram.svg	Room cross-section with airflow arrows	Air circulates	Technical pages
+water-category-chart.svg	Clean → Gray → Black water comparison	Categories highlight	Education content
+response-time-map.svg	Northern VA map with 60-min radius	Radius pulse expands	Location pages
+SECTION 7: Insurance & Documentation (6 icons)
+
+Icon	Description	Animation	Page
+claim-filed.svg	Document with checkmark flying to insurance building	Document travels	/resources/insurance-guide/
+direct-billing.svg	Arrow from Flood Doctor logo to insurance logo	Arrow pulses	Trust bar
+photo-documentation.svg	Camera with phone capturing damage	Flash effect	/resources/homeowner-guides/
+xactimate.svg	Computer with estimate form	Numbers fill in	Insurance section
+policy-review.svg	Magnifying glass over policy document	Glass moves over text	Insurance guide
+claim-approved.svg	Green checkmark stamp on document	Stamp animates down	Success states
+SECTION 8: Emergency Checklists (6 icons)
+
+Icon	Description	Animation	Page
+shut-off-water.svg	Water valve turning closed	Valve rotates 90°	/resources/emergency-checklists/
+electricity-off.svg	Electrical panel with switch flipping	Switch moves to OFF	Emergency checklist
+document-damage.svg	Phone camera framing damage	Shutter click	Emergency checklist
+ventilate.svg	Window opening with fresh air arrows	Window slides up	Emergency checklist
+call-flood-doctor.svg	Phone with Flood Doctor logo	Phone rings/pulses	Emergency CTA
+dont-wait.svg	Hourglass with mold growing	Sand falls, mold appears	Urgency messaging
+SECTION 9: Technology & Equipment (8 icons)
+
+Icon	Description	Animation	Page
+thermal-camera.svg	Thermal imaging camera with heat display	Colors shift blue→red	/resources/technology/
+truck-mount.svg	Extraction truck with hoses	Hoses extend to house	Equipment page
+desiccant-dehu.svg	Large commercial dehumidifier	Airflow arrows circulate	Equipment page
+air-scrubber.svg	HEPA air scrubber with clean air out	Particles filter out	Equipment page
+hydroxyl-generator.svg	Odor removal machine with molecule diagram	Molecules break apart	Technology page
+moisture-detection.svg	Wall scanner detecting moisture	Screen shows readings	Technology page
+daily-monitoring.svg	Clipboard with chart and checkmarks	Checkmarks appear daily	Communication page
+real-time-updates.svg	Phone with notification + photo	Notification pops in	/resources/communication/
+SECTION 10: Location/City Icons (4 variations)
+
+Icon	Description	Animation	Page
+virginia-map.svg	Virginia outline with NOVA highlighted	Region pulses	/locations/
+dc-area-map.svg	DMV area with service radius	Radius expands	Location pages
+city-pin.svg	Map pin with city name (variable)	Pin drops	City subdomains
+neighborhood.svg	House cluster representing local community	Houses appear	City pages
+SECTION 11: Trust & Credibility (7 icons)
+
+Icon	Description	Animation	Page
+25-years.svg	"25+" with anniversary ribbon	Number counts up	About, Trust bar
+iicrc-certified.svg	IICRC logo style certification badge	Badge shines	Credentials
+dpor-licensed.svg	Virginia license with seal	Seal stamps	Credentials
+homeadvisor-award.svg	Award ribbon with star	Star sparkles	Awards section
+angie-list.svg	Super Service award badge	Badge glows	Awards section
+bbb-accredited.svg	BBB A+ rating style	Rating fills in	Trust bar
+reviews-stars.svg	5 stars with "4.9" rating	Stars fill left to right	Reviews page
+SECTION 12: Blog & Resource Icons (6 icons)
+
+Icon	Description	Animation	Page
+prevention-tips.svg	Lightbulb with water droplet	Lightbulb glows	/resources/
+seasonal-prep.svg	Calendar with seasons icons	Seasons rotate	Blog
+diy-vs-pro.svg	Split icon: wrench vs. pro badge	Comparison highlight	Blog
+insurance-101.svg	Book with insurance shield	Book opens	/resources/insurance-guide/
+water-facts.svg	Info icon with water statistics	Stats count up	Blog
+faq-icon.svg	Question mark with speech bubble	Bubble expands	/resources/faq/
+Animated SVG Infographics (Hero/Section Animations)
+
+Large Animated Graphics (Match Your Video Style)
+
+Animation	Description	Duration	Placement
+home-restoration-sequence.svg	House floods → extraction → drying → restored	10-12s loop	Homepage hero
+equipment-lineup.svg	Dehumidifiers, air movers, extraction unit slide in	6s loop	Technology page
+insurance-process.svg	Document → review → approval → payment	8s loop	Insurance guide
+mold-prevention-timeline.svg	Clock showing 24-48hr mold growth	5s loop	Mold page
+commercial-response.svg	Multi-truck dispatch to building	8s loop	Commercial page
+contents-packout-sequence.svg	Items being documented → packed → stored	10s loop	Contents page
+Video Animation Concepts (Google Style)
+
+These would match your existing teal/navy/cream palette:
+
+Video	Concept	Duration	Use Case
+emergency-response.mp4	Phone call → dispatch → truck arrives → work begins	15s	Homepage hero
+structural-drying.mp4	Water detected → equipment placed → moisture graph drops	12s	Drying services
+insurance-claim.mp4	Damage → documentation → claim filed → approved	15s	Insurance page
+before-after.mp4	Damaged room transitions to restored room	10s	Portfolio/Reviews
+24-7-availability.mp4	Clock spinning through day/night, phone always ready	8s	Emergency CTA
+local-team.mp4	Map of NOVA with pins appearing in each city	10s	Locations page
+Summary Counts
+
+Category	Count
+Static SVG Icons	75
+Animated SVG Icons	75 (same icons with animation)
+Large Animated Infographics	6
+Video Animation Concepts	6
+Total Graphics	87 unique assets
+Recommended Priority Order
+
+Phase 1 (Essential - Build First)
+
+Homepage trust bar icons (6)
+Service category icons (water, mold, fire, storm) (9)
+3-step process infographic (1)
+Emergency icons (6)
+Phase 2 (Service Pages)
+
+All residential restoration icons (8)
+All cleanup service icons (6)
+Specialty service icons (5)
+Equipment icons (8)
+Phase 3 (Commercial & Resources)
+
+Commercial service icons (8)
+Insurance/documentation icons (6)
+Technology icons (8)
+Phase 4 (Polish)
+
+Location map icons (4)
+Trust/credential badges (7)
+Blog/resource icons (6)
+Large animated infographics (6)

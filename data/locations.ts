@@ -2,22 +2,25 @@
 import { LocationData } from '../types';
 
 export const LOCATIONS: LocationData[] = [
-  { title: 'Ashburn', url: 'https://ashburn.flood.doctor/', region: 'NOVA', lat: 39.0438, lng: -77.4875 },
-  { title: 'Arlington', url: 'https://arlington.flood.doctor/', region: 'NOVA', lat: 38.8816, lng: -77.0910 },
-  { title: 'Alexandria', url: 'https://alexandria.flood.doctor/', region: 'NOVA', lat: 38.8048, lng: -77.0469 },
-  { title: 'Falls Church', url: 'https://fallschurch.flood.doctor/', region: 'NOVA', lat: 38.8823, lng: -77.1711 },
-  { title: 'Fairfax', url: 'https://fairfax.flood.doctor/', region: 'NOVA', lat: 38.8462, lng: -77.3064 },
-  { title: 'Great Falls', url: 'https://greatfalls.flood.doctor/', region: 'NOVA', lat: 39.0012, lng: -77.2891 },
-  { title: 'Herndon', url: 'https://herndon.flood.doctor/', region: 'NOVA', lat: 38.9696, lng: -77.3861 },
-  { title: 'Lorton', url: 'https://lorton.flood.doctor/', region: 'NOVA', lat: 38.7043, lng: -77.2197 },
-  { title: 'McLean', url: 'https://mclean.flood.doctor/', region: 'NOVA', lat: 38.9339, lng: -77.1773 },
-  { title: 'Reston', url: 'https://reston.flood.doctor/', region: 'NOVA', lat: 38.9586, lng: -77.3570 },
-  { title: 'Springfield', url: 'https://springfield.flood.doctor/', region: 'NOVA', lat: 38.7891, lng: -77.1872 },
-  { title: 'Tysons', url: 'https://tysons.flood.doctor/', region: 'NOVA', lat: 38.9187, lng: -77.2311 },
+  { title: 'Ashburn', path: '/locations/virginia/ashburn/', region: 'NOVA', lat: 39.0438, lng: -77.4875 },
+  { title: 'Arlington', path: '/locations/virginia/arlington/', region: 'NOVA', lat: 38.8816, lng: -77.0910 },
+  { title: 'Alexandria', path: '/locations/virginia/alexandria/', region: 'NOVA', lat: 38.8048, lng: -77.0469 },
+  { title: 'Bethesda', path: '/locations/maryland/bethesda/', region: 'MD', lat: 38.9847, lng: -77.0947 }, // Moved to Primary
+  { title: 'Fairfax', path: '/locations/virginia/fairfax/', region: 'NOVA', lat: 38.8462, lng: -77.3064 },
+  { title: 'Falls Church', path: '/locations/virginia/falls-church/', region: 'NOVA', lat: 38.8823, lng: -77.1711 },
+  { title: 'Great Falls', path: '/locations/virginia/great-falls/', region: 'NOVA', lat: 39.0012, lng: -77.2891 },
+  { title: 'Herndon', path: '/locations/virginia/herndon/', region: 'NOVA', lat: 38.9696, lng: -77.3861 },
+  { title: 'Lorton', path: '/locations/virginia/lorton/', region: 'NOVA', lat: 38.7043, lng: -77.2197 },
+  { title: 'McLean', path: '/locations/virginia/mclean/', region: 'NOVA', lat: 38.9339, lng: -77.1773 },
+  { title: 'Reston', path: '/locations/virginia/reston/', region: 'NOVA', lat: 38.9586, lng: -77.3570 },
+  { title: 'Springfield', path: '/locations/virginia/springfield/', region: 'NOVA', lat: 38.7891, lng: -77.1872 },
+  { title: 'Tysons', path: '/locations/virginia/tysons/', region: 'NOVA', lat: 38.9187, lng: -77.2311 },
+  { title: 'Washington DC', path: '/locations/dc/washington/', region: 'DC', lat: 38.9072, lng: -77.0369 },
 ];
 
 export const NEARBY_AREAS: LocationData[] = [
-  { title: 'Washington DC', url: '', path: '/locations/', region: 'NEARBY', lat: 38.9072, lng: -77.0369 },
-  { title: 'Bethesda MD', url: '', path: '/locations/', region: 'NEARBY', lat: 38.9847, lng: -77.0947 },
-  { title: 'Silver Spring MD', url: '', path: '/locations/', region: 'NEARBY', lat: 38.9907, lng: -77.0261 },
+  { title: 'Silver Spring MD', path: '/locations/maryland/silver-spring/', region: 'MD', lat: 38.9907, lng: -77.0261 },
+  { title: 'Potomac MD', path: '/locations/maryland/potomac/', region: 'MD', lat: 39.0180, lng: -77.2090 },
+  { title: 'Vienna VA', path: '/locations/virginia/vienna/', region: 'NOVA', lat: 38.9012, lng: -77.2653 },
+  { title: 'Chantilly VA', path: '/locations/virginia/chantilly/', region: 'NOVA', lat: 38.8943, lng: -77.4311 },
 ];

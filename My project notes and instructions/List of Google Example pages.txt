@@ -1,0 +1,23 @@
+Google page layout examples to use for page layouts and scroll behaviors and row + columns and googles aggressive use of white space in their pages
+
+https://business.google.com/us/google-ads/how-ads-work/
+https://business.google.com/us/google-ads/campaign-budget/
+https://business.google.com/us/resources/ (service hub page card layout)
+https://business.google.com/us/support/ads-expert/
+https://business.google.com/us/ad-solutions/performance-max/
+https://business.google.com/us/ad-solutions/youtube-ads/
+https://business.google.com/us/google-analytics/
+https://workspace.google.com/
+https://workspace.google.com/business/small-business/
+https://workspace.google.com/blog/small-business/make-time-things-matter-your-small-business-using-google-workspace?hl=en (blog post template)
+https://workspace.google.com/blog/gmail (blog articles list)
+https://workspace.google.com/industries/healthcare/
+
+
+https://flood.doctor/
+https://flood.doctor/business-google/
+https://flood.doctor/google-business/
+https://flood.doctor/google-restaurant/
+https://flood.doctor/google-retail/
+https://flood.doctor/google-service/
+https://flood.doctor/merchant-center/

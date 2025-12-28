@@ -1,3 +1,4 @@
+/// <reference types="vite/client" />
 
 import React, { useState, useEffect } from 'react';
 import { GoogleGenAI } from "@google/genai";
@@ -45,7 +46,9 @@ const VeoGenerator: React.FC = () => {
   // Check for API Key on mount
   useEffect(() => {
     const checkKey = async () => {
+      // @ts-ignore
       if (window.aistudio && window.aistudio.hasSelectedApiKey) {
+        // @ts-ignore
         const has = await window.aistudio.hasSelectedApiKey();
         setHasKey(has);
       }
@@ -54,7 +57,9 @@ const VeoGenerator: React.FC = () => {
   }, []);
 
   const handleSelectKey = async () => {
+    // @ts-ignore
     if (window.aistudio && window.aistudio.openSelectKey) {
+      // @ts-ignore
       await window.aistudio.openSelectKey();
       // Assume success after dialog interaction to mitigate race condition
       setHasKey(true);
@@ -74,10 +79,12 @@ const VeoGenerator: React.FC = () => {
 
     try {
       // Initialize AI with the environment key (injected by the platform)
-      const ai = new GoogleGenAI({ apiKey: process.env.API_KEY });
-      
+      // @ts-ignore
+      const apiKey = import.meta.env.VITE_GOOGLE_API_KEY || '';
+      const ai = new GoogleGenAI({ apiKey });
+
       setStatus('Sending request to Google Veo...');
-      
+
       let operation = await ai.models.generateVideos({
         model: 'veo-3.1-fast-generate-preview',
         prompt: customPrompt,
@@ -100,19 +107,20 @@ const VeoGenerator: React.FC = () => {
       if (operation.response?.generatedVideos?.[0]?.video?.uri) {
         const downloadLink = operation.response.generatedVideos[0].video.uri;
         // Append API key for viewing
-        setVideoUrl(`${downloadLink}&key=${process.env.API_KEY}`);
+        setVideoUrl(`${downloadLink}&key=${import.meta.env.VITE_GOOGLE_API_KEY}`);
         setStatus('Complete!');
       } else {
         throw new Error("No video URI returned.");
       }
 
-    } catch (err: any) {
+    } catch (err) {
       console.error(err);
+      // @ts-ignore
       if (err.message && err.message.includes('Requested entity was not found')) {
-         setHasKey(false); // Reset key state if invalid
-         setError("API Key invalid or expired. Please select a key again.");
+        setHasKey(false); // Reset key state if invalid
+        setError("API Key invalid or expired. Please select a key again.");
       } else {
-         setError("Failed to generate video. Please try again.");
+        setError("Failed to generate video. Please try again.");
       }
     } finally {
       setIsGenerating(false);
@@ -145,10 +153,10 @@ const VeoGenerator: React.FC = () => {
 
   return (
     <div className="grid grid-cols-1 lg:grid-cols-12 gap-8">
-      
+
       {/* Controls */}
       <div className="lg:col-span-5 space-y-8">
-        
+
         {/* Scene Selector */}
         <div className="space-y-4">
           <label className="block text-sm font-bold text-gray-700 uppercase tracking-wide">
@@ -159,15 +167,13 @@ const VeoGenerator: React.FC = () => {
               <button
                 key={scene.id}
                 onClick={() => handleSceneChange(scene)}
-                className={`flex items-center text-left p-4 rounded-xl border transition-all ${
-                  selectedScene.id === scene.id
-                    ? 'border-primary bg-blue-50 ring-1 ring-primary'
-                    : 'border-gray-200 hover:border-blue-200 bg-white'
-                }`}
+                className={`flex items-center text-left p-4 rounded-xl border transition-all ${selectedScene.id === scene.id
+                  ? 'border-primary bg-blue-50 ring-1 ring-primary'
+                  : 'border-gray-200 hover:border-blue-200 bg-white'
+                  }`}
               >
-                <div className={`w-8 h-8 rounded-full flex items-center justify-center text-sm font-bold mr-4 ${
-                   selectedScene.id === scene.id ? 'bg-primary text-white' : 'bg-gray-100 text-gray-500'
-                }`}>
+                <div className={`w-8 h-8 rounded-full flex items-center justify-center text-sm font-bold mr-4 ${selectedScene.id === scene.id ? 'bg-primary text-white' : 'bg-gray-100 text-gray-500'
+                  }`}>
                   {scene.id === 'fleet' && '🚛'}
                   {scene.id === 'warehouse' && '🏗️'}
                   {scene.id === 'equipment' && '📦'}
@@ -200,10 +206,10 @@ const VeoGenerator: React.FC = () => {
         </div>
 
         {/* Generate Button */}
-        <Button 
-          onClick={generateVideo} 
-          disabled={isGenerating} 
-          fullWidth 
+        <Button
+          onClick={generateVideo}
+          disabled={isGenerating}
+          fullWidth
           variant="primary"
           className="h-14 text-lg shadow-google hover:shadow-google-hover"
         >
@@ -217,69 +223,69 @@ const VeoGenerator: React.FC = () => {
             </span>
           )}
         </Button>
-        
+
         {error && (
-            <div className="p-4 bg-red-50 text-red-700 rounded-xl text-sm border border-red-100 flex items-start gap-3">
-                <AlertTriangle size={18} className="shrink-0 mt-0.5" />
-                {error}
-            </div>
+          <div className="p-4 bg-red-50 text-red-700 rounded-xl text-sm border border-red-100 flex items-start gap-3">
+            <AlertTriangle size={18} className="shrink-0 mt-0.5" />
+            {error}
+          </div>
         )}
       </div>
 
       {/* Preview Area */}
       <div className="lg:col-span-7">
         <div className="sticky top-24">
-            <label className="block text-sm font-bold text-gray-700 uppercase tracking-wide mb-4">
-                3. Preview & Download
-            </label>
-            
-            <div className="aspect-video bg-black rounded-2xl overflow-hidden shadow-2xl relative flex items-center justify-center border border-gray-800">
-                {videoUrl ? (
-                    <video 
-                        src={videoUrl} 
-                        controls 
-                        autoPlay 
-                        loop 
-                        className="w-full h-full object-contain"
-                    />
-                ) : (
-                    <div className="text-center p-8">
-                        {isGenerating ? (
-                            <div className="flex flex-col items-center">
-                                <div className="w-16 h-16 border-4 border-white/20 border-t-primary rounded-full animate-spin mb-6"></div>
-                                <div className="text-white font-medium text-lg">{status}</div>
-                                <div className="text-white/50 text-sm mt-2">AI is dreaming up your video...</div>
-                            </div>
-                        ) : (
-                            <div className="text-white/30 flex flex-col items-center">
-                                <Video size={64} className="mb-4" />
-                                <div className="text-lg font-medium">Ready to Generate</div>
-                                <div className="text-sm">Select a scene and click Generate</div>
-                            </div>
-                        )}
-                    </div>
-                )}
-            </div>
+          <label className="block text-sm font-bold text-gray-700 uppercase tracking-wide mb-4">
+            3. Preview & Download
+          </label>
 
-            {videoUrl && (
-                <div className="mt-6 flex justify-end">
-                    <a 
-                        href={videoUrl} 
-                        download="flood-doctor-veo-clip.mp4" 
-                        className="inline-flex items-center gap-2 px-6 py-3 bg-white border border-gray-200 rounded-full text-gray-700 font-medium hover:bg-gray-50 transition-colors shadow-sm"
-                    >
-                        <Download size={18} /> Download MP4
-                    </a>
-                </div>
+          <div className="aspect-video bg-black rounded-2xl overflow-hidden shadow-2xl relative flex items-center justify-center border border-gray-800">
+            {videoUrl ? (
+              <video
+                src={videoUrl}
+                controls
+                autoPlay
+                loop
+                className="w-full h-full object-contain"
+              />
+            ) : (
+              <div className="text-center p-8">
+                {isGenerating ? (
+                  <div className="flex flex-col items-center">
+                    <div className="w-16 h-16 border-4 border-white/20 border-t-primary rounded-full animate-spin mb-6"></div>
+                    <div className="text-white font-medium text-lg">{status}</div>
+                    <div className="text-white/50 text-sm mt-2">AI is dreaming up your video...</div>
+                  </div>
+                ) : (
+                  <div className="text-white/30 flex flex-col items-center">
+                    <Video size={64} className="mb-4" />
+                    <div className="text-lg font-medium">Ready to Generate</div>
+                    <div className="text-sm">Select a scene and click Generate</div>
+                  </div>
+                )}
+              </div>
             )}
-            
-            <div className="mt-8 bg-blue-50 p-6 rounded-xl border border-blue-100">
-                <h4 className="font-bold text-blue-900 mb-2">About Google Veo</h4>
-                <p className="text-sm text-blue-800 leading-relaxed">
-                    Veo is Google's most capable generative video model. It creates high-quality, 1080p resolution clips. 
-                    Use these clips to build your own hero videos or social media content.
-                </p>
+          </div>
+
+          {videoUrl && (
+            <div className="mt-6 flex justify-end">
+              <a
+                href={videoUrl}
+                download="flood-doctor-veo-clip.mp4"
+                className="inline-flex items-center gap-2 px-6 py-3 bg-white border border-gray-200 rounded-full text-gray-700 font-medium hover:bg-gray-50 transition-colors shadow-sm"
+              >
+                <Download size={18} /> Download MP4
+              </a>
             </div>
+          )}
+
+          <div className="mt-8 bg-blue-50 p-6 rounded-xl border border-blue-100">
+            <h4 className="font-bold text-blue-900 mb-2">About Google Veo</h4>
+            <p className="text-sm text-blue-800 leading-relaxed">
+              Veo is Google's most capable generative video model. It creates high-quality, 1080p resolution clips.
+              Use these clips to build your own hero videos or social media content.
+            </p>
+          </div>
         </div>
       </div>
 

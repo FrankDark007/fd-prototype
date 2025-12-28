@@ -26,27 +26,27 @@ export interface ServiceData {
   shortDescription: string;
   audience: ServiceAudience;
   category: ServiceCategory;
-  
+
   // SEO Fields
   primaryKeyword?: string;
   secondaryKeywords?: string[];
-  
+
   // Rich Content Fields
   heroHeading?: string; // Custom H1
   heroIntro?: string; // First paragraph content
   heroVisualKey?: string; // Key to map to SVG component in ServiceDetail
   thumbVisualKey?: string; // Key to map to SVG component in Service Cards (Archive)
-  
+
   // Content Sections with Optional Intros
   intro_whenToCall?: string;
   whenToCall?: string[]; // Bullets
-  
+
   // New SEO Content Section (Sticky Scroll)
   contentSections?: ServiceContentSections;
-  
+
   intro_whatWeDo?: string;
   whatWeDo?: string[]; // Bullets
-  
+
   // Updated to allow flexible specification keys while keeping standard ones optional
   whatToExpect?: {
     timeline?: string;
@@ -55,17 +55,17 @@ export interface ServiceData {
     noise?: string;
     [key: string]: string | undefined; // Allow custom keys
   };
-  
+
   intro_safety?: string;
   safety?: {
     head?: string;
     items: string[];
     kidsPets?: string;
   };
-  
+
   intro_scenarios?: string;
   scenarios?: string[]; // Bullets
-  
+
   saveVsRemove?: {
     save: string[];
     remove: string[];
@@ -73,14 +73,14 @@ export interface ServiceData {
 
   faqs?: FAQItem[];
   relatedSearchTerms?: string[];
-  
+
   infographicType?: 'DRYING_TREND' | 'FLOOD_TIMELINE' | 'SEWAGE_CONTAINMENT' | 'MOLD_AIRFLOW' | 'STRUCTURAL_DRYING';
 }
 
 export interface LocationData {
   title: string;
-  url: string; // External subdomain
-  region: 'NOVA' | 'NEARBY'; // NEARBY usually just has paths, but we normalized to url/path in logic
+  url?: string; // External subdomain - Optional
+  region: 'NOVA' | 'NEARBY' | 'MD' | 'DC'; // NEARBY usually just has paths, but we normalized to url/path in logic
   path?: string; // Internal fallback
   lat?: number;
   lng?: number;

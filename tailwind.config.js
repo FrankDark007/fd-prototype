@@ -11,24 +11,27 @@ export default {
   theme: {
     extend: {
       fontFamily: {
-        // 'Plus Jakarta Sans' is the closest free alternative to Google's "Product Sans"
         sans: ['Inter', 'system-ui', 'sans-serif'],
-        display: ['Plus Jakarta Sans', 'Inter', 'system-ui', 'sans-serif'],
+        display: ['Outfit', 'system-ui', 'sans-serif'],
       },
       colors: {
         // The specific "Google Blue" used in their consumer products
         primary: {
-          DEFAULT: '#1a73e8', 
+          DEFAULT: '#1a73e8',
           hover: '#1557b0',
         },
+        primaryHover: '#1557b0', // Alias for compatibility
         // High-contrast dark text (not pure black)
         text: '#202124',
         // Soft gray text for descriptions
         muted: '#5f6368',
         // The "Google Gray" background
-        subtle: '#f8f9fa',
+        subtle: '#f2f2f2',
         // Border colors
         border: '#dadce0',
+        green: '#1e8e3e',
+        red: '#d93025',
+        yellow: '#fbbc04',
       },
       boxShadow: {
         // Soft, diffused shadows used on Google Store cards
@@ -37,7 +40,7 @@ export default {
         'button': '0 1px 2px 0 rgba(0,0,0,0.05)',
       },
       borderRadius: {
-        '4xl': '2rem', // For the large rounded cards
+        '4xl': '32px', // Material 3 large curve
       },
       animation: {
         'fade-in': 'fadeIn 0.5s ease-out',
