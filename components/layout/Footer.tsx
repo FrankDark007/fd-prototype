@@ -1,6 +1,7 @@
+
 import React, { useState } from 'react';
 import { Link } from 'react-router-dom';
-import { Facebook, Twitter, Linkedin, Instagram, ChevronDown } from 'lucide-react';
+import { Facebook, Twitter, Linkedin, Instagram, ChevronDown, MapPin } from 'lucide-react';
 
 interface MobileAccordionItemProps {
   title: string;
@@ -76,6 +77,11 @@ const Footer: React.FC = () => {
                         <li><Link to="/services/residential/" className="block text-sm text-gray-500 hover:text-primary transition-colors py-2 md:py-0">Residential</Link></li>
                         <li><Link to="/services/commercial/" className="block text-sm text-gray-500 hover:text-primary transition-colors py-2 md:py-0">Commercial</Link></li>
                         <li><Link to="/locations/" className="block text-sm text-gray-500 hover:text-primary transition-colors py-2 md:py-0">Locations</Link></li>
+                        <li>
+                            <Link to="/nearme/water-damage-restoration/" className="flex items-center gap-2 text-sm text-primary font-medium hover:text-primaryHover transition-colors py-2 md:py-0">
+                               <MapPin size={14} /> Find Near Me
+                            </Link>
+                        </li>
                     </ul>
                 </MobileAccordionItem>
 

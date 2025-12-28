@@ -1,3 +1,4 @@
+
 import React from 'react';
 import { 
   ArrowRight, 
@@ -10,7 +11,7 @@ import {
   Activity, 
   Hammer, 
   Zap, 
-  Waves,
+  Waves, 
   Box
 } from 'lucide-react';
 import ServiceCardThumb from './ServiceCardThumb';
@@ -47,7 +48,7 @@ const ServiceCard: React.FC<ServiceCardProps> = ({ service, onClick }) => {
   return (
     <div 
       onClick={() => onClick(service)}
-      className="group relative flex flex-col bg-subtle rounded-4xl overflow-hidden cursor-pointer transition-all duration-300 hover:shadow-google-hover border border-transparent hover:border-border h-full"
+      className="group relative flex flex-col bg-subtle rounded-2xl overflow-hidden cursor-pointer transition-all duration-300 hover:shadow-google-hover border border-transparent hover:border-border h-full"
       role="button"
       tabIndex={0}
       onKeyDown={(e) => {
@@ -58,40 +59,40 @@ const ServiceCard: React.FC<ServiceCardProps> = ({ service, onClick }) => {
       }}
       aria-label={`View details for ${service.title}`}
     >
-      {/* Top Thumbnail Area - Google Store style (large image area) */}
-      <div className="relative w-full aspect-[4/3] bg-white overflow-hidden">
+      {/* Top Thumbnail Area - 16:9 Aspect Ratio */}
+      <div className="relative w-full aspect-[16/9] bg-white overflow-hidden">
         <ServiceCardThumb 
           visualKey={service.thumbVisualKey} 
           className="w-full h-full transform transition-transform duration-700 group-hover:scale-105" 
         />
         
         {/* Category Chip (Floating) */}
-        <div className="absolute top-4 left-4">
-          <span className="inline-flex items-center px-3 py-1 rounded-full text-[11px] font-bold tracking-wider uppercase bg-white/90 backdrop-blur-sm text-text border border-gray-100 shadow-sm">
-            {service.audience === 'RESIDENTIAL' ? 'Home' : 'Business'}
+        <div className="absolute top-3 left-3">
+          <span className="inline-flex items-center px-2 py-0.5 rounded-full text-[10px] font-bold tracking-wider uppercase bg-white/90 backdrop-blur-sm text-text border border-gray-100 shadow-sm">
+            {service.audience === 'RESIDENTIAL' ? 'Residential' : 'Commercial'}
           </span>
         </div>
       </div>
 
-      {/* Content Area */}
-      <div className="p-8 flex flex-col flex-grow">
-        <div className="flex items-center gap-3 mb-4">
-          <div className="p-2 rounded-full bg-white border border-gray-200 text-primary shrink-0">
-             <Icon size={20} strokeWidth={2} />
+      {/* Content Area - Compact Padding */}
+      <div className="p-5 flex flex-col flex-grow">
+        <div className="flex items-center gap-3 mb-2.5">
+          <div className="p-1.5 rounded-full bg-white border border-gray-200 text-primary shrink-0">
+             <Icon size={16} strokeWidth={2} />
           </div>
-          <h3 className="font-display text-xl font-medium text-text leading-tight group-hover:text-primary transition-colors">
+          <h3 className="font-display text-[17px] font-medium text-text leading-tight group-hover:text-primary transition-colors">
              {service.title}
           </h3>
         </div>
         
-        <p className="font-sans text-[15px] text-muted leading-relaxed line-clamp-3 mb-8 flex-grow">
+        <p className="font-sans text-[13px] text-muted leading-relaxed line-clamp-3 mb-4 flex-grow">
           {service.shortDescription}
         </p>
 
         {/* Action Area */}
-        <div className="flex items-center text-primary font-medium text-[15px] group/btn">
+        <div className="flex items-center text-primary font-medium text-sm group/btn">
           <span>Learn more</span>
-          <ArrowRight size={18} className="ml-2 transition-transform group-hover/btn:translate-x-1" />
+          <ArrowRight size={16} className="ml-1.5 transition-transform group-hover/btn:translate-x-1" />
         </div>
       </div>
     </div>

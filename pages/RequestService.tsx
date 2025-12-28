@@ -1,8 +1,9 @@
 
-import React, { useState, useRef } from 'react';
+import React, { useState, useRef, useEffect } from 'react';
 import Button from '../components/ui/Button';
 import PageMeta from '../components/ui/PageMeta';
 import EmergencyServiceCard from '../components/ui/EmergencyServiceCard';
+import { useEmergencyData } from '../contexts/EmergencyContext';
 import { 
   ShieldCheck, 
   CheckCircle2, 
@@ -87,6 +88,7 @@ const GoogleRadio = ({ id, name, label, checked, onChange, value }: any) => (
 // --- MAIN PAGE ---
 
 const RequestService: React.FC = () => {
+  const { triggerEmergency, resetEmergency } = useEmergencyData();
   const [step, setStep] = useState(1);
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [isSuccess, setIsSuccess] = useState(false);
@@ -94,7 +96,7 @@ const RequestService: React.FC = () => {
   // Form State
   const [formData, setFormData] = useState({
     // Step 1: Triage
-    isEmergency: 'yes',
+    isEmergency: 'no', // Default to NO to avoid triggering on load
     isCoveredLoss: 'yes',
     
     // Step 2: Client Info
@@ -124,12 +126,17 @@ const RequestService: React.FC = () => {
   const handleChange = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement | HTMLSelectElement>) => {
     const { name, value } = e.target;
     setFormData(prev => ({ ...prev, [name]: value }));
+    
+    // Trigger global context if Emergency is selected
+    if (name === 'isEmergency') {
+        if (value === 'yes') triggerEmergency();
+        else resetEmergency();
+    }
   };
 
   const handleNext = () => {
     // Logic: If Step 1 is done and Covered Loss is NO, Skip Step 3 (Insurance)
     if (step === 1) {
-        // Scroll to top
         window.scrollTo({ top: 0, behavior: 'smooth' });
     }
 
@@ -245,10 +252,10 @@ const RequestService: React.FC = () => {
                             </div>
                             {/* Logic Notice: WP E-Sign Trigger */}
                             {formData.isEmergency === 'yes' && (
-                                <div className="flex items-start gap-3 p-4 bg-amber-50 text-amber-800 rounded-xl text-sm border border-amber-100">
-                                    <AlertTriangle size={18} className="shrink-0 mt-0.5" />
+                                <div className="flex items-start gap-3 p-4 bg-red-50 text-red-800 rounded-xl text-sm border border-red-100 animate-in fade-in zoom-in-95">
+                                    <AlertTriangle size={18} className="shrink-0 mt-0.5 text-red-600" />
                                     <p>
-                                        <strong>Priority Status:</strong> You will receive an email with a Work Authorization form immediately after submitting. Please sign it so we can dispatch a team instantly.
+                                        <strong>Priority Status Activated:</strong> We are prioritizing your request. You will receive an immediate Work Authorization email. Please sign it so we can dispatch a team instantly.
                                     </p>
                                 </div>
                             )}

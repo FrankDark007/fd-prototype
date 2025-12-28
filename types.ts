@@ -82,6 +82,8 @@ export interface LocationData {
   url: string; // External subdomain
   region: 'NOVA' | 'NEARBY'; // NEARBY usually just has paths, but we normalized to url/path in logic
   path?: string; // Internal fallback
+  lat?: number;
+  lng?: number;
 }
 
 export interface NavItem {

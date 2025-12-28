@@ -1,3 +1,4 @@
+
 import React from 'react';
 import { Link } from 'react-router-dom';
 import { ServiceData } from '../../types'; // Go up two levels to src/types
@@ -15,13 +16,14 @@ const ServicesGrid: React.FC<ServicesGridProps> = ({ services, title, id, childr
   if (services.length === 0) return null;
 
   return (
-    <div id={id} className="py-20 lg:py-24 bg-white">
-      <div className="max-w-[1440px] mx-auto px-6">
+    <div id={id} className="py-16 lg:py-20 bg-white">
+      {/* Reduced max-width from 1440px to 6xl (~1150px) to shrink cards by roughly 20% */}
+      <div className="max-w-6xl mx-auto px-6">
         
         {/* Header - Centered for impact */}
         {title && (
-            <div className="mb-16 text-center max-w-2xl mx-auto">
-                <h2 className="font-display text-4xl md:text-5xl font-medium text-text mb-6 tracking-tight">
+            <div className="mb-12 text-center max-w-2xl mx-auto">
+                <h2 className="font-display text-3xl md:text-4xl font-medium text-text mb-4 tracking-tight">
                   {title}
                 </h2>
                 <p className="font-sans text-lg text-muted">
@@ -30,8 +32,8 @@ const ServicesGrid: React.FC<ServicesGridProps> = ({ services, title, id, childr
             </div>
         )}
 
-        {/* The Grid - Wider gap for airy feel */}
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8 lg:gap-10">
+        {/* The Grid - Max 3 columns */}
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
           {services.map((service) => (
             <Link 
                key={service.id} 
@@ -48,7 +50,7 @@ const ServicesGrid: React.FC<ServicesGridProps> = ({ services, title, id, childr
         </div>
 
         {children && (
-           <div className="mt-16 text-center">
+           <div className="mt-12 text-center">
              {children}
            </div>
         )}
