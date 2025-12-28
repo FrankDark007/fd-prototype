@@ -9,11 +9,38 @@ import GoogleStyleFAQ from '../../components/sections/GoogleStyleFAQ';
 import ServiceAreaLinks from '../../components/sections/ServiceAreaLinks';
 import RelatedServices from '../../components/sections/RelatedServices';
 import Button from '../../components/ui/Button';
-import { CheckCircle2, AlertTriangle, Activity, Shield } from 'lucide-react';
+import { 
+  CheckCircle2, 
+  AlertTriangle, 
+  Activity, 
+  Shield,
+  Clock,
+  Truck,
+  Volume2,
+  Calendar,
+  Microscope,
+  FileCheck,
+  Scale,
+  Award
+} from 'lucide-react';
 
 interface ServiceDetailProps {
   service: ServiceData;
 }
+
+// Helper to map specification keys to icons
+const getSpecIcon = (key: string) => {
+  const normalized = key.toLowerCase();
+  if (normalized.includes('time') || normalized.includes('turnaround')) return Clock;
+  if (normalized.includes('arrival') || normalized.includes('logistics')) return Truck;
+  if (normalized.includes('noise') || normalized.includes('sound')) return Volume2;
+  if (normalized.includes('daily') || normalized.includes('frequency')) return Calendar;
+  if (normalized.includes('lab') || normalized.includes('analysis')) return Microscope;
+  if (normalized.includes('report') || normalized.includes('doc')) return FileCheck;
+  if (normalized.includes('standard') || normalized.includes('regulation')) return Scale;
+  if (normalized.includes('cert') || normalized.includes('qual')) return Award;
+  return Activity; // Default
+};
 
 const ServiceDetail: React.FC<ServiceDetailProps> = ({ service }) => {
   // Breadcrumbs construction
@@ -36,7 +63,7 @@ const ServiceDetail: React.FC<ServiceDetailProps> = ({ service }) => {
     { id: 'faq', label: 'FAQ' },
   ];
 
-  // FIX 1: Handle scroll manually to prevent "Refused to connect" errors
+  // Handle scroll manually to prevent "Refused to connect" errors
   const scrollToSection = (e: React.MouseEvent<HTMLAnchorElement>, id: string) => {
     e.preventDefault();
     const element = document.getElementById(id);
@@ -127,7 +154,7 @@ const ServiceDetail: React.FC<ServiceDetailProps> = ({ service }) => {
               ))}
             </nav>
             <div className="ml-auto">
-              <Button href="tel:8774970007" variant="primary" className="h-8 px-4 text-xs">
+              <Button to="/request/" variant="primary" className="h-8 px-4 text-xs">
                 Request Service
               </Button>
             </div>
@@ -214,28 +241,34 @@ const ServiceDetail: React.FC<ServiceDetailProps> = ({ service }) => {
               </div>
             </div>
 
-            {/* 3. Tech Specs */}
+            {/* 3. Tech Specs - UPGRADED GRID LAYOUT */}
             <div id="specs" className="scroll-mt-40 mb-20">
               <h2 className="font-display text-3xl font-medium text-text mb-8">Technical Specifications</h2>
-              <div className="grid md:grid-cols-2 gap-px bg-gray-200 rounded-4xl overflow-hidden border border-gray-200">
-                {service.whatToExpect && Object.entries(service.whatToExpect).map(([key, value]) => (
-                  <div key={key} className="bg-white p-8">
-                    <div className="text-xs font-bold text-muted uppercase tracking-wider mb-2">
-                      {key.replace(/([A-Z])/g, ' $1').trim()}
+              
+              <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+                {service.whatToExpect && Object.entries(service.whatToExpect).map(([key, value]) => {
+                  if (!value) return null;
+                  const Icon = getSpecIcon(key);
+                  const label = key.replace(/([A-Z])/g, ' $1').trim(); // Camel to Title case
+                  
+                  return (
+                    <div key={key} className="bg-white p-6 rounded-2xl border border-gray-200 shadow-sm hover:shadow-md transition-shadow">
+                      <div className="flex items-start gap-4">
+                        <div className="w-10 h-10 rounded-full bg-blue-50 text-primary flex items-center justify-center shrink-0">
+                          <Icon size={20} />
+                        </div>
+                        <div>
+                          <div className="text-xs font-bold text-gray-400 uppercase tracking-wider mb-1">
+                            {label}
+                          </div>
+                          <div className="font-sans text-base font-medium text-gray-900 leading-snug">
+                            {value}
+                          </div>
+                        </div>
+                      </div>
                     </div>
-                    <div className="font-sans text-base text-text leading-relaxed">
-                      {value}
-                    </div>
-                  </div>
-                ))}
-                <div className="bg-white p-8">
-                   <div className="text-xs font-bold text-muted uppercase tracking-wider mb-2">Equipment Grade</div>
-                   <div className="font-sans text-base text-text">Commercial LGR / HEPA Filtration</div>
-                </div>
-                <div className="bg-white p-8">
-                   <div className="text-xs font-bold text-muted uppercase tracking-wider mb-2">Certification</div>
-                   <div className="font-sans text-base text-text">IICRC S500 / S520 Standards</div>
-                </div>
+                  );
+                })}
               </div>
             </div>
 

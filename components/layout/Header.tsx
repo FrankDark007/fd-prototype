@@ -127,7 +127,7 @@ const Header: React.FC = () => {
                                     <div className="space-y-8">
                                         {residentialGroups.map((group) => (
                                             <div key={group.label}>
-                                                <h4 className="text-xs font-bold text-gray-900 uppercase tracking-wider mb-3 opacity-60">{group.label}</h4>
+                                                <h4 className="text-sm font-bold text-gray-900 uppercase tracking-wide mb-3">{group.label}</h4>
                                                 <ul className="space-y-1">
                                                     {group.items.map(service => (
                                                         <li key={service.id}>
@@ -150,7 +150,7 @@ const Header: React.FC = () => {
                                     <div className="space-y-8">
                                         {commercialGroups.map((group) => (
                                             <div key={group.label}>
-                                                <h4 className="text-xs font-bold text-gray-900 uppercase tracking-wider mb-3 opacity-60">{group.label}</h4>
+                                                <h4 className="text-sm font-bold text-gray-900 uppercase tracking-wide mb-3">{group.label}</h4>
                                                 <ul className="space-y-1">
                                                     {group.items.map(service => (
                                                         <li key={service.id}>

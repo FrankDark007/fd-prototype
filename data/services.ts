@@ -1798,7 +1798,7 @@ export const SERVICES: ServiceData[] = [
     primaryKeyword: 'structural drying',
     heroHeading: 'Structural Drying',
     heroIntro: 'Science-based drying to save drywall, subfloors, and framing without demolition.',
-    heroVisualKey: 'orbit-phone', // UPDATED to use the Orbit Phone animation from Variant A
+    heroVisualKey: 'structural-drying',
     thumbVisualKey: 'structural-drying',
     infographicType: 'STRUCTURAL_DRYING',
     intro_whenToCall: 'Call when you want to save materials rather than replace them.',
@@ -3078,102 +3078,161 @@ export const SERVICES: ServiceData[] = [
     relatedSearchTerms: ['air quality test', 'mold testing', 'voc testing', 'sick building', 'commercial hygiene', 'commercial air quality testing', 'sick building syndrome testing', 'office air quality monitoring', 'industrial hygiene services', 'voc testing commercial']
   },
 
-  // 23. Environmental Testing
+  // 23. Environmental Testing (UPDATED)
   {
     id: 'com-env',
     title: 'Environmental Testing',
     slug: '/services/commercial/technical-services/environmental-testing/',
-    shortDescription: 'Testing for hazards and environmental safety.',
+    shortDescription: 'Industrial hygiene and hazardous material testing for regulatory compliance.',
     audience: 'COMMERCIAL',
     category: 'TECHNICAL',
-    primaryKeyword: 'environmental testing services',
-    heroHeading: 'Environmental Testing',
-    heroIntro: 'Identifying hazardous materials and conditions. We provide testing for asbestos, lead, bacteria, and other environmental risks in commercial properties.',
+    primaryKeyword: 'commercial environmental testing',
+    secondaryKeywords: ['asbestos testing', 'lead paint inspection', 'industrial hygiene', 'commercial mold testing', 'phase 1 ESA support', 'OSHA compliance testing'],
+    heroHeading: 'Commercial Environmental Testing',
+    heroIntro: 'Certified industrial hygiene and environmental testing for Northern Virginia businesses. We identify hazards like asbestos, lead, mold, and VOCs to ensure regulatory compliance and occupant safety.',
     heroVisualKey: 'env-testing',
     thumbVisualKey: 'env-test',
     infographicType: 'MOLD_AIRFLOW',
-    intro_whenToCall: 'Before renovation or after contamination.',
+    intro_whenToCall: 'Environmental testing is critical before renovation, during real estate transactions, or when health concerns arise. Call us if:',
     whenToCall: [
-      'Pre-Demolition: Asbestos check (required).',
-      'Water Loss: Bacteria testing (Category 3).',
-      'Lead Paint: Older building renovation.',
-      'Unknown Substance: Chemical spills.',
-      'Regulatory: EPA/OSHA compliance.',
-      'Real Estate: Phase 1 checks.',
-      'Employee Health: Exposure concerns.',
-      'Sewage Spill: E. Coli verification.',
-      'Disinfection: Viral clearance.',
-      'Soil Testing: Contamination check.',
-      'Fuel Spill: Hydrocarbon check.',
-      'Hazardous Material: Identification.'
+      'Pre-Demolition: Asbestos surveys (ACP-5) required before construction.',
+      'Renovation: Lead paint testing for buildings pre-1978.',
+      'Water Damage: Category 3 bacterial analysis (sewage/flood).',
+      'Air Quality: Sick Building Syndrome or employee health complaints.',
+      'Real Estate: Phase I/II Environmental Site Assessment support.',
+      'Regulatory: OSHA/EPA compliance verification.',
+      'Post-Remediation: Clearance testing to re-occupy spaces.',
+      'Chemical Spills: Identifying unknown substances or residues.',
+      'HVAC Contamination: Mold or particulate testing in ductwork.',
+      'Soil & Water: Testing for heavy metals or hydrocarbons.',
+      'Legal Compliance: Due diligence for property liability.',
+      'Viral Safety: Surface testing for sanitation verification.'
     ],
-    intro_whatWeDo: 'Sample, Analyze, Report.',
-    whatWeDo: [
-      'Asbestos Survey: ACP-5/bulk sampling.',
-      'Lead Testing: XRF or chip sampling.',
-      'Bacteria Swabs: ATP/Culture testing.',
-      'Water Quality: Potable/Waste testing.',
-      'Soil Sampling: Contaminant check.',
-      'Chain of Custody: Legal tracking.',
-      'Lab Analysis: Accredited labs.',
-      'Reporting: Compliance documents.',
-      'Clearance: Post-abatement check.',
-      'Consulting: Remediation plans.',
-      'Site Assessment: Visual inspection.',
-      'Monitoring: Ongoing safety checks.'
-    ],
-    whatToExpect: {
-      timeline: 'Sampling is fast. Lab time varies (24h - 1 week).',
-      arrival: 'Certified inspectors.',
-      daily: 'N/A',
-      noise: 'Quiet.'
-    },
-    intro_safety: 'Managing hazards.',
-    safety: {
-      head: 'Testing Safety',
-      items: [
-        'PPE: Inspectors wear gear.',
-        'Disturbance: Minimal material removal.',
-        'Wet Methods: Prevent dust.',
-        'Isolation: During sampling.',
-        'Labels: Marking hazards.',
-        'Disposal: Safe sample handling.',
-        'No Occupancy: During hazardous checks.',
-        'Protocols: EPA/State regulations.',
-        'Reporting: Mandatory if positive.',
-        'Health: Protect occupants.'
+    contentSections: {
+      heading: "Comprehensive Environmental Diagnostics",
+      intro: "Managing environmental risks requires precise data. Our certified industrial hygienists provide the objective sampling and analysis needed to make informed decisions about remediation, renovation, and occupancy.",
+      cards: [
+        {
+          title: "Asbestos & Lead Compliance",
+          content: "Federal and state regulations (OSHA, EPA, NESHAP) mandate asbestos and lead testing before disturbing materials in older commercial buildings. We conduct comprehensive surveys, including bulk sampling of flooring, insulation, drywall, and surfacing materials. Our reports provide the definitive data needed for demolition permits and abatement planning, keeping your project legal and safe."
+        },
+        {
+          title: "Industrial Hygiene & Air Quality",
+          content: "Employee health complaints often stem from invisible airborne hazards. We investigate Sick Building Syndrome using advanced air sampling for VOCs (Volatile Organic Compounds), formaldehyde, particulates, and biological contaminants. We compare results against OSHA Permissible Exposure Limits (PELs) and ACGIH guidelines to verify a safe working environment."
+        },
+        {
+          title: "Bacterial & Mold Analysis",
+          content: "Following water damage or sewage backups, visual inspection isn't enough. We use ATP testing for instant sanitation verification and culture sampling for specific pathogen identification (e.g., E. coli, Salmonella). For mold, we conduct spore trap analysis to quantify airborne concentrations, differentiating between normal fungal ecology and active amplification requiring remediation."
+        },
+        {
+          title: "Independent Clearance Testing",
+          content: "Conflict of interest is a major liability in environmental work. As an objective third party, we perform post-remediation clearance testing to verify that abatement contractors have successfully removed hazards. Our Certificate of Clearance provides the documentation building owners need to limit liability and safely re-occupy treated areas."
+        },
+        {
+          title: "Phase I ESA Support",
+          content: "For commercial property transactions, we support environmental engineering firms by conducting specific sampling required for Phase II assessments. This includes soil sampling, groundwater testing, and vapor intrusion investigations to identify recognized environmental conditions (RECs) that could affect property value or liability."
+        }
       ]
     },
-    intro_scenarios: 'Common testing needs.',
+    intro_whatWeDo: 'We Sample, Analyze, and Certify.',
+    whatWeDo: [
+      'Asbestos Surveys: Comprehensive NESHAP-compliant inspections.',
+      'Lead Risk Assessment: XRF analysis and chip sampling.',
+      'Mold Testing: Air and surface sampling with lab ID.',
+      'Bacterial Swabs: Verifying sewage cleanup efficacy.',
+      'VOC/Chemical Testing: Identifying odors and toxins.',
+      'Water Quality: Legionella and potable water testing.',
+      'Soil Sampling: Testing for heavy metals and fuel.',
+      'Chain of Custody: Strict legal tracking of all samples.',
+      'Lab Analysis: Accredited NVLAP/AIHA laboratories.',
+      'Reporting: Detailed compliance reports with recommendations.',
+      'Clearance: Final verification after abatement.',
+      'Consulting: Remediation protocol development.'
+    ],
+    whatToExpect: {
+      "Turnaround Time": "24-48 hours for standard lab analysis. Same-day rush available for critical projects.",
+      "Laboratories": "All samples analyzed by NVLAP and AIHA-accredited third-party labs.",
+      "Instrumentation": "XRF Analyzers, High-flow pumps, Thermal IR, and ATP Luminometers.",
+      "Regulations": "Strict adherence to OSHA, EPA, AHERA, and State/Local statutes.",
+      "Reporting": "Digital reports delivered via secure portal with photos and lab data.",
+      "Certifications": "Licensed Asbestos Inspectors, Lead Risk Assessors, and Industrial Hygienists."
+    },
+    intro_safety: 'Safety is the core of our business.',
+    safety: {
+      head: 'Testing Safety Protocols',
+      items: [
+        'Minimal Disturbance: Wet methods used to prevent dust release during sampling.',
+        'PPE: Inspectors wear appropriate respirators and suits.',
+        'Isolation: Sampling areas temporarily restricted.',
+        'Containment: Mini-enclosures used for destructive sampling.',
+        'Decontamination: Tools cleaned between samples.',
+        'Labeling: Hazards clearly marked immediately.',
+        'Chain of Custody: Secure handling of all evidence.',
+        'Disposal: Safe disposal of sampling waste.',
+        'Notification: Critical hazards flagged immediately.',
+        'Privacy: Discreet vehicles and confidential reporting.'
+      ]
+    },
+    intro_scenarios: 'Common commercial testing scenarios.',
     scenarios: [
-      'Asbestos Floor Tiles',
-      'Lead Paint Peeling',
-      'Sewage Bacteria Check',
-      'Drinking Water Quality',
-      'Oil Tank Leak',
-      'Unknown White Powder',
-      'Meth Lab Cleanup Check',
-      'Post-COVID Surface Test',
-      'Industrial Residue',
-      'Mold Identification'
+      'Pre-Renovation Asbestos Check',
+      'Peeling Paint in Schools (Lead)',
+      'Post-Flood Bacterial Clearance',
+      'Office "Mystery Odor" Investigation',
+      'Legionella Check in Cooling Towers',
+      'Construction Dust Monitoring',
+      'Tenant Mold Complaints',
+      'Warehouse Chemical Spills',
+      'Real Estate Due Diligence',
+      'OSHA Noise Dosimetry'
     ],
     saveVsRemove: {
-      save: ['N/A'],
-      remove: ['N/A']
+      save: ['N/A (Consulting Service)'],
+      remove: ['N/A (Consulting Service)']
     },
     faqs: [
-      { question: "What environmental testing services do you provide for commercial properties?", answer: "We provide comprehensive environmental testing including asbestos surveys, lead paint assessment, mold sampling, indoor air quality testing, and water quality analysis. Testing supports due diligence, renovation planning, and regulatory compliance." },
-      { question: "When is environmental testing required for commercial buildings?", answer: "Environmental testing may be required before renovation or demolition of older buildings, during property transactions, after water damage, when hazardous materials are suspected, and for ongoing regulatory compliance in certain industries." },
-      { question: "Do you provide asbestos testing for commercial properties?", answer: "Yes, we conduct asbestos surveys including bulk sampling and analysis by accredited laboratories. Our reports identify asbestos-containing materials, assess condition, and provide management recommendations compliant with EPA and OSHA requirements." },
-      { question: "How do you test for lead in commercial buildings?", answer: "Lead testing includes XRF (X-ray fluorescence) analysis for painted surfaces and laboratory analysis of bulk samples. We assess lead hazards in accordance with EPA, HUD, and OSHA standards applicable to commercial properties." },
-      { question: "What credentials do your environmental testing technicians hold?", answer: "Our technicians hold relevant certifications including EPA-accredited asbestos inspector, lead inspector and risk assessor, and mold assessment credentials. We maintain all required state licenses for environmental consulting services." },
-      { question: "How do environmental testing results affect renovation projects?", answer: "Testing results determine whether hazardous material abatement is required before renovation. Early identification allows proper budgeting, contractor selection, and regulatory notification. Undiscovered hazards can halt projects and create liability." },
-      { question: "What laboratory analysis is used for environmental samples?", answer: "Samples are analyzed by accredited laboratories using EPA-approved methods. This includes PLM and TEM analysis for asbestos, ICP analysis for lead, and spore trap or culture analysis for mold. We only use NVLAP or AIHA-accredited laboratories." },
-      { question: "Do you provide Phase I or Phase II environmental assessments?", answer: "We provide environmental testing that supports Phase I and Phase II Environmental Site Assessments. For complete ESA services, we coordinate with environmental engineering firms who rely on our sampling and testing capabilities." },
-      { question: "How quickly can you complete commercial environmental testing?", answer: "Standard testing and reporting takes 5 to 7 business days. Rush services are available for time-sensitive transactions or urgent concerns, with some results available within 24 to 48 hours depending on analysis type." },
-      { question: "What documentation do you provide for environmental testing?", answer: "Reports include sampling methodology, chain of custody documentation, laboratory certificates of analysis, findings summary, regulatory comparison, and recommendations. Documentation meets requirements for property transactions, regulatory compliance, and litigation support." }
+      { 
+        question: "Why do I need an asbestos survey before renovation?", 
+        answer: "Federal NESHAP regulations require an asbestos survey for all commercial buildings before demolition or renovation, regardless of age. Disturbing asbestos without a survey can lead to massive EPA fines, project shutdowns, and severe health liability." 
+      },
+      { 
+        question: "How long does it take to get lab results?", 
+        answer: "Standard turnaround time is 3-5 business days. However, we offer 24-hour, 48-hour, and even same-day rush analysis for urgent situations like water damage or construction delays. Rush fees apply." 
+      },
+      { 
+        question: "What is the difference between mold testing and inspection?", 
+        answer: "An inspection is a visual assessment to identify potential growth and moisture sources. Testing involves collecting physical samples (air or surface) for laboratory analysis to identify the mold species and spore concentration. Commercial clients typically need testing for legal documentation." 
+      },
+      { 
+        question: "Do you perform the abatement (removal) as well?", 
+        answer: "For hazardous materials like asbestos and lead, it is a conflict of interest to test and remove on the same project. We perform the testing and write the protocol, then a separate licensed abatement contractor performs the work. We then return for clearance testing to certify it was done correctly." 
+      },
+      { 
+        question: "What standards do you use for clearance testing?", 
+        answer: "We follow industry-recognized standards including IICRC S520 for mold, AHERA for asbestos, and HUD/EPA guidelines for lead. For sewage, we use ATP benchmarks and quantitative PCR analysis to verify surfaces are sanitary." 
+      },
+      { 
+        question: "Can you test for specific chemicals or odors?", 
+        answer: "Yes. We use summa canisters and photoionization detectors (PIDs) to sample for Volatile Organic Compounds (VOCs), formaldehyde, and other specific chemical agents causing odors or health effects in the workplace." 
+      },
+      { 
+        question: "Is environmental testing disruptive to business operations?", 
+        answer: "Minimal disruption is our goal. Most sampling (air, bulk, surface) is quiet and quick. If destructive sampling is required (cutting into walls), we use containment methods to prevent dust and debris from affecting your operations." 
+      },
+      { 
+        question: "Do you provide a remediation protocol?", 
+        answer: "Yes. If hazards are found, we provide a detailed Scope of Work (protocol) outlining exactly what needs to be done to remediate the issue safely. This document allows you to get accurate, apples-to-apples bids from abatement contractors." 
+      },
+      { 
+        question: "Are your inspectors licensed?", 
+        answer: "Yes. Our team includes Virginia licensed Asbestos Inspectors, Lead Risk Assessors, and Council-certified Microbial Investigators (CMI). We maintain strict adherence to continuing education and state licensing requirements." 
+      },
+      { 
+        question: "What does a Phase I ESA involve vs. your testing?", 
+        answer: "A Phase I ESA is a paper-trail research of a property's history. If a Phase I identifies potential risks (RECs), a Phase II is required. We perform the physical sampling (Phase II) such as soil and groundwater testing to confirm if contamination exists." 
+      }
     ],
-    relatedSearchTerms: ['asbestos testing', 'lead paint test', 'bacteria testing', 'water quality test', 'environmental consultant', 'commercial environmental testing', 'asbestos testing for business', 'lead paint testing commercial', 'commercial water quality testing', 'hazardous material testing']
+    relatedSearchTerms: ['asbestos survey commercial', 'lead paint inspection virginia', 'industrial hygiene services', 'commercial mold testing', 'OSHA compliance testing', 'environmental consultants nova', 'water quality testing lab', 'phase 2 environmental assessment', 'indoor air quality testing business', 'hazardous material testing']
   },
 
   // 24. Healthcare Facilities

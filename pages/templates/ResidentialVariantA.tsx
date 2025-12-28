@@ -1,3 +1,4 @@
+
 import React, { useState, useEffect, useRef } from 'react';
 import { Link } from 'react-router-dom';
 import PageMeta from '../../components/ui/PageMeta';
@@ -83,9 +84,9 @@ const ResidentialVariantA: React.FC = () => {
                 Turn a water emergency into a quick recovery with Flood Doctor's 60-minute response guarantee. We serve Northern Virginia, DC, and Maryland 24/7 with professional water extraction, structural drying, and complete restoration.
               </p>
               <div>
-                <a href="tel:8774970007" className="inline-flex items-center justify-center h-12 px-8 rounded-md bg-[#1a73e8] text-white font-medium hover:bg-[#1557b0] transition-colors shadow-sm">
+                <Link to="/request/" className="inline-flex items-center justify-center h-12 px-8 rounded-md bg-[#1a73e8] text-white font-medium hover:bg-[#1557b0] transition-colors shadow-sm">
                   Get Help Now
-                </a>
+                </Link>
               </div>
             </div>
 
@@ -568,9 +569,9 @@ const ResidentialVariantA: React.FC = () => {
          <div className="max-w-2xl mx-auto px-6">
             <h2 className="text-[36px] font-normal text-[#202124] mb-6">Don't Wait for Water Damage to Spread</h2>
             <p className="text-lg text-[#5f6368] mb-8">Mold can begin growing within 24-48 hours. Call now for immediate help.</p>
-            <a href="tel:8774970007" className="inline-flex items-center justify-center h-14 px-8 rounded-md bg-[#1a73e8] text-white text-lg font-medium hover:bg-[#1557b0] transition-colors shadow-sm">
+            <Link to="/request/" className="inline-flex items-center justify-center h-14 px-8 rounded-md bg-[#1a73e8] text-white text-lg font-medium hover:bg-[#1557b0] transition-colors shadow-sm">
                Get Emergency Help Now
-            </a>
+            </Link>
          </div>
       </section>
 

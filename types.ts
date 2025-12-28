@@ -47,11 +47,13 @@ export interface ServiceData {
   intro_whatWeDo?: string;
   whatWeDo?: string[]; // Bullets
   
+  // Updated to allow flexible specification keys while keeping standard ones optional
   whatToExpect?: {
-    timeline: string;
-    arrival: string;
-    daily: string;
+    timeline?: string;
+    arrival?: string;
+    daily?: string;
     noise?: string;
+    [key: string]: string | undefined; // Allow custom keys
   };
   
   intro_safety?: string;

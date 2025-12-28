@@ -1,4 +1,3 @@
-
 import React, { useState } from 'react';
 import { Link } from 'react-router-dom';
 import { Facebook, Twitter, Linkedin, Instagram, ChevronDown } from 'lucide-react';
@@ -90,7 +89,6 @@ const Footer: React.FC = () => {
                          <li><Link to="/blog/" className="block text-sm text-gray-500 hover:text-primary transition-colors py-2 md:py-0">Blog</Link></li>
                          <li><Link to="/resources/technology/" className="block text-sm text-gray-500 hover:text-primary transition-colors py-2 md:py-0">Our Technology</Link></li>
                          <li><Link to="/resources/insurance-guide/" className="block text-sm text-gray-500 hover:text-primary transition-colors py-2 md:py-0">Insurance Help</Link></li>
-                         <li><Link to="/resources/video-generator/" className="block text-sm text-gray-500 hover:text-primary transition-colors py-2 md:py-0">AI Video Generator</Link></li>
                     </ul>
                 </MobileAccordionItem>
 

@@ -1,4 +1,3 @@
-
 import React from 'react';
 import { BrowserRouter, HashRouter, Routes, Route } from 'react-router-dom';
 import Header from './components/layout/Header';
@@ -26,7 +25,6 @@ import HomeownerGuides from './pages/resources/HomeownerGuides';
 import EmergencyChecklists from './pages/resources/EmergencyChecklists';
 import Technology from './pages/resources/Technology';
 import Communication from './pages/resources/Communication';
-import VideoGenerator from './pages/VideoGenerator';
 import BlogIndex from './pages/BlogIndex';
 import NearMeLanding from './pages/NearMeLanding';
 import NotFound from './pages/NotFound';
@@ -126,7 +124,6 @@ const App: React.FC = () => {
           <Route path="/resources/emergency-checklists/" element={<EmergencyChecklists />} />
           <Route path="/resources/technology/" element={<Technology />} />
           <Route path="/resources/communication/" element={<Communication />} />
-          <Route path="/resources/video-generator/" element={<VideoGenerator />} />
           <Route path="/blog/" element={<BlogIndex />} />
 
           {/* Legal & Company */}
