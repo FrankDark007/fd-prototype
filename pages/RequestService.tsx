@@ -1,6 +1,8 @@
+
 import React, { useState, useRef } from 'react';
 import Button from '../components/ui/Button';
 import PageMeta from '../components/ui/PageMeta';
+import EmergencyServiceCard from '../components/ui/EmergencyServiceCard';
 import { 
   ShieldCheck, 
   CheckCircle2, 
@@ -195,6 +197,13 @@ const RequestService: React.FC = () => {
       <div className="flex-grow flex items-start justify-center py-12 px-4 sm:px-6">
         <div className="max-w-[600px] w-full">
           
+          {/* Live Status Dashboard (Visible on all devices) */}
+          {!isSuccess && (
+            <div className="mb-10">
+                <EmergencyServiceCard variant="expanded" />
+            </div>
+          )}
+
           {!isSuccess ? (
             <form onSubmit={handleSubmit} className="space-y-8 animate-in fade-in slide-in-from-bottom-4 duration-500">
                 

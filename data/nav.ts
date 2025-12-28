@@ -1,3 +1,4 @@
+
 import { NavSection } from '../types';
 
 // Curated links for the Mega Menu
@@ -32,4 +33,5 @@ export const MAIN_NAV_ITEMS = [
   { label: 'Locations', type: 'dropdown', dropdownId: 'locations' },
   { label: 'About', path: '/about/', type: 'link' },
   { label: 'Blog', path: '/blog/', type: 'link' },
+  { label: 'Contact', path: '/contact/', type: 'link' },
 ];

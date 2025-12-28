@@ -1,7 +1,9 @@
+
 import React from 'react';
 import Button from '../ui/Button';
 import { ArrowRight } from 'lucide-react';
 import GoogleGuaranteedBadge from '../ui/GoogleGuaranteedBadge';
+import EmergencyServiceBadge from '../ui/EmergencyServiceBadge';
 
 interface HeroProps {
   title: React.ReactNode;
@@ -20,9 +22,7 @@ const Hero: React.FC<HeroProps> = ({ title, subtitle, visual }) => {
             <div className="max-w-xl">
               {/* Eyebrow badges - M3 consistent chip styling */}
               <div className="flex items-center gap-2 mb-6">
-                <span className="inline-flex items-center bg-blue-50 text-primary text-xs font-bold px-3 py-1 rounded-full uppercase tracking-wider">
-                  24/7 Emergency Service
-                </span>
+                <EmergencyServiceBadge />
                 <GoogleGuaranteedBadge />
               </div>
 

@@ -1,3 +1,4 @@
+
 import React from 'react';
 import Hero from '../components/sections/Hero';
 import SectionTabs from '../components/layout/SectionTabs';
@@ -10,6 +11,7 @@ import TrustBar from '../components/sections/TrustBar';
 import { SERVICES } from '../data/services';
 import Button from '../components/ui/Button';
 import PageMeta from '../components/ui/PageMeta';
+import EmergencyServiceCard from '../components/ui/EmergencyServiceCard';
 
 // Visuals
 import DryingProgressCard from '../components/ui/DryingProgressCard';
@@ -35,6 +37,11 @@ const Home: React.FC = () => {
         subtitle="Serving Northern Virginia, Maryland, and DC. We combine rapid dispatch with hospital-grade technology to dry your home faster."
         visual={<HeroOrbitPhone />}
       />
+      
+      {/* Mobile Only: Live Status Dashboard */}
+      <div className="md:hidden px-6 -mt-6 mb-10 relative z-20">
+        <EmergencyServiceCard />
+      </div>
       
       {/* 2. Sticky Navigation Bar */}
       <SectionTabs />

@@ -9,6 +9,7 @@ import GoogleStyleFAQ from '../../components/sections/GoogleStyleFAQ';
 import ServiceAreaLinks from '../../components/sections/ServiceAreaLinks';
 import RelatedServices from '../../components/sections/RelatedServices';
 import Button from '../../components/ui/Button';
+import EmergencyServiceCard from '../../components/ui/EmergencyServiceCard';
 import { 
   CheckCircle2, 
   AlertTriangle, 
@@ -347,6 +348,9 @@ const ServiceDetail: React.FC<ServiceDetailProps> = ({ service }) => {
                   </div>
                 </div>
               </div>
+
+              {/* Enhanced Live Status Dashboard */}
+              <EmergencyServiceCard variant="expanded" className="mt-6" />
             </div>
           </div>
 

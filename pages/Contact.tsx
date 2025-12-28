@@ -1,6 +1,8 @@
+
 import React, { useState } from 'react';
 import PageMeta from '../components/ui/PageMeta';
 import Button from '../components/ui/Button';
+import EmergencyServiceCard from '../components/ui/EmergencyServiceCard';
 import { 
   Phone, 
   Mail, 
@@ -9,11 +11,11 @@ import {
   AlertTriangle, 
   MessageSquare, 
   FileText, 
-  Briefcase,
+  Briefcase, 
   CheckCircle2
 } from 'lucide-react';
 
-// Reusable Floating Input (Local definition for ease of copy-paste)
+// Reusable Floating Input
 const FloatingInput = ({ label, id, type = "text", required = false }: any) => (
   <div className="relative group">
     <input
@@ -50,7 +52,7 @@ const Contact: React.FC = () => {
       {/* 1. Header & Triage Section */}
       <div className="bg-subtle pt-16 pb-24 border-b border-border">
         <div className="max-w-[1440px] mx-auto px-6">
-            <div className="max-w-3xl mx-auto text-center mb-16">
+            <div className="max-w-3xl mx-auto text-center mb-12">
                 <h1 className="font-display text-4xl md:text-5xl font-medium text-text mb-6">
                     How can we help?
                 </h1>
@@ -59,49 +61,63 @@ const Contact: React.FC = () => {
                 </p>
             </div>
 
+            {/* System Status Dashboard */}
+            <div className="max-w-4xl mx-auto mb-12">
+                <EmergencyServiceCard variant="expanded" />
+            </div>
+
             {/* Triage Cards */}
             <div className="grid grid-cols-1 md:grid-cols-2 gap-8 max-w-4xl mx-auto">
-                {/* Emergency Card */}
+                
+                {/* Emergency Card (Redesigned) */}
                 <div className="bg-white p-8 rounded-[32px] shadow-google hover:shadow-google-hover transition-shadow border border-red-100 relative overflow-hidden group">
-                    <div className="absolute top-0 left-0 w-full h-1 bg-red-500"></div>
                     <div className="flex items-start justify-between mb-6">
-                        <div className="w-14 h-14 bg-red-50 text-red-600 rounded-full flex items-center justify-center">
-                            <AlertTriangle size={28} />
+                        <div className="w-16 h-16 bg-red-50 text-red-600 rounded-2xl flex items-center justify-center border border-red-100">
+                            <AlertTriangle size={32} />
                         </div>
-                        <span className="bg-red-100 text-red-700 text-[10px] font-bold px-3 py-1 rounded-full uppercase tracking-wider">
-                            Urgent
+                        <span className="bg-red-600 text-white text-[11px] font-bold px-3 py-1.5 rounded-full uppercase tracking-wider shadow-sm">
+                            Urgent Priority
                         </span>
                     </div>
-                    <h2 className="font-display text-2xl font-medium text-text mb-3">Emergency Service</h2>
-                    <p className="text-muted mb-8 leading-relaxed">
+                    <h2 className="font-display text-2xl font-bold text-gray-900 mb-3">Emergency Service</h2>
+                    <p className="text-gray-600 mb-8 leading-relaxed">
                         Active water leak, flooding, or sewage backup? Our rapid response team is on standby 24/7.
                     </p>
-                    <Button href="tel:8774970007" variant="primary" fullWidth className="h-14 text-lg bg-red-600 hover:bg-red-700 shadow-none border-transparent">
-                        Call (877) 497-0007
-                    </Button>
-                    <div className="mt-4 text-center text-xs text-muted font-medium flex items-center justify-center gap-1.5">
-                        <Clock size={14} className="text-green-600" />
-                        <span>Wait time: &lt; 1 minute</span>
+                    <div className="mt-auto">
+                        <Button href="tel:8774970007" variant="primary" fullWidth className="h-14 text-lg bg-red-600 hover:bg-red-700 shadow-none border-transparent">
+                            Call (877) 497-0007
+                        </Button>
+                        <div className="mt-4 text-center text-xs font-medium flex items-center justify-center gap-1.5 text-gray-500">
+                            <Clock size={14} className="text-green-600" />
+                            <span>Current wait time: <span className="text-green-700 font-bold">&lt; 1 minute</span></span>
+                        </div>
                     </div>
                 </div>
 
-                {/* General Inquiry Card */}
-                <div className="bg-white p-8 rounded-[32px] shadow-google hover:shadow-google-hover transition-shadow border border-gray-100 relative overflow-hidden">
-                    <div className="absolute top-0 left-0 w-full h-1 bg-primary"></div>
-                    <div className="w-14 h-14 bg-blue-50 text-primary rounded-full flex items-center justify-center mb-6">
-                        <MessageSquare size={28} />
+                {/* General Inquiry Card (Redesigned) */}
+                <div className="bg-white p-8 rounded-[32px] shadow-google hover:shadow-google-hover transition-shadow border border-gray-200 relative overflow-hidden">
+                    <div className="flex items-start justify-between mb-6">
+                        <div className="w-16 h-16 bg-blue-50 text-primary rounded-2xl flex items-center justify-center border border-blue-100">
+                            <MessageSquare size={32} />
+                        </div>
+                        <span className="bg-gray-100 text-gray-600 text-[11px] font-bold px-3 py-1.5 rounded-full uppercase tracking-wider">
+                            Non-Urgent
+                        </span>
                     </div>
-                    <h2 className="font-display text-2xl font-medium text-text mb-3">General Inquiry</h2>
-                    <p className="text-muted mb-8 leading-relaxed">
+                    <h2 className="font-display text-2xl font-bold text-gray-900 mb-3">General Inquiry</h2>
+                    <p className="text-gray-600 mb-8 leading-relaxed">
                         Questions about our services, billing, or scheduling a non-emergency inspection?
                     </p>
-                    <Button onClick={() => document.getElementById('contact-form')?.scrollIntoView({ behavior: 'smooth'})} variant="secondary" fullWidth className="h-14 text-lg">
-                        Send a Message
-                    </Button>
-                    <div className="mt-4 text-center text-xs text-muted font-medium">
-                        Responds within 4 hours
+                    <div className="mt-auto">
+                        <Button onClick={() => document.getElementById('contact-form')?.scrollIntoView({ behavior: 'smooth'})} variant="secondary" fullWidth className="h-14 text-lg">
+                            Send a Message
+                        </Button>
+                        <div className="mt-4 text-center text-xs font-medium text-gray-500">
+                            Typical response time: 4 hours
+                        </div>
                     </div>
                 </div>
+
             </div>
         </div>
       </div>
