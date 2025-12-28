@@ -154,11 +154,7 @@ const ServiceDetail: React.FC<ServiceDetailProps> = ({ service }) => {
                 </a>
               ))}
             </nav>
-            <div className="ml-auto">
-              <Button to="/request/" variant="primary" className="h-8 px-4 text-xs">
-                Request Service
-              </Button>
-            </div>
+            {/* CTA Removed from Submenu per request */}
           </div>
         </div>
       </div>
@@ -276,10 +272,11 @@ const ServiceDetail: React.FC<ServiceDetailProps> = ({ service }) => {
             {/* 4. Safety Information */}
             <div id="safety" className="scroll-mt-40 mb-20">
               {service.safety && (
-                <div className="bg-red-50/50 rounded-4xl p-8 lg:p-12 border border-red-100">
+                <div className="bg-yellow-50/50 rounded-4xl p-8 lg:p-12 border border-yellow-100">
                   <div className="flex items-center gap-3 mb-6">
-                    <div className="p-2 bg-red-100 text-red-700 rounded-full">
-                      <AlertTriangle size={24} />
+                    <div className="p-2 bg-yellow-50 rounded-full border border-yellow-100">
+                      {/* Using Google Yellow #fbbc04 specifically as requested */}
+                      <AlertTriangle size={24} style={{ color: '#fbbc04' }} />
                     </div>
                     <h2 className="font-display text-2xl font-medium text-text">Safety Protocols</h2>
                   </div>
@@ -287,15 +284,16 @@ const ServiceDetail: React.FC<ServiceDetailProps> = ({ service }) => {
                   <div className="grid md:grid-cols-2 gap-x-12 gap-y-4 mb-8">
                     {service.safety.items.slice(0, 6).map((item, i) => (
                       <li key={i} className="flex items-start gap-3 list-none font-sans text-muted">
-                        <span className="w-1.5 h-1.5 rounded-full bg-red-500 mt-2 shrink-0"></span>
+                        <span className="w-1.5 h-1.5 rounded-full bg-yellow-500 mt-2 shrink-0"></span>
                         {item}
                       </li>
                     ))}
                   </div>
 
                   {service.safety.kidsPets && (
-                    <div className="bg-white p-6 rounded-2xl border border-red-100 flex items-start gap-4">
-                      <Shield size={24} className="text-red-500 shrink-0" />
+                    <div className="bg-white p-6 rounded-2xl border border-yellow-100 flex items-start gap-4">
+                      {/* Using Google Green #1e8e3e specifically as requested */}
+                      <Shield size={24} style={{ color: '#1e8e3e' }} className="shrink-0" />
                       <div>
                         <h4 className="font-bold text-text text-sm mb-1">Family Safety Note</h4>
                         <p className="text-sm text-muted">{service.safety.kidsPets}</p>

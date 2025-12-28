@@ -70,12 +70,12 @@ const Contact: React.FC = () => {
             <div className="grid grid-cols-1 md:grid-cols-2 gap-8 max-w-4xl mx-auto">
                 
                 {/* Emergency Card (Redesigned) */}
-                <div className="bg-white p-8 rounded-[32px] shadow-google hover:shadow-google-hover transition-shadow border border-red-100 relative overflow-hidden group">
+                <div className="bg-white p-8 rounded-[32px] shadow-google hover:shadow-google-hover transition-shadow border border-yellow-100 relative overflow-hidden group">
                     <div className="flex items-start justify-between mb-6">
-                        <div className="w-16 h-16 bg-red-50 text-red-600 rounded-2xl flex items-center justify-center border border-red-100">
+                        <div className="w-16 h-16 bg-yellow-50 text-[#fbbc04] rounded-2xl flex items-center justify-center border border-yellow-100">
                             <AlertTriangle size={32} />
                         </div>
-                        <span className="bg-red-600 text-white text-[11px] font-bold px-3 py-1.5 rounded-full uppercase tracking-wider shadow-sm">
+                        <span className="bg-yellow-100 text-yellow-800 text-[11px] font-bold px-3 py-1.5 rounded-full uppercase tracking-wider shadow-sm">
                             Urgent Priority
                         </span>
                     </div>

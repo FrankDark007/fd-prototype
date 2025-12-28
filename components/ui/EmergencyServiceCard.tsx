@@ -29,15 +29,17 @@ const EmergencyServiceCard: React.FC<EmergencyServiceCardProps> = ({
         const currentTimestamp = now.getTime();
         const hourMs = 3600000;
 
-        // 1. Date Time String
+        // 1. Date Time String (Live with Seconds)
         const options: Intl.DateTimeFormatOptions = { 
             weekday: 'long', 
             month: 'short', 
             day: 'numeric', 
             hour: 'numeric', 
-            minute: '2-digit' 
+            minute: '2-digit',
+            second: '2-digit'
         };
-        setDateTime(now.toLocaleDateString('en-US', options));
+        // Use toLocaleString to ensure seconds are included and formatted correctly
+        setDateTime(now.toLocaleString('en-US', options));
 
         // 2. Response Time: Updates every 4 hours, Range 67-90
         const responseSeed = Math.floor(currentTimestamp / (4 * hourMs)); 
@@ -53,11 +55,11 @@ const EmergencyServiceCard: React.FC<EmergencyServiceCardProps> = ({
     };
     
     updateStatus();
-    const interval = setInterval(updateStatus, 60000);
+    const interval = setInterval(updateStatus, 1000); // Update every second for live clock
     return () => clearInterval(interval);
   }, []);
 
-  // --- LIVE NET ANIMATION SVG (Reusable) ---
+  // --- LIVE NET ANIMATION SVG ---
   const NetAnimation = () => (
     <svg width="12" height="12" viewBox="0 0 10 10" className="text-[#1e8e3e]">
         <rect x="1" y="4" width="2" height="4" rx="0.5" fill="currentColor">
@@ -75,6 +77,35 @@ const EmergencyServiceCard: React.FC<EmergencyServiceCardProps> = ({
     </svg>
   );
 
+  // --- ANIMATED HEARTBEAT (Monitor Style) ---
+  const AnimatedHeartbeat = () => (
+    <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="#ea4335" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+      <path d="M22 12h-4l-3 9L9 3l-3 9H2" opacity="0.8">
+         {/* Simulate EKG drawing effect */}
+         <animate attributeName="stroke-dasharray" values="0 100; 100 0; 0 100" dur="2.5s" repeatCount="indefinite" />
+         <animate attributeName="opacity" values="0;1;0" dur="2.5s" repeatCount="indefinite" />
+      </path>
+    </svg>
+  );
+
+  // --- ANIMATED SIGNAL BARS ---
+  const AnimatedSignal = () => (
+    <svg width="14" height="14" viewBox="0 0 14 14" fill="none">
+        <rect x="1" y="8" width="3" height="4" rx="1" fill="#34a853">
+            <animate attributeName="height" values="4;8;3;4" dur="1.2s" repeatCount="indefinite" begin="0s" />
+            <animate attributeName="y" values="8;4;9;8" dur="1.2s" repeatCount="indefinite" begin="0s" />
+        </rect>
+        <rect x="5.5" y="4" width="3" height="8" rx="1" fill="#34a853">
+            <animate attributeName="height" values="8;12;6;8" dur="1.2s" repeatCount="indefinite" begin="0.2s" />
+            <animate attributeName="y" values="4;0;6;4" dur="1.2s" repeatCount="indefinite" begin="0.2s" />
+        </rect>
+        <rect x="10" y="0" width="3" height="12" rx="1" fill="#34a853">
+            <animate attributeName="height" values="12;6;10;12" dur="1.2s" repeatCount="indefinite" begin="0.4s" />
+            <animate attributeName="y" values="0;6;2;0" dur="1.2s" repeatCount="indefinite" begin="0.4s" />
+        </rect>
+    </svg>
+  );
+
   // --- EXPANDED VARIANT (Sidebar) ---
   if (variant === 'expanded') {
     return (
@@ -88,11 +119,11 @@ const EmergencyServiceCard: React.FC<EmergencyServiceCardProps> = ({
           }
         `}</style>
 
-        {/* Header */}
-        <div className="flex justify-between items-start mb-6 relative z-10">
+        {/* Header - Centered Alignment */}
+        <div className="flex justify-between items-center mb-6 relative z-10">
             <div className="flex items-center gap-3">
-                <div className="w-12 h-12 rounded-full bg-blue-50 flex items-center justify-center text-primary shrink-0 relative">
-                    <Activity size={24} />
+                <div className="w-12 h-12 rounded-full bg-red-50 flex items-center justify-center shrink-0 relative">
+                    <AnimatedHeartbeat />
                     <span className="absolute top-0 right-0 flex h-3 w-3">
                       <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-green-400 opacity-75"></span>
                       <span className="relative inline-flex rounded-full h-3 w-3 bg-green-500 border-2 border-white"></span>
@@ -100,15 +131,15 @@ const EmergencyServiceCard: React.FC<EmergencyServiceCardProps> = ({
                 </div>
                 <div>
                     <div className="font-bold text-gray-900 text-base leading-tight">System Status</div>
-                    <div className="text-[11px] text-gray-500 font-medium mt-0.5 flex items-center gap-1.5">
-                        <span className="w-1.5 h-1.5 rounded-full bg-green-500"></span>
+                    {/* Aligned text without bullet point for cleaner alignment */}
+                    <div className="text-[11px] text-gray-500 font-medium mt-0.5">
                         Connected to Dispatch
                     </div>
                 </div>
             </div>
             
             {/* Live Data Badge */}
-            <div className="flex items-center gap-1.5 bg-gray-50 px-2.5 py-1.5 rounded-md border border-gray-200/60 shadow-sm">
+            <div className="flex items-center gap-1.5 bg-gray-50 px-2.5 py-1.5 rounded-md border border-gray-200/60 shadow-sm self-start">
                 <span className="text-[9px] font-mono font-bold text-gray-500 tracking-wider">NET</span>
                 <NetAnimation />
             </div>
@@ -119,7 +150,7 @@ const EmergencyServiceCard: React.FC<EmergencyServiceCardProps> = ({
             {/* Crews Card */}
             <div className="bg-gradient-to-br from-gray-50 to-white rounded-2xl p-4 border border-gray-100 text-center flex flex-col justify-center min-h-[110px] relative group hover:border-blue-100 transition-colors">
                 <div className="absolute top-2 right-2 opacity-0 group-hover:opacity-100 transition-opacity">
-                    <Signal size={12} className="text-green-500" />
+                    <AnimatedSignal />
                 </div>
                 <div className="text-4xl font-display font-bold text-gray-900 mb-1 leading-none tracking-tight">{activeCrews}</div>
                 <div className="text-[10px] font-bold text-gray-500 uppercase tracking-wider flex items-center justify-center gap-1.5 mt-2">
@@ -138,7 +169,7 @@ const EmergencyServiceCard: React.FC<EmergencyServiceCardProps> = ({
             </div>
         </div>
 
-        {/* Status Text Footer */}
+        {/* Status Text Footer - High Contrast */}
         <div className="bg-blue-50/60 rounded-xl p-3.5 border border-blue-100/50 relative z-10 flex items-start gap-3">
             <div className="mt-1">
                 <div className="relative flex h-2 w-2">
@@ -147,10 +178,10 @@ const EmergencyServiceCard: React.FC<EmergencyServiceCardProps> = ({
                 </div>
             </div>
             <div>
-                <p className="text-[11px] font-medium text-blue-900 leading-snug">
+                <p className="text-[11px] font-medium text-blue-950 leading-snug">
                     <span className="font-bold">Real-time coverage:</span> High availability in Northern Virginia, DC, and Maryland.
                 </p>
-                <div className="text-[10px] text-blue-700/60 mt-1 font-mono">
+                <div className="text-[10px] text-blue-950 font-mono mt-1 font-bold">
                     Last updated: {dateTime}
                 </div>
             </div>

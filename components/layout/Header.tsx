@@ -1,3 +1,4 @@
+
 import React, { useState, useRef, useEffect } from 'react';
 import { Link, useLocation } from 'react-router-dom';
 import { Menu, Phone, ChevronDown } from 'lucide-react';
@@ -169,13 +170,10 @@ const Header: React.FC = () => {
                           </div>
 
                           {/* Mega Menu Footer */}
-                          <div className="mt-8 pt-6 border-t border-gray-100 flex items-center justify-between bg-white z-10 relative">
+                          <div className="mt-8 pt-6 border-t border-gray-100 flex items-center justify-start bg-white z-10 relative">
                              <Link to="/services/" className="text-sm font-medium text-primary hover:text-primaryHover hover:underline flex items-center">
                                 View Full Service Directory &rarr;
                              </Link>
-                             <Button to="/request/" variant="primary" className="h-10 px-6 text-sm font-semibold">
-                                Request Service
-                             </Button>
                           </div>
                         </div>
                       )}
