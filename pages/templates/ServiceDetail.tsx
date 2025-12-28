@@ -1,3 +1,4 @@
+
 import React, { useState, useEffect } from 'react';
 import { ServiceData } from '../../types';
 import PageMeta from '../../components/ui/PageMeta';
@@ -313,23 +314,18 @@ const ServiceDetail: React.FC<ServiceDetailProps> = ({ service }) => {
                   </div>
                 </div>
               </div>
-
-              {/* Related Services */}
-              <div className="mt-8">
-                <h4 className="text-xs font-bold text-muted uppercase tracking-wider mb-4">Related Services</h4>
-                <div className="space-y-3">
-                  <RelatedServices 
-                      currentServiceId={service.id} 
-                      category={service.category} 
-                      audience={service.audience} 
-                  />
-                </div>
-              </div>
             </div>
           </div>
 
         </div>
       </div>
+
+      {/* Related Services (Moved out of sidebar) */}
+      <RelatedServices 
+          currentServiceId={service.id} 
+          category={service.category} 
+          audience={service.audience} 
+      />
 
       <ServiceAreaLinks />
     </main>

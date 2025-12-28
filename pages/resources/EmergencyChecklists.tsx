@@ -11,7 +11,8 @@ import {
   Biohazard, 
   Flame, 
   Thermometer,
-  Phone
+  Phone,
+  XCircle
 } from 'lucide-react';
 
 const EmergencyChecklists: React.FC = () => {

@@ -9,7 +9,8 @@ import {
   Clock, 
   MapPin, 
   ArrowRight, 
-  ShieldCheck 
+  ShieldCheck,
+  CheckCircle2
 } from 'lucide-react';
 import Button from '../components/ui/Button';
 

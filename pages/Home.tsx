@@ -15,7 +15,7 @@ import PageMeta from '../components/ui/PageMeta';
 import DryingProgressCard from '../components/ui/DryingProgressCard';
 import DispatchEtaCard from '../components/ui/illustrations/DispatchEtaCard';
 import SupportChatCard from '../components/ui/illustrations/SupportChatCard';
-// Removed HomeHeroAnimation import so Hero uses its default OrbitDots/Mock
+import HeroOrbitPhone from '../components/ui/illustrations/service-hero/HeroOrbitPhone';
 
 const Home: React.FC = () => {
   // Show top 6 services to keep the home page focused (Product Catalogue feel)
@@ -30,10 +30,10 @@ const Home: React.FC = () => {
       />
 
       {/* 1. Hero: Split layout with large visual (Google Store style) */}
-      {/* Removed visual prop so it defaults to OrbitDots + ResponseMock defined in Hero.tsx */}
       <Hero 
         title={<>24/7 <span className="text-primary">Water Damage Restoration</span></>}
-        subtitle="Serving Northern Virginia, Maryland, and DC. We combine rapid dispatch with hospital-grade technology to dry your home faster." 
+        subtitle="Serving Northern Virginia, Maryland, and DC. We combine rapid dispatch with hospital-grade technology to dry your home faster."
+        visual={<HeroOrbitPhone />}
       />
       
       {/* 2. Sticky Navigation Bar */}
