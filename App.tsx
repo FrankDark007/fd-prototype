@@ -30,7 +30,6 @@ import HomeownerGuides from './pages/resources/HomeownerGuides';
 import EmergencyChecklists from './pages/resources/EmergencyChecklists';
 import Technology from './pages/resources/Technology';
 import Communication from './pages/resources/Communication';
-import Glossary from './pages/resources/Glossary';
 import BlogIndex from './pages/BlogIndex';
 import NearMeLanding from './pages/NearMeLanding';
 import NotFound from './pages/NotFound';
@@ -111,7 +110,6 @@ const App: React.FC = () => {
             {/* Dynamic Leaf Service Pages */}
             {SERVICES.map((service) => (
               <Route
-                // @ts-ignore
                 key={service.id}
                 path={service.slug}
                 element={<ServiceDetail service={service} />}
@@ -143,7 +141,6 @@ const App: React.FC = () => {
             <Route path="/resources/emergency-checklists/" element={<EmergencyChecklists />} />
             <Route path="/resources/technology/" element={<Technology />} />
             <Route path="/resources/communication/" element={<Communication />} />
-            <Route path="/resources/glossary/" element={<Glossary />} />
             <Route path="/blog/" element={<BlogIndex />} />
 
             {/* Tools & Demos */}

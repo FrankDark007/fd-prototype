@@ -1,15 +1,15 @@
 import React, { useEffect, useState } from 'react';
 import { Link, useLocation } from 'react-router-dom';
-import { 
-  X, 
-  ChevronDown, 
+import {
+  X,
+  ChevronDown,
   ChevronRight,
-  Home, 
-  Briefcase, 
-  MapPin, 
-  BookOpen, 
-  Star, 
-  Info, 
+  Home,
+  Briefcase,
+  MapPin,
+  BookOpen,
+  Star,
+  Info,
   Phone,
   ShieldAlert,
   FileText,
@@ -25,15 +25,15 @@ interface MobileMenuProps {
 
 // Data Structure for Accordions
 const MENU_STRUCTURE = [
-  { 
-    label: 'Home', 
-    path: '/', 
-    icon: Home, 
-    type: 'link' 
+  {
+    label: 'Home',
+    path: '/',
+    icon: Home,
+    type: 'link'
   },
-  { 
-    label: 'Services', 
-    icon: Briefcase, 
+  {
+    label: 'Services',
+    icon: Briefcase,
     type: 'accordion',
     children: [
       { label: 'All Services', path: '/services/' },
@@ -43,16 +43,16 @@ const MENU_STRUCTURE = [
       { label: 'Commercial Services', path: '/services/commercial/' },
     ]
   },
-  { 
-    label: 'Locations', 
-    path: '/locations/', 
-    icon: MapPin, 
-    type: 'link' 
+  {
+    label: 'Locations',
+    path: '/locations/',
+    icon: MapPin,
+    type: 'link'
   },
-  { 
-    label: 'Resources', 
-    icon: BookOpen, 
-    type: 'accordion', 
+  {
+    label: 'Resources',
+    icon: BookOpen,
+    type: 'accordion',
     children: [
       { label: 'Help Center', path: '/resources/' },
       { label: 'Insurance Guide', path: '/resources/insurance-guide/' },
@@ -61,23 +61,23 @@ const MENU_STRUCTURE = [
       { label: 'FAQ', path: '/resources/faq/' },
     ]
   },
-  { 
-    label: 'Reviews', 
-    path: '/reviews/', 
-    icon: Star, 
-    type: 'link' 
+  {
+    label: 'Reviews',
+    path: '/reviews/',
+    icon: Star,
+    type: 'link'
   },
-  { 
-    label: 'About Us', 
-    path: '/about/', 
-    icon: Info, 
-    type: 'link' 
+  {
+    label: 'About Us',
+    path: '/about/',
+    icon: Info,
+    type: 'link'
   },
-  { 
-    label: 'Contact', 
-    path: '/contact/', 
-    icon: Phone, 
-    type: 'link' 
+  {
+    label: 'Contact',
+    path: '/contact/',
+    icon: Phone,
+    type: 'link'
   }
 ];
 
@@ -87,9 +87,9 @@ const MobileMenu: React.FC<MobileMenuProps> = ({ isOpen, onClose }) => {
 
   // Toggle Accordion Logic
   const toggleAccordion = (label: string) => {
-    setExpandedItems(prev => 
-      prev.includes(label) 
-        ? prev.filter(item => item !== label) 
+    setExpandedItems(prev =>
+      prev.includes(label)
+        ? prev.filter(item => item !== label)
         : [...prev, label]
     );
   };
@@ -124,23 +124,21 @@ const MobileMenu: React.FC<MobileMenuProps> = ({ isOpen, onClose }) => {
   return (
     <>
       {/* Backdrop (for fade effect) */}
-      <div 
+      <div
         className={`fixed inset-0 bg-black/50 z-[60] transition-opacity duration-300 ${isOpen ? 'opacity-100' : 'opacity-0 pointer-events-none'}`}
         onClick={onClose}
         aria-hidden="true"
       />
 
       {/* Slide-Over Panel */}
-      <div 
+      <div
         className={`fixed inset-y-0 right-0 w-full sm:max-w-sm bg-white z-[70] shadow-2xl transform transition-transform duration-300 ease-in-out flex flex-col ${isOpen ? 'translate-x-0' : 'translate-x-full'}`}
       >
-        
+
         {/* 1. Header */}
         <div className="flex items-center justify-between px-6 h-16 border-b border-gray-100 shrink-0">
-          <span className="font-display font-bold text-lg text-gray-900 tracking-tight">
-            FLOOD DOCTOR
-          </span>
-          <button 
+          <img src="/assets/logo.png" alt="Flood Doctor" className="h-12 w-auto object-contain" />
+          <button
             onClick={onClose}
             className="p-2 -mr-2 text-gray-500 hover:bg-gray-100 rounded-full transition-colors"
             aria-label="Close menu"
@@ -153,10 +151,10 @@ const MobileMenu: React.FC<MobileMenuProps> = ({ isOpen, onClose }) => {
         <div className="flex-1 overflow-y-auto">
           <nav className="px-4 py-6 space-y-2">
             {MENU_STRUCTURE.map((item) => {
-              const isActive = item.path === '/' 
-                ? location.pathname === '/' 
+              const isActive = item.path === '/'
+                ? location.pathname === '/'
                 : item.path ? location.pathname.startsWith(item.path) : false;
-              
+
               const isExpanded = expandedItems.includes(item.label);
               const Icon = item.icon;
 
@@ -165,25 +163,23 @@ const MobileMenu: React.FC<MobileMenuProps> = ({ isOpen, onClose }) => {
                   <div key={item.label} className="rounded-xl overflow-hidden">
                     <button
                       onClick={() => toggleAccordion(item.label)}
-                      className={`flex items-center justify-between w-full px-4 py-4 text-[17px] font-medium transition-colors rounded-xl ${
-                        isActive || isExpanded ? 'bg-blue-50 text-primary' : 'text-text hover:bg-gray-50'
-                      }`}
+                      className={`flex items-center justify-between w-full px-4 py-4 text-[17px] font-medium transition-colors rounded-xl ${isActive || isExpanded ? 'bg-blue-50 text-primary' : 'text-text hover:bg-gray-50'
+                        }`}
                     >
                       <div className="flex items-center gap-4">
                         <Icon size={20} className={isActive || isExpanded ? 'text-primary' : 'text-gray-400'} />
                         <span>{item.label}</span>
                       </div>
-                      <ChevronDown 
-                        size={20} 
-                        className={`transition-transform duration-300 ${isExpanded ? 'rotate-180 text-primary' : 'text-gray-300'}`} 
+                      <ChevronDown
+                        size={20}
+                        className={`transition-transform duration-300 ${isExpanded ? 'rotate-180 text-primary' : 'text-gray-300'}`}
                       />
                     </button>
-                    
+
                     {/* Sub-menu Animation */}
-                    <div 
-                      className={`overflow-hidden transition-all duration-300 ease-in-out ${
-                        isExpanded ? 'max-h-96 opacity-100' : 'max-h-0 opacity-0'
-                      }`}
+                    <div
+                      className={`overflow-hidden transition-all duration-300 ease-in-out ${isExpanded ? 'max-h-96 opacity-100' : 'max-h-0 opacity-0'
+                        }`}
                     >
                       <div className="bg-gray-50/50 rounded-b-xl pb-2">
                         {item.children?.map((child) => (
@@ -203,14 +199,13 @@ const MobileMenu: React.FC<MobileMenuProps> = ({ isOpen, onClose }) => {
 
               // Standard Link
               return (
-                <Link 
+                <Link
                   key={item.path}
                   to={item.path!}
-                  className={`flex items-center w-full px-4 py-4 text-[17px] font-medium rounded-xl transition-colors ${
-                      isActive 
-                      ? 'bg-blue-50 text-primary' 
-                      : 'text-text hover:bg-gray-50'
-                  }`}
+                  className={`flex items-center w-full px-4 py-4 text-[17px] font-medium rounded-xl transition-colors ${isActive
+                    ? 'bg-blue-50 text-primary'
+                    : 'text-text hover:bg-gray-50'
+                    }`}
                 >
                   <Icon size={20} className={`mr-4 ${isActive ? 'text-primary' : 'text-gray-400'}`} />
                   <span>{item.label}</span>

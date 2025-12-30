@@ -7,7 +7,6 @@ import Breadcrumbs from '../../components/ui/Breadcrumbs';
 import ServiceDetailHeroAnimation from '../../components/graphics/ServiceDetailHeroAnimation';
 import GoogleStyleFAQ from '../../components/sections/GoogleStyleFAQ';
 import { BentoGrid, BentoGridItem } from '../../components/ui/BentoGrid';
-import MatterportViewer from '../../components/ui/MatterportViewer';
 import ServiceAreaLinks from '../../components/sections/ServiceAreaLinks';
 import RelatedServices from '../../components/sections/RelatedServices';
 import Button from '../../components/ui/Button';
@@ -255,15 +254,6 @@ const ServiceDetail: React.FC<ServiceDetailProps> = ({ service }) => {
                 <p className="text-xl text-gray-500 max-w-2xl font-normal">Our systematic approach ensures thorough restoration and complete peace of mind.</p>
               </div>
 
-              {/* Matterport Digital Job File Integration */}
-              <div className="mb-16">
-                <MatterportViewer
-                  modelId="pcVCBr8q2NP" // User Provided Scan
-                  title="Digital Job File: 3D Documentation"
-                  className="w-full"
-                />
-              </div>
-
               <BentoGrid className="!max-w-none !px-0 !gap-4 md:!gap-6">
                 {service.whatWeDo?.map((step, i) => {
                   const [title, desc] = step.split(':');
@@ -395,7 +385,7 @@ const ServiceDetail: React.FC<ServiceDetailProps> = ({ service }) => {
                 initial={{ opacity: 0, x: 20 }}
                 animate={{ opacity: 1, x: 0 }}
                 transition={{ delay: 0.5 }}
-                className="bg-white/80 backdrop-blur-xl border border-white/50 rounded-3xl p-8 shadow-2xl ring-1 ring-black/5"
+                className="bg-white border border-border rounded-3xl p-8 shadow-google"
               >
                 <div className="flex items-center gap-2 mb-2">
                   <div className="w-2 h-2 rounded-full bg-green-500 animate-pulse"></div>
@@ -410,12 +400,12 @@ const ServiceDetail: React.FC<ServiceDetailProps> = ({ service }) => {
                   <Button href="tel:8774970007" variant="primary" fullWidth className="h-12 text-base shadow-lg shadow-primary/20 hover:shadow-primary/40 transition-shadow">
                     (877) 497-0007
                   </Button>
-                  <Button to="/request/" variant="secondary" fullWidth className="h-12 text-base bg-white/50 hover:bg-white">
+                  <Button to="/request/" variant="secondary" fullWidth className="h-12 text-base">
                     Request Online
                   </Button>
                 </div>
 
-                <div className="mt-6 pt-6 border-t border-gray-200/50">
+                <div className="mt-6 pt-6 border-t border-gray-100">
                   <div className="flex items-center justify-between text-xs text-muted mb-2">
                     <span>Response Time</span>
                     <span className="font-bold text-primary">~60 min</span>

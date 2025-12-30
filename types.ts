@@ -79,8 +79,8 @@ export interface ServiceData {
 
 export interface LocationData {
   title: string;
-  url?: string; // External subdomain - Optional
-  region: 'NOVA' | 'NEARBY' | 'MD' | 'DC'; // NEARBY usually just has paths, but we normalized to url/path in logic
+  url: string; // External subdomain
+  region: 'NOVA' | 'NEARBY'; // NEARBY usually just has paths, but we normalized to url/path in logic
   path?: string; // Internal fallback
   lat?: number;
   lng?: number;

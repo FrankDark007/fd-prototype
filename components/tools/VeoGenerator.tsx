@@ -1,4 +1,3 @@
-/// <reference types="vite/client" />
 
 import React, { useState, useEffect } from 'react';
 import { GoogleGenAI } from "@google/genai";
@@ -46,9 +45,7 @@ const VeoGenerator: React.FC = () => {
   // Check for API Key on mount
   useEffect(() => {
     const checkKey = async () => {
-      // @ts-ignore
       if (window.aistudio && window.aistudio.hasSelectedApiKey) {
-        // @ts-ignore
         const has = await window.aistudio.hasSelectedApiKey();
         setHasKey(has);
       }
@@ -57,9 +54,7 @@ const VeoGenerator: React.FC = () => {
   }, []);
 
   const handleSelectKey = async () => {
-    // @ts-ignore
     if (window.aistudio && window.aistudio.openSelectKey) {
-      // @ts-ignore
       await window.aistudio.openSelectKey();
       // Assume success after dialog interaction to mitigate race condition
       setHasKey(true);
@@ -79,9 +74,7 @@ const VeoGenerator: React.FC = () => {
 
     try {
       // Initialize AI with the environment key (injected by the platform)
-      // @ts-ignore
-      const apiKey = import.meta.env.VITE_GOOGLE_API_KEY || '';
-      const ai = new GoogleGenAI({ apiKey });
+      const ai = new GoogleGenAI({ apiKey: process.env.API_KEY });
 
       setStatus('Sending request to Google Veo...');
 
@@ -107,15 +100,14 @@ const VeoGenerator: React.FC = () => {
       if (operation.response?.generatedVideos?.[0]?.video?.uri) {
         const downloadLink = operation.response.generatedVideos[0].video.uri;
         // Append API key for viewing
-        setVideoUrl(`${downloadLink}&key=${import.meta.env.VITE_GOOGLE_API_KEY}`);
+        setVideoUrl(`${downloadLink}&key=${process.env.API_KEY}`);
         setStatus('Complete!');
       } else {
         throw new Error("No video URI returned.");
       }
 
-    } catch (err) {
+    } catch (err: any) {
       console.error(err);
-      // @ts-ignore
       if (err.message && err.message.includes('Requested entity was not found')) {
         setHasKey(false); // Reset key state if invalid
         setError("API Key invalid or expired. Please select a key again.");
@@ -168,8 +160,8 @@ const VeoGenerator: React.FC = () => {
                 key={scene.id}
                 onClick={() => handleSceneChange(scene)}
                 className={`flex items-center text-left p-4 rounded-xl border transition-all ${selectedScene.id === scene.id
-                  ? 'border-primary bg-blue-50 ring-1 ring-primary'
-                  : 'border-gray-200 hover:border-blue-200 bg-white'
+                    ? 'border-primary bg-blue-50 ring-1 ring-primary'
+                    : 'border-gray-200 hover:border-blue-200 bg-white'
                   }`}
               >
                 <div className={`w-8 h-8 rounded-full flex items-center justify-center text-sm font-bold mr-4 ${selectedScene.id === scene.id ? 'bg-primary text-white' : 'bg-gray-100 text-gray-500'

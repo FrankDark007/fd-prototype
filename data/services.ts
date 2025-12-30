@@ -3,7 +3,7 @@ import { ServiceData } from '../types';
 
 export const SERVICES: ServiceData[] = [
   // --- RESIDENTIAL (14 Services) ---
-  
+
   // 1. Odor Removal
   {
     id: 'res-odor',
@@ -17,6 +17,7 @@ export const SERVICES: ServiceData[] = [
     heroHeading: 'Odor Removal Services',
     heroIntro: 'We do not just mask smells; we eliminate them at the source. Professional odor removal for smoke, pets, mold, and biohazards in Northern Virginia, Maryland, and DC.',
     heroVisualKey: 'odor-removal',
+    // One of the extracted images might fit here, or fallback to default
     thumbVisualKey: 'odor-gauge',
     infographicType: 'MOLD_AIRFLOW',
     intro_whenToCall: 'Persistent odors are often a sign of trapped bacteria, mold, or chemical residues. If over-the-counter sprays have failed, it is time for professional molecular treatment.',
@@ -184,6 +185,7 @@ export const SERVICES: ServiceData[] = [
     heroHeading: 'Water Damage Restoration',
     heroIntro: '24/7 Emergency Response. Rapid water removal, structural drying, and damage repairs for homeowners in Northern Virginia, Maryland, and DC.',
     heroVisualKey: 'water-damage',
+    heroImage: '/assets/services/water-damage-restoration-hero.png',
     thumbVisualKey: 'water-damage-dash',
     infographicType: 'DRYING_TREND',
     intro_whenToCall: 'Water damage spreads fast. Call us immediately if:',
@@ -351,6 +353,7 @@ export const SERVICES: ServiceData[] = [
     heroHeading: 'Fire & Smoke Damage Restoration',
     heroIntro: 'Professional fire restoration and smoke odor removal. We clean up soot, remove smoke smells, and restore your home.',
     heroVisualKey: 'fire-smoke',
+    heroImage: '/assets/services/fire-smoke-hero.png',
     thumbVisualKey: 'fire-smoke',
     infographicType: 'MOLD_AIRFLOW',
     intro_whenToCall: 'Smoke and soot cause ongoing damage. Call us if:',
@@ -1340,6 +1343,7 @@ export const SERVICES: ServiceData[] = [
     heroHeading: 'Flood Cleanup Services',
     heroIntro: 'Fast response for basement flooding, storm damage, and groundwater intrusion. We pump out water, remove mud, and sanitize safely.',
     heroVisualKey: 'flood-cleanup',
+    heroImage: '/assets/services/flood-cleanup-hero.png',
     thumbVisualKey: 'flood-timeline',
     infographicType: 'FLOOD_TIMELINE',
     intro_whenToCall: 'Rising water requires heavy equipment. Call if:',
@@ -1635,6 +1639,7 @@ export const SERVICES: ServiceData[] = [
     heroHeading: 'Mold Remediation Services',
     heroIntro: 'Licensed mold removal. We identify the source, contain the spores, and restore your healthy home environment.',
     heroVisualKey: 'mold-remediation',
+    heroImage: '/assets/services/mold-remediation-hero.png',
     thumbVisualKey: 'mold-neg-air',
     infographicType: 'MOLD_AIRFLOW',
     intro_whenToCall: 'Mold needs removal, not just covering up. Call if:',
@@ -3191,45 +3196,45 @@ export const SERVICES: ServiceData[] = [
       remove: ['N/A (Consulting Service)']
     },
     faqs: [
-      { 
-        question: "Why do I need an asbestos survey before renovation?", 
-        answer: "Federal NESHAP regulations require an asbestos survey for all commercial buildings before demolition or renovation, regardless of age. Disturbing asbestos without a survey can lead to massive EPA fines, project shutdowns, and severe health liability." 
+      {
+        question: "Why do I need an asbestos survey before renovation?",
+        answer: "Federal NESHAP regulations require an asbestos survey for all commercial buildings before demolition or renovation, regardless of age. Disturbing asbestos without a survey can lead to massive EPA fines, project shutdowns, and severe health liability."
       },
-      { 
-        question: "How long does it take to get lab results?", 
-        answer: "Standard turnaround time is 3-5 business days. However, we offer 24-hour, 48-hour, and even same-day rush analysis for urgent situations like water damage or construction delays. Rush fees apply." 
+      {
+        question: "How long does it take to get lab results?",
+        answer: "Standard turnaround time is 3-5 business days. However, we offer 24-hour, 48-hour, and even same-day rush analysis for urgent situations like water damage or construction delays. Rush fees apply."
       },
-      { 
-        question: "What is the difference between mold testing and inspection?", 
-        answer: "An inspection is a visual assessment to identify potential growth and moisture sources. Testing involves collecting physical samples (air or surface) for laboratory analysis to identify the mold species and spore concentration. Commercial clients typically need testing for legal documentation." 
+      {
+        question: "What is the difference between mold testing and inspection?",
+        answer: "An inspection is a visual assessment to identify potential growth and moisture sources. Testing involves collecting physical samples (air or surface) for laboratory analysis to identify the mold species and spore concentration. Commercial clients typically need testing for legal documentation."
       },
-      { 
-        question: "Do you perform the abatement (removal) as well?", 
-        answer: "For hazardous materials like asbestos and lead, it is a conflict of interest to test and remove on the same project. We perform the testing and write the protocol, then a separate licensed abatement contractor performs the work. We then return for clearance testing to certify it was done correctly." 
+      {
+        question: "Do you perform the abatement (removal) as well?",
+        answer: "For hazardous materials like asbestos and lead, it is a conflict of interest to test and remove on the same project. We perform the testing and write the protocol, then a separate licensed abatement contractor performs the work. We then return for clearance testing to certify it was done correctly."
       },
-      { 
-        question: "What standards do you use for clearance testing?", 
-        answer: "We follow industry-recognized standards including IICRC S520 for mold, AHERA for asbestos, and HUD/EPA guidelines for lead. For sewage, we use ATP benchmarks and quantitative PCR analysis to verify surfaces are sanitary." 
+      {
+        question: "What standards do you use for clearance testing?",
+        answer: "We follow industry-recognized standards including IICRC S520 for mold, AHERA for asbestos, and HUD/EPA guidelines for lead. For sewage, we use ATP benchmarks and quantitative PCR analysis to verify surfaces are sanitary."
       },
-      { 
-        question: "Can you test for specific chemicals or odors?", 
-        answer: "Yes. We use summa canisters and photoionization detectors (PIDs) to sample for Volatile Organic Compounds (VOCs), formaldehyde, and other specific chemical agents causing odors or health effects in the workplace." 
+      {
+        question: "Can you test for specific chemicals or odors?",
+        answer: "Yes. We use summa canisters and photoionization detectors (PIDs) to sample for Volatile Organic Compounds (VOCs), formaldehyde, and other specific chemical agents causing odors or health effects in the workplace."
       },
-      { 
-        question: "Is environmental testing disruptive to business operations?", 
-        answer: "Minimal disruption is our goal. Most sampling (air, bulk, surface) is quiet and quick. If destructive sampling is required (cutting into walls), we use containment methods to prevent dust and debris from affecting your operations." 
+      {
+        question: "Is environmental testing disruptive to business operations?",
+        answer: "Minimal disruption is our goal. Most sampling (air, bulk, surface) is quiet and quick. If destructive sampling is required (cutting into walls), we use containment methods to prevent dust and debris from affecting your operations."
       },
-      { 
-        question: "Do you provide a remediation protocol?", 
-        answer: "Yes. If hazards are found, we provide a detailed Scope of Work (protocol) outlining exactly what needs to be done to remediate the issue safely. This document allows you to get accurate, apples-to-apples bids from abatement contractors." 
+      {
+        question: "Do you provide a remediation protocol?",
+        answer: "Yes. If hazards are found, we provide a detailed Scope of Work (protocol) outlining exactly what needs to be done to remediate the issue safely. This document allows you to get accurate, apples-to-apples bids from abatement contractors."
       },
-      { 
-        question: "Are your inspectors licensed?", 
-        answer: "Yes. Our team includes Virginia licensed Asbestos Inspectors, Lead Risk Assessors, and Council-certified Microbial Investigators (CMI). We maintain strict adherence to continuing education and state licensing requirements." 
+      {
+        question: "Are your inspectors licensed?",
+        answer: "Yes. Our team includes Virginia licensed Asbestos Inspectors, Lead Risk Assessors, and Council-certified Microbial Investigators (CMI). We maintain strict adherence to continuing education and state licensing requirements."
       },
-      { 
-        question: "What does a Phase I ESA involve vs. your testing?", 
-        answer: "A Phase I ESA is a paper-trail research of a property's history. If a Phase I identifies potential risks (RECs), a Phase II is required. We perform the physical sampling (Phase II) such as soil and groundwater testing to confirm if contamination exists." 
+      {
+        question: "What does a Phase I ESA involve vs. your testing?",
+        answer: "A Phase I ESA is a paper-trail research of a property's history. If a Phase I identifies potential risks (RECs), a Phase II is required. We perform the physical sampling (Phase II) such as soil and groundwater testing to confirm if contamination exists."
       }
     ],
     relatedSearchTerms: ['asbestos survey commercial', 'lead paint inspection virginia', 'industrial hygiene services', 'commercial mold testing', 'OSHA compliance testing', 'environmental consultants nova', 'water quality testing lab', 'phase 2 environmental assessment', 'indoor air quality testing business', 'hazardous material testing']

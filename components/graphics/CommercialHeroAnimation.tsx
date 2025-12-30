@@ -1,70 +1,94 @@
 import React from 'react';
 
 const CommercialHeroAnimation = () => (
-  <svg viewBox="0 0 800 400" role="img" aria-label="Commercial Restoration Operations" className="w-full h-auto">
+  <svg viewBox="0 0 800 400" role="img" aria-label="Commercial Facility Restoration" className="w-full h-auto">
     <defs>
-      <filter id="comm-shadow" x="-20%" y="-20%" width="140%" height="140%">
-        <feDropShadow dx="0" dy="8" stdDeviation="16" floodOpacity="0.1"/>
+      <filter id="comm-iso-shadow" x="-50%" y="-50%" width="200%" height="200%">
+        <feDropShadow dx="0" dy="12" stdDeviation="16" floodOpacity="0.12" />
       </filter>
-      <linearGradient id="comm-grad" x1="0%" y1="0%" x2="100%" y2="100%">
-        <stop offset="0%" stopColor="#e3f2fd"/>
-        <stop offset="100%" stopColor="#ffffff"/>
+      <linearGradient id="bldg-grad" x1="0%" y1="0%" x2="0%" y2="100%">
+        <stop offset="0%" stopColor="#f8f9fa" />
+        <stop offset="100%" stopColor="#e8eaed" />
       </linearGradient>
+      <pattern id="grid-pattern" width="40" height="20" patternUnits="userSpaceOnUse">
+        <path d="M0 10 L20 0 L40 10 L20 20 Z" fill="none" stroke="#e8eaed" strokeWidth="1" />
+      </pattern>
     </defs>
-    
-    <rect width="800" height="400" fill="url(#comm-grad)" rx="24"/>
-    
-    {/* Abstract Cityscape */}
-    <path d="M50 350 L50 150 L150 150 L150 200 L250 200 L250 100 L400 100 L400 350" fill="none" stroke="#1a73e8" strokeWidth="2" opacity="0.1"/>
-    
-    {/* Operations Dashboard */}
-    <g transform="translate(200, 50)" filter="url(#comm-shadow)">
-      <rect width="400" height="280" rx="16" fill="#ffffff"/>
-      
-      {/* Header */}
-      <rect width="400" height="50" rx="16" fill="#1e293b"/>
-      <rect y="30" width="400" height="20" fill="#1e293b"/>
-      <circle cx="30" cy="25" r="6" fill="#ef4444"/>
-      <circle cx="50" cy="25" r="6" fill="#f59e0b"/>
-      <circle cx="70" cy="25" r="6" fill="#22c55e"/>
-      <text x="350" y="30" textAnchor="end" fontSize="12" fill="#94a3b8" fontFamily="monospace">COMMAND_CENTER</text>
-      
-      {/* Map Grid */}
-      <g transform="translate(20, 70)">
-        <rect width="220" height="140" rx="8" fill="#f1f5f9"/>
-        <path d="M0 40 H220 M0 80 H220 M0 120 H220" stroke="#e2e8f0"/>
-        <path d="M60 0 V140 M120 0 V140 M180 0 V140" stroke="#e2e8f0"/>
-        {/* Active Jobs */}
-        <circle cx="90" cy="60" r="4" fill="#1a73e8">
-           <animate attributeName="r" values="4;8;4" dur="2s" repeatCount="indefinite"/>
-           <animate attributeName="opacity" values="1;0.5;1" dur="2s" repeatCount="indefinite"/>
-        </circle>
-        <circle cx="150" cy="100" r="4" fill="#34a853"/>
+
+    {/* Scene Container */}
+    <g transform="translate(400, 100)">
+
+      {/* Background City Floor */}
+      <path d="M0 250 L-400 50 L0 -150 L400 50 Z" fill="url(#grid-pattern)" opacity="0.6" />
+
+      {/* Main Commercial Building (Isometric High-rise Section) */}
+      <g transform="translate(0, 50)" filter="url(#comm-iso-shadow)">
+        {/* Base */}
+        <path d="M0 200 L-140 130 L-140 -120 L0 -50 Z" fill="#d1d3d4" />
+        <path d="M0 200 L140 130 L140 -120 L0 -50 Z" fill="#bdc1c6" />
+        <path d="M0 -50 L-140 -120 L0 -190 L140 -120 Z" fill="#fff" />
+
+        {/* Glass Facade - Left */}
+        <g opacity="0.9">
+          <path d="M-130 120 L-10 180 L-10 -70 L-130 -130 Z" fill="#e8f0fe" />
+          <path d="M-130 60 L-10 120 M-130 0 L-10 60 M-130 -60 L-10 0" stroke="#fff" strokeWidth="1" strokeOpacity="0.5" />
+          <path d="M-90 140 L-90 -110 M-50 160 L-50 -90" stroke="#fff" strokeWidth="1" strokeOpacity="0.5" />
+        </g>
+
+        {/* Glass Facade - Right */}
+        <g opacity="0.8">
+          <path d="M130 120 L10 180 L10 -70 L130 -130 Z" fill="#d2e3fc" />
+          <path d="M130 60 L10 120 M130 0 L10 60 M130 -60 L10 0" stroke="#fff" strokeWidth="1" strokeOpacity="0.5" />
+        </g>
       </g>
-      
-      {/* Right Column Stats */}
-      <g transform="translate(260, 70)">
-         <rect width="120" height="60" rx="8" fill="#e8f0fe"/>
-         <text x="10" y="20" fontSize="10" fill="#1a73e8">ACTIVE CREWS</text>
-         <text x="10" y="45" fontSize="24" fontWeight="bold" fill="#1a73e8">14</text>
-         
-         <rect y="70" width="120" height="60" rx="8" fill="#e6f4ea"/>
-         <text x="10" y="90" fontSize="10" fill="#34a853">MITIGATION</text>
-         <text x="10" y="115" fontSize="24" fontWeight="bold" fill="#34a853">92%</text>
+
+      {/* Operations Cluster (Satellite Buildings) */}
+      <g transform="translate(-200, 180)">
+        <path d="M0 40 L-60 10 L-60 -40 L0 -10 Z" fill="#9aa0a6" />
+        <path d="M0 40 L60 10 L60 -40 L0 -10 Z" fill="#7f868b" />
+        <path d="M0 -10 L-60 -40 L0 -70 L60 -40 Z" fill="#f1f3f4" />
+        {/* Active Zone Highlight */}
+        <path d="M0 -40 L-30 -55 L0 -70 L30 -55 Z" fill="#34a853" opacity="0.8" />
       </g>
-      
-      {/* Bottom Timeline */}
-      <g transform="translate(20, 230)">
-         <line x1="0" y1="10" x2="360" y2="10" stroke="#e2e8f0" strokeWidth="2"/>
-         <circle cx="0" cy="10" r="4" fill="#1a73e8"/>
-         <circle cx="120" cy="10" r="4" fill="#1a73e8"/>
-         <circle cx="240" cy="10" r="4" fill="#1a73e8"/>
-         <circle cx="360" cy="10" r="4" fill="#94a3b8"/>
-         <text x="0" y="30" fontSize="10" fill="#64748b">Alert</text>
-         <text x="120" y="30" fontSize="10" fill="#64748b">Deploy</text>
-         <text x="240" y="30" fontSize="10" fill="#64748b">Restore</text>
-         <text x="360" y="30" fontSize="10" fill="#94a3b8">Verify</text>
+
+      {/* Fleet Trucks (Depot) */}
+      <g transform="translate(220, 200)">
+        {/* Truck 1 */}
+        <g transform="translate(0, 0)">
+          <path d="M0 10 L20 0 L20 -15 L0 -5 Z" fill="#fff" />
+          <path d="M0 10 L-15 2.5 L-15 -12.5 L0 -5 Z" fill="#e8eaed" />
+          <circle cx="0" cy="-10" r="2" fill="#ea4335">
+            <animate attributeName="opacity" values="1;0;1" dur="1s" repeatCount="indefinite" />
+          </circle>
+        </g>
+        {/* Truck 2 */}
+        <g transform="translate(40, 20)">
+          <path d="M0 10 L20 0 L20 -15 L0 -5 Z" fill="#fff" />
+          <path d="M0 10 L-15 2.5 L-15 -12.5 L0 -5 Z" fill="#e8eaed" />
+        </g>
       </g>
+
+      {/* Data Connectors (Lines) */}
+      <g opacity="0.6">
+        <path d="M-140 130 L-200 150" stroke="#1a73e8" strokeWidth="2" strokeDasharray="4,4" />
+        <circle cx="-200" cy="150" r="3" fill="#1a73e8" />
+
+        <path d="M140 130 L220 180" stroke="#1a73e8" strokeWidth="2" strokeDasharray="4,4" />
+        <circle cx="220" cy="180" r="3" fill="#1a73e8" />
+      </g>
+
+      {/* Floating HUD - Active Monitor */}
+      <g transform="translate(260, 0)" filter="url(#comm-iso-shadow)">
+        <path d="M-70 35 L0 70 L70 35 L0 0 Z" fill="#1e293b" />
+        <path d="M0 70 L70 35 L70 45 L0 80 Z" fill="#0f172a" />
+        <path d="M-70 35 L0 70 L0 80 L-70 45 Z" fill="#334155" />
+
+        {/* Screen Content */}
+        <path d="M-60 35 L0 65 L60 35 L0 5 Z" fill="#0f172a" />
+        <text x="-20" y="45" fontSize="10" fill="#22c55e" transform="rotate(-26.5) skewX(26.5)">MONITORING</text>
+        <text x="-15" y="55" fontSize="8" fill="#94a3b8" transform="rotate(-26.5) skewX(26.5)">ZONE A-4 SECURE</text>
+      </g>
+
     </g>
   </svg>
 );
